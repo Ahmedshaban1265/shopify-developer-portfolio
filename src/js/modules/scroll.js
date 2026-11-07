@@ -42,8 +42,10 @@ function closeMenu() {
   lenis?.start();
 }
 
-export function goTo(el, top = false) {
-  if (lenis) lenis.scrollTo(el, { offset: top ? 0 : -70 });
+export function goTo(el, _top = false) {
+  // No manual offset: sections carry scroll-margin-top (nav height + gap),
+  // which Lenis and scrollIntoView both honour. Adding one here doubled it.
+  if (lenis) lenis.scrollTo(el);
   else el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
 }
 
