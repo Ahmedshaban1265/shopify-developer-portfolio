@@ -95,21 +95,22 @@ export const process = [
   { n: '01', title: 'Discovery', body: 'Brand, catalogue, markets and commercial goals. What the store has to do before anything is designed.' },
   { n: '02', title: 'Store audit', body: 'Existing theme, speed, journeys and leaks. For a replatform, a full inventory of what must survive the move.' },
   { n: '03', title: 'Planning', body: 'Information architecture, section inventory, feature list and the build order — agreed before code.' },
-  { n: '04', title: 'Development', body: 'Custom theme and Liquid sections built to the plan, with merchant-editable settings so the team can run the store without me.' },
+  { n: '04', title: 'Development', body: 'Custom theme and Liquid sections built to the plan, with merchant-editable settings so your team can run the store without us.' },
   { n: '05', title: 'Testing', body: 'Devices, browsers, both languages, both directions. Cart, checkout, payments and promotional logic exercised end to end.' },
   { n: '06', title: 'Launch &amp; optimisation', body: 'Structured go-live with redirects and analytics in place, then iteration against real behaviour.' }
 ];
 
 /** About — written from the portfolio's own evidence. No invented history. */
 export const about = {
-  lede: 'I build Shopify storefronts for brands that have to sell seriously — official brand stores operating alongside national retail networks, and independent labels growing fast across Egypt and the Gulf.',
+  lede: 'VEQRU is a two-person commerce studio. We build Shopify storefronts for brands that have to sell seriously — official brand stores operating alongside national retail networks, and independent labels growing fast across Egypt and the Gulf.',
   paragraphs: [
-    'My work sits where three things meet: theme engineering, interface design, and an understanding of how a store actually makes money. A product page is a layout problem and a merchandising problem at the same time, and the stores in this portfolio were built treating it that way.',
-    'Most of what I build is custom. Bundle builders, routine and vitamin quizzes, loyalty tiers, cart logic, instalment checkout, store locators — features that live in the theme rather than in a stack of apps that slow the site down and fight each other.',
+    'Our work sits where three things meet: theme engineering, interface design, and an understanding of how a store actually makes money. A product page is a layout problem and a merchandising problem at the same time, and the stores in this portfolio were built treating it that way.',
+    'Most of what we build is custom. Bundle builders, routine and vitamin quizzes, loyalty tiers, cart logic, instalment checkout, store locators — features that live in the theme rather than in a stack of apps that slow the site down and fight each other.',
     'A large share of the catalogue is bilingual. Arabic–English with true right-to-left is not a translation layer; it is a mirrored build, and getting it right is one of the things this region quietly demands.'
   ],
   // Verifiable facts only.
   facts: [
+    ['Studio', 'Two founders, Egypt-based'],
     ['Built on', 'Shopify, end to end'],
     ['Markets', 'Egypt &amp; the Gulf'],
     ['Languages', 'Arabic &amp; English, full RTL'],

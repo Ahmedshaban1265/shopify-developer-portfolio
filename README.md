@@ -1,7 +1,12 @@
-# Shopify Developer Portfolio
+# VEQRU — Digital Commerce Studio
 
-Personal portfolio for a Shopify e-commerce developer working across Egypt and the Gulf.
-Editorial design, real store previews, and working demonstrations of storefront features.
+Website for VEQRU, a two-person Shopify and digital-commerce studio working across
+Egypt and the Gulf. Editorial design, real store previews captured from live
+storefronts, and working demonstrations of storefront features.
+
+> **Branch note.** `main` carries the original personal portfolio. This branch
+> (`veqru-rebrand`) is the agency rebrand and is **not** approved for public launch —
+> see "Brand clearance" below.
 
 **Stack:** Vite (multi-page) · vanilla JS modules · GSAP + ScrollTrigger · Lenis · Vercel
 (static build + one Node serverless function). No framework runtime ships to the browser.
@@ -122,3 +127,16 @@ production; any other branch gets a preview deployment.
 
 Before launch, set `site.url` in `content/site.js` to the real domain — canonical tags,
 Open Graph URLs and `sitemap.xml` all derive from it.
+
+## Brand clearance — pending
+
+Checked 7 Nov 2026:
+
+- `veqru.com`, `.io`, `.co`, `.net`, `.dev`, `.studio` and `.agency` were all
+  **unregistered** at the time of checking. None has been purchased.
+- No exact "VEQRU" trademark surfaced in a general search. The nearest marks found
+  were unrelated (`VEQ`, `VERQ`).
+
+This is a preliminary check, not legal advice. Before any public launch:
+register the domain, and run a proper trademark search in Egypt, the GCC, the
+EUIPO and the USPTO — ideally through a trademark attorney.

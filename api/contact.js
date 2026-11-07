@@ -62,7 +62,7 @@ export default async function handler(req, res) {
   const ip =
     (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket?.remoteAddress || 'unknown';
   if (rateLimited(ip)) {
-    return res.status(429).json({ error: 'Too many enquiries from this connection. Please email me directly.' });
+    return res.status(429).json({ error: 'Too many enquiries from this connection. Please email us directly.' });
   }
 
   const key = process.env.RESEND_API_KEY;
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
   if (!key || !to.length || !from) {
     return res.status(503).json({
-      error: 'The contact form is not connected yet — please email me directly.',
+      error: 'The contact form is not connected yet — please email us directly.',
       detail: 'Missing RESEND_API_KEY, CONTACT_TO or CONTACT_FROM.'
     });
   }
@@ -103,12 +103,12 @@ export default async function handler(req, res) {
     if (!r.ok) {
       const detail = await r.text().catch(() => '');
       console.error('Resend error', r.status, detail.slice(0, 300));
-      return res.status(502).json({ error: 'Could not send right now. Please email me directly.' });
+      return res.status(502).json({ error: 'Could not send right now. Please email us directly.' });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Contact handler failed:', err?.message);
-    return res.status(502).json({ error: 'Could not send right now. Please email me directly.' });
+    return res.status(502).json({ error: 'Could not send right now. Please email us directly.' });
   }
 }

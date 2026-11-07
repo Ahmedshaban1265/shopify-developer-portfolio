@@ -11,28 +11,27 @@ const hero = () => `
 <section class="hero wrap" id="hero">
   <div>
     <div class="hero-top">
-      <span class="label">Shopify developer · ${site.regions}</span>
-      <span class="label">Portfolio · ${site.year}</span>
+      <span class="label">${site.brand} · ${site.positioning}</span>
+      <span class="label">${site.regions} · ${site.year}</span>
     </div>
     <h1 class="hero-h1 display lines" id="heroH1">
-      <span class="line"><span>Shopify development</span></span>
-      <span class="line"><span>that goes <em>beyond</em></span></span>
-      <span class="line"><span>design.</span></span>
+      <span class="line"><span>We engineer</span></span>
+      <span class="line"><span><em>better</em> commerce.</span></span>
     </h1>
   </div>
 
   <div class="hero-grid">
     <div class="rv rv-d2">
-      <p class="hero-lede">I build, customise and optimise Shopify storefronts that look exceptional, perform smoothly and help e-commerce brands grow. <strong>50+ stores delivered across Egypt and the Gulf</strong> — official brand flagships like Skechers, ANTA and ECCO alongside fast-growing local labels.</p>
+      <p class="hero-lede">Custom Shopify experiences, powerful integrations and conversion-focused solutions built to help ambitious brands grow. <strong>50+ stores delivered across Egypt and the Gulf</strong> — official brand flagships like Skechers, ANTA and ECCO alongside fast-growing local labels.</p>
       <div class="hero-acts">
-        <a class="btn btn--fill" href="#work" data-magnet><i></i>View the work</a>
-        <a class="btn" href="#contact" data-magnet>Let's work together</a>
+        <a class="btn btn--fill" href="#work" data-magnet><i></i>See our work</a>
+        <a class="btn" href="#contact" data-magnet>Start a project</a>
       </div>
     </div>
     <div class="hero-side rv rv-d3">
       <div>
-        <div class="hero-name">${site.name}</div>
-        <div class="hero-role">${site.roleLong} · custom themes, Liquid, bilingual AR/EN and CRO</div>
+        <div class="hero-name wordmark">${site.brandMark}<span class="dot">.</span></div>
+        <div class="hero-role">${site.tagline} A two-person studio building Shopify storefronts, custom Liquid and CRO for brands that have to sell seriously.</div>
       </div>
       <div class="hero-meta">
         <a href="mailto:${mail}">${mail}</a>
@@ -101,7 +100,7 @@ const work = () => `
   <div class="sect-head">
     <div>
       <span class="label rv">Selected work</span>
-      <h2 class="about-h display rv">Featured Shopify projects</h2>
+      <h2 class="about-h display rv">Commerce we have built</h2>
     </div>
     <p class="sect-note rv rv-d1">Eight storefronts, shown the way a store actually reads — homepage, product page and cart. Switch views on any preview below.</p>
   </div>
@@ -152,15 +151,38 @@ const storeWall = () => `
   <p class="wall-empty" id="wallEmpty" hidden>No stores in that sector yet.</p>
 </section>`;
 
+/* ------------------------------------------------------------------- why */
+const why = () => `
+<section class="sect wrap" id="why">
+  <div class="sect-head">
+    <div>
+      <span class="label rv">Why work with us</span>
+      <h2 class="about-h display rv">Three things that change the result</h2>
+    </div>
+    <p class="sect-note rv rv-d1">Not claims about us — things you can check in the work above.</p>
+  </div>
+  <div class="why">
+    ${site.why
+      .map(
+        (w) => `<div class="why-item rv">
+      <span class="why-n">${w.n}</span>
+      <h3>${w.title}</h3>
+      <p>${w.body}</p>
+    </div>`
+      )
+      .join('\n    ')}
+  </div>
+</section>`;
+
 /* -------------------------------------------------------------- services */
 const servicesSection = () => `
 <section class="sect wrap" id="services">
   <div class="sect-head">
     <div>
-      <span class="label rv">Services</span>
-      <h2 class="about-h display rv">What I take on</h2>
+      <span class="label rv">Solutions</span>
+      <h2 class="about-h display rv">What we take on</h2>
     </div>
-    <p class="sect-note rv rv-d1">Engaged for a full build, or for the part of an existing store that is holding it back.</p>
+    <p class="sect-note rv rv-d1">Engaged for a full build, or for the one part of an existing store that is holding it back.</p>
   </div>
   <div class="bento">
     ${services
@@ -183,10 +205,10 @@ const demos = () => `
   <div class="wrap">
     <div class="sect-head">
       <div>
-        <span class="label rv">Live demonstrations</span>
+        <span class="label rv">Shopify Lab</span>
         <h2 class="exp-h display rv">Features, running — not screenshots.</h2>
       </div>
-      <p class="sect-note rv rv-d1">Four storefront mechanics I build, working here in the page. Click, drag and switch language: they are real components, not mockups.</p>
+      <p class="sect-note rv rv-d1">Four storefront mechanics we build, running live in this page. Click, drag and switch language — these are real components, not mockups.</p>
     </div>
 
     <div class="demo-tabs rv" role="tablist" aria-label="Storefront feature demonstrations">
@@ -253,7 +275,7 @@ const demos = () => `
             </div>
           </div>
         </div>
-        <p class="demo-note"><b>Same components, mirrored logic.</b> Built this way for Infinity Clinic Pharma, Givago, El Tahan, Fourteen Scarves and Murouj Art.</p>
+        <p class="demo-note"><b>Same components, mirrored logic.</b> We build this way for Infinity Clinic Pharma, Givago, El Tahan, Fourteen Scarves and Murouj Art.</p>
       </div>
     </div>
 
@@ -419,7 +441,7 @@ const processSection = () => `
 <section class="sect wrap" id="process">
   <div class="sect-head">
     <div>
-      <span class="label rv">How a project runs</span>
+      <span class="label rv">Process</span>
       <h2 class="about-h display rv">From first wireframe to long-term growth</h2>
     </div>
     <p class="sect-note rv rv-d1">Six stages. You always know which one we are in and what comes out of it.</p>
@@ -444,8 +466,8 @@ const aboutSection = () => `
     <div>
       <span class="label rv">About</span>
       <h2 class="about-h display lines rv">
-        <span class="line"><span>Commerce,</span></span>
-        <span class="line"><span>crafted <em class="serif-i">end to end.</em></span></span>
+        <span class="line"><span>Two founders,</span></span>
+        <span class="line"><span>one <em class="serif-i">commerce studio.</em></span></span>
       </h2>
       <dl class="facts rv rv-d2">
         ${about.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n        ')}
@@ -455,6 +477,20 @@ const aboutSection = () => `
       <p class="rv">${about.lede}</p>
       ${about.paragraphs.map((t, i) => `<p class="rv rv-d${i + 1}">${t}</p>`).join('\n      ')}
     </div>
+  </div>
+
+  <div class="founders">
+    ${site.founders
+      .map(
+        (f) => `<article class="founder rv">
+      <span class="founder-mark" aria-hidden="true">${f.initials}</span>
+      <span class="role">${f.role}</span>
+      <h3>${f.name}</h3>
+      <p>${f.bio}</p>
+      <a href="mailto:${f.email}">${f.email}</a>
+    </article>`
+      )
+      .join('\n    ')}
   </div>
 </section>`;
 
@@ -467,7 +503,7 @@ const contact = () => `
       <span class="line"><span>Have a Shopify</span></span>
       <span class="line"><span>project <em class="serif-i">in mind?</em></span></span>
     </h2>
-    <p class="contact-lede rv">Tell me what the store needs to do. I reply to every serious enquiry — new builds, redesigns, rescue jobs and consultations.</p>
+    <p class="contact-lede rv">Tell us what the store needs to do. We reply to every serious enquiry — new builds, redesigns, rescue jobs and consultations.</p>
 
     <div class="contact-grid">
       <form class="cform rv" id="contactForm" novalidate>
@@ -533,7 +569,7 @@ const contact = () => `
         </div>`
             : ''
         }
-        <p class="cnote">Based in Egypt, working with brands across the Gulf and further afield. Happy to work in Arabic or English.</p>
+        <p class="cnote">Based in Egypt, working with brands across the Gulf and further afield. We work in Arabic and English.</p>
       </aside>
     </div>
   </div>
@@ -560,6 +596,7 @@ export const homeBody = () =>
     stats(),
     work(),
     storeWall(),
+    why(),
     servicesSection(),
     demos(),
     expertiseSection(),

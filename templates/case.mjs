@@ -93,7 +93,7 @@ export function caseBody(p) {
 }
 
 export const caseMeta = (p) => ({
-  title: `${plain(p.name)} — Shopify case study | ${site.name}`,
+  title: `${plain(p.name)} — Shopify case study | ${site.brand}`,
   description: `${plain(p.summary).slice(0, 150)}`,
   path: `/work/${p.slug}/`,
   depth: 1,
