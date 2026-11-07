@@ -1,0 +1,57 @@
+name: Capture store screenshots
+
+# Run from the Actions tab. Captures homepage / product page / cart drawer from
+# the live storefronts, rebuilds the image manifest and commits the result.
+on:
+  workflow_dispatch:
+    inputs:
+      stores:
+        description: 'Space-separated slugs to capture (blank = all)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Capture
+        run: node scripts/capture-screenshots.mjs ${{ inputs.stores }}
+
+      - name: Rebuild image manifest
+        run: node scripts/build-manifest.mjs
+
+      - name: Verify the site still builds
+        run: npm run build
+
+      - name: Publish report to the run summary
+        if: always()
+        run: cat capture-report.md >> "$GITHUB_STEP_SUMMARY" || echo "no report produced" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit updated screenshots
+        run: |
+          rm -f capture-report.md
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images content/images.json
+          if git diff --staged --quiet; then
+            echo "No screenshot changes."
+          else
+            git commit -m "chore: refresh live store screenshots"
+            git push
+          fi

@@ -1,0 +1,216 @@
+{
+  "anta": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/anta-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/anta-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/anta-home-mobile-380.webp",
+          "w": 380,
+          "h": 773
+        },
+        {
+          "src": "/images/anta-home-mobile-700.webp",
+          "w": 700,
+          "h": 1424
+        }
+      ]
+    }
+  },
+  "ecco": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/ecco-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/ecco-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/ecco-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/ecco-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
+  "givago": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/givago-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/givago-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/givago-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/givago-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
+  "imza": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/imza-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/imza-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/imza-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/imza-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
+  "infinity": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/infinity-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/infinity-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/infinity-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/infinity-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
+  "myvi": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/myvi-home-desktop-1600.webp",
+          "w": 855,
+          "h": 534
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/myvi-home-mobile-380.webp",
+          "w": 262,
+          "h": 534
+        }
+      ]
+    }
+  },
+  "skechers": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/skechers-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/skechers-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/skechers-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/skechers-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
+  "skinify": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/skinify-home-desktop-900.webp",
+          "w": 900,
+          "h": 562
+        },
+        {
+          "src": "/images/skinify-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 999
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/skinify-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/skinify-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  }
+}

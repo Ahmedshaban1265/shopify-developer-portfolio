@@ -1,0 +1,41 @@
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .about-grid,.exp-grid,.svc-grid{grid-template-columns:1fr}
+  .svc-sticky,.exp-demo,.about-grid > div:first-child{position:static}
+  .hero-grid{grid-template-columns:1fr;align-items:start}
+  .proj-feats{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--rule)}
+  .frame-d{width:100%}
+  .stage-caps{width:100%}
+  .frame-p{width:98px;right:8px;bottom:6px}
+  .stage{padding-bottom:44px}
+  .proj-feats{grid-template-columns:1fr;gap:22px}
+  .feat{border-top:1px solid var(--rule-soft);padding-top:16px}
+  .contact-grid{grid-template-columns:1fr}
+  .wall{grid-template-rows:1fr;gap:12px}
+  .store{width:78vw;max-width:300px}
+  .demo-card{grid-template-columns:78px 1fr}
+  .demo-links{display:none}
+  .hero{min-height:auto}
+}
+@media (max-width:520px){
+  .hero-h1{font-size:clamp(38px,11.4vw,56px)}
+  .proj-title{font-size:clamp(32px,11vw,56px)}
+  .stat b{font-size:clamp(36px,13vw,58px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .line > span{transform:none!important}
+  .rv{opacity:1!important;transform:none!important}
+  .frame-d,.frame-p{clip-path:none!important}
+  .cursor{display:none!important}
+  .marquee-in{animation:none}
+}

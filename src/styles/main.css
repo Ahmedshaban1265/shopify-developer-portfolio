@@ -1,0 +1,7 @@
+/* Design system entry point.
+   Order matters: tokens → layout chrome → page sections → new components → responsive. */
+@import './tokens.css';
+@import './layout.css';
+@import './sections.css';
+@import './components.css';
+@import './responsive.css';
