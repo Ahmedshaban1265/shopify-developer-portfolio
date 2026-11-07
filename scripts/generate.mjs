@@ -8,7 +8,7 @@ import { mkdir, writeFile, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { site } from '../content/site.js';
+import { site, isProduction } from '../content/site.js';
 import { featured } from '../content/projects.js';
 import { layout } from '../templates/layout.mjs';
 import { homeBody } from '../templates/home.mjs';
@@ -70,7 +70,9 @@ ${urls
   );
   await write(
     'public/robots.txt',
-    `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`
+    isProduction
+      ? `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`
+      : 'User-agent: *\nDisallow: /\n'
   );
 
   console.log(`generated ${written.length} pages:\n  ${written.join('\n  ')}`);

@@ -9,6 +9,31 @@
  *   in README.md. veqru.com is unregistered as of 7 Nov 2026.
  */
 
+/**
+ * Canonical origin for the environment being built.
+ *
+ * Priority:
+ *   1. SITE_URL            — set this once a custom domain exists
+ *   2. production on Vercel → the project's stable production domain
+ *   3. preview on Vercel    → that deployment's own URL
+ *   4. local dev
+ *
+ * Canonical tags, Open Graph URLs and sitemap.xml all derive from this, so a
+ * preview never advertises itself as the production site.
+ */
+function resolveSiteUrl() {
+  const env = process.env;
+  if (env.SITE_URL) return env.SITE_URL.replace(/\/$/, '');
+  if (env.VERCEL_ENV === 'production' && env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
+  return 'http://localhost:4173';
+}
+
+/** True for anything that is not the production deployment. */
+export const isProduction = process.env.VERCEL_ENV === 'production';
+
 export const site = {
   brand: 'VEQRU',
   /** How the brand is written in running text and in the wordmark. */
@@ -18,8 +43,9 @@ export const site = {
   regions: 'Egypt & GCC',
   year: 'MMXXVI',
 
-  // Replace with the real production domain once it is registered.
-  url: 'https://example.com',
+  // Resolved per environment at build time — see resolveSiteUrl() above.
+  // Set SITE_URL once veqru.com (or the final domain) is registered.
+  url: resolveSiteUrl(),
 
   founders: [
     {

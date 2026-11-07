@@ -1,4 +1,4 @@
-import { site } from '../content/site.js';
+import { site, isProduction } from '../content/site.js';
 import { attr, plain } from './utils.mjs';
 
 const mail = site.emails[0];
@@ -62,6 +62,7 @@ export function layout(page) {
 <meta name="author" content="${attr(site.brand)}">
 <meta name="keywords" content="${attr(site.meta.keywords.join(', '))}">
 <link rel="canonical" href="${canonical}">
+${isProduction ? '' : '<meta name="robots" content="noindex, nofollow">'}
 <meta name="theme-color" content="#EDEBE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E0E0D" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="${page.ogType || 'website'}">
