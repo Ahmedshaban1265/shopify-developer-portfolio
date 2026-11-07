@@ -1,5 +1,21 @@
 {
   "anta": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/anta-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/anta-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
@@ -23,6 +39,22 @@
           "src": "/images/anta-home-mobile-700.webp",
           "w": 700,
           "h": 1424
+        }
+      ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/anta-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/anta-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
         }
       ]
     }
@@ -51,56 +83,6 @@
           "src": "/images/ecco-home-mobile-700.webp",
           "w": 700,
           "h": 1422
-        }
-      ]
-    }
-  },
-  "frg": {
-    "cart": {
-      "desktop": [
-        {
-          "src": "/images/frg-cart-desktop-1400.webp",
-          "w": 1400,
-          "h": 864
-        }
-      ],
-      "mobile": [
-        {
-          "src": "/images/frg-cart-mobile-560.webp",
-          "w": 560,
-          "h": 1139
-        }
-      ]
-    },
-    "home": {
-      "desktop": [
-        {
-          "src": "/images/frg-home-desktop-1400.webp",
-          "w": 1400,
-          "h": 864
-        }
-      ],
-      "mobile": [
-        {
-          "src": "/images/frg-home-mobile-560.webp",
-          "w": 560,
-          "h": 1139
-        }
-      ]
-    },
-    "product": {
-      "desktop": [
-        {
-          "src": "/images/frg-product-desktop-1400.webp",
-          "w": 1400,
-          "h": 864
-        }
-      ],
-      "mobile": [
-        {
-          "src": "/images/frg-product-mobile-560.webp",
-          "w": 560,
-          "h": 1139
         }
       ]
     }

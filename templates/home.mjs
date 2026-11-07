@@ -92,7 +92,7 @@ function project(p, i) {
         )
         .join('\n      ')}
     </div>
-    ${multi ? `<p class="proj-meta label">Previews captured from the live store · ${views.map((v) => v.label).join(' · ')}</p>` : ''}
+    ${multi ? `<p class="proj-meta label">${p.previewNote || 'Previews captured from the live store'} · ${views.map((v) => v.label).join(' · ')}</p>` : ''}
   </article>`;
 }
 

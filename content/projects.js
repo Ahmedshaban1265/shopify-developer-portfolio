@@ -46,6 +46,8 @@ export const featured = [
     summary:
       'The official ANTA storefront for Egypt — a performance-led brand shop with video-driven campaigns and a collection structure spanning performance, lifestyle and global collaborations.',
     scope: ['Brand storefront design', 'Video hero sections', 'Collection architecture', 'Seasonal campaigns'],
+    previewNote:
+      'Homepage from the ANTA brand storefront; product page and cart drawer captured live from the shared Fashion Retail Group platform.',
     highlights: [
       ['Campaign-led homepage', '“Keep Moving” brand campaigns with full-width video heroes and seasonal sale takeovers.'],
       ['Performance segmentation', 'Dedicated journeys for performance, lifestyle and collaboration lines.'],
