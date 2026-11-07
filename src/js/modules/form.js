@@ -85,23 +85,23 @@ export function initContactForm() {
         done.className = 'form-done';
         done.setAttribute('role', 'status');
         done.innerHTML = `<h3 class="display">Thanks — that's with me.</h3>
-          <p>I read every enquiry personally and usually reply within one working day.
+          <p>We read every enquiry and usually reply within one working day.
           If it is urgent, ${
             form.dataset.whatsapp
-              ? `<a href="${form.dataset.whatsapp}" target="_blank" rel="noopener noreferrer">message me on WhatsApp</a>`
-              : `email me directly`
+              ? `<a href="${form.dataset.whatsapp}" target="_blank" rel="noopener noreferrer">message us on WhatsApp</a>`
+              : `email us directly`
           }.</p>`;
         form.parentElement.insertBefore(done, form);
         return;
       }
 
       if (res.status === 503) {
-        setStatus(data.error || 'The form is not connected yet — please email me directly.', 'err');
+        setStatus(data.error || 'The form is not connected yet — please email us directly.', 'err');
       } else {
-        setStatus(data.error || 'Something went wrong. Please email me directly instead.', 'err');
+        setStatus(data.error || 'Something went wrong. Please email us directly instead.', 'err');
       }
     } catch {
-      setStatus('Network error — please email me directly instead.', 'err');
+      setStatus('Network error — please email us directly instead.', 'err');
     } finally {
       submit.disabled = false;
     }

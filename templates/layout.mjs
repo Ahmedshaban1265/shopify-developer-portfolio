@@ -11,18 +11,21 @@ export const whatsappUrl = tel.whatsapp
   : null;
 
 function jsonLd(page) {
-  const person = {
+  const org = {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: site.name,
-    jobTitle: site.role,
+    '@type': 'ProfessionalService',
+    name: site.brand,
+    description: site.positioning,
+    slogan: site.tagline,
     email: `mailto:${mail}`,
     telephone: tel.tel,
     url: site.url,
+    areaServed: ['Egypt', 'Saudi Arabia', 'United Arab Emirates'],
     knowsAbout: site.meta.keywords,
-    address: { '@type': 'PostalAddress', addressCountry: 'EG' }
+    address: { '@type': 'PostalAddress', addressCountry: 'EG' },
+    founder: site.founders.map((f) => ({ '@type': 'Person', name: f.name, jobTitle: f.role }))
   };
-  const out = [person];
+  const out = [org];
   if (page.breadcrumb) {
     out.push({
       '@context': 'https://schema.org',
@@ -56,14 +59,14 @@ export function layout(page) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${attr(title)}</title>
 <meta name="description" content="${attr(desc)}">
-<meta name="author" content="${attr(site.name)}">
+<meta name="author" content="${attr(site.brand)}">
 <meta name="keywords" content="${attr(site.meta.keywords.join(', '))}">
 <link rel="canonical" href="${canonical}">
 ${isProduction ? '' : '<meta name="robots" content="noindex, nofollow">'}
 <meta name="theme-color" content="#EDEBE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E0E0D" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="${page.ogType || 'website'}">
-<meta property="og:site_name" content="${attr(site.name)}">
+<meta property="og:site_name" content="${attr(site.brand)}">
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(desc)}">
 <meta property="og:url" content="${canonical}">
@@ -98,7 +101,7 @@ ${jsonLd(page)}
 
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a class="brand" href="${prefix || '/'}#top" aria-label="${attr(site.name)} — home"><i></i>${site.name}</a>
+    <a class="brand" href="${prefix || '/'}#top" aria-label="${attr(site.brand)} — home"><i></i>${site.brandMark}<span class="dot">.</span></a>
     <nav class="nav-links" aria-label="Primary">
       ${navLinks(prefix)}
     </nav>
@@ -124,8 +127,8 @@ ${page.body}
 
 <footer class="noir foot-wrap">
   <div class="wrap foot">
-    <span class="label">Shopify e-commerce portfolio · ${site.year}</span>
-    <span class="label">${site.name} · ${site.regions}</span>
+    <span class="studio-line">${site.brand} · ${site.positioning}</span>
+    <span class="label">${site.regions} · ${site.year}</span>
     <a class="to-top" href="${prefix}#top" data-magnet>Back to top ↑</a>
   </div>
 </footer>

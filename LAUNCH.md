@@ -1,0 +1,62 @@
+# VEQRU — launch status
+
+VEQRU is live on a free Vercel address. No custom domain has been purchased,
+and none is required for this stage.
+
+| | |
+|---|---|
+| Production | `main` → the project's `.vercel.app` production domain |
+| Previews | every other branch — protected by Vercel auth, `noindex` |
+| Personal portfolio backup | `portfolio-personal-backup` |
+
+## Done
+
+- [x] VEQRU branch merged into `main` and live in production
+- [x] Production publicly accessible; previews remain protected
+- [x] `SITE_URL` set to the production `.vercel.app` address — canonical tags,
+      Open Graph, JSON-LD, `sitemap.xml` and `robots.txt` all derive from it
+- [x] Contact form switched off; direct email + WhatsApp shown instead
+
+## Still open
+
+### Brand clearance
+
+- [ ] **Trademark search** for "VEQRU" in Egypt, the GCC markets you sell into,
+      EUIPO and USPTO, ideally through a trademark attorney. A general web
+      search on 7 Nov 2026 found no exact mark (nearest: unrelated `VEQ`,
+      `VERQ`). That is a preliminary check, not clearance.
+- [ ] Social handles (`@veqru` on Instagram, LinkedIn, X, Behance).
+- [ ] Domain — optional. `veqru.com` and the other TLDs checked were unregistered
+      on 7 Nov 2026. If you buy one later: add it in Vercel, then update
+      `SITE_URL`. Nothing in the code needs to change.
+
+### Contact form
+
+Off by design. Turning it on needs a domain you own:
+
+1. Verify the domain in Resend.
+2. Set `RESEND_API_KEY`, `CONTACT_TO` (both founders' addresses) and
+   `CONTACT_FROM` (a sender on that domain) in Vercel → Production.
+3. Set `contactForm: true` in `content/site.js` and push.
+
+Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
+address that owns the Resend account, so it can't serve as a stopgap for two
+founders.
+
+### Content
+
+- [ ] Both founders approve their role line and bio in `content/site.js`.
+- [ ] Fill in `challenge` / `contribution` / `solution` per project in
+      `content/projects.js`. Say who did what, and mark any work done with AI
+      assistance.
+- [ ] Add `outcomes` only where you have real measured numbers.
+- [ ] Skechers & ECCO: the brand-specific frg.store URLs, so the capture
+      workflow can add product-page and cart-drawer previews.
+- [ ] Retro Sport Egypt, Italiano, MAZY, Shopify Slice: confirm the URL and
+      scope for each, or leave them out.
+
+## Do not claim
+
+- Shopify Partner or Shopify Expert status, unless verified.
+- Any team member, review, certification, metric or years of experience
+  that isn't documented.

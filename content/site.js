@@ -1,11 +1,12 @@
 /**
- * Site identity, contact details and global metadata.
+ * Brand identity, contact details and global metadata.
  *
- * SOURCE OF TRUTH: every value here comes from the portfolio PDF
- * (Shopify_Ecommerce_Portfolio.pdf) or was stated directly by the owner.
- * Nothing in this file is inferred marketing copy about results or clients.
+ * SOURCE OF TRUTH: facts here come from the portfolio PDF
+ * (Shopify_Ecommerce_Portfolio.pdf) or were stated directly by the founders.
+ * No invented team members, results, certifications or years of experience.
  *
- * ⚠ REVIEW BEFORE LAUNCH — see `name` and `whatsapp` notes below.
+ * Live on a free .vercel.app address — no custom domain owned. Trademark
+ * clearance for the VEQRU name is still open; see LAUNCH.md.
  */
 
 /**
@@ -34,18 +35,50 @@ function resolveSiteUrl() {
 export const isProduction = process.env.VERCEL_ENV === 'production';
 
 export const site = {
-  // ⚠ The PDF does not state a name. Derived from the primary email address.
-  //    Change this one value if the spelling differs.
-  name: 'Abdulrahman Magdy',
-  shortName: 'Abdulrahman',
-  role: 'Shopify Developer',
-  roleLong: 'Shopify developer & e-commerce engineer',
+  brand: 'VEQRU',
+  /** How the brand is written in running text and in the wordmark. */
+  brandMark: 'veqru',
+  positioning: 'Digital Commerce Studio',
+  tagline: 'We Build Commerce That Performs.',
   regions: 'Egypt & GCC',
   year: 'MMXXVI',
 
-  // Resolved per environment at build time — see resolveSiteUrl() below.
+  // Resolved per environment at build time — see resolveSiteUrl() above.
+  // Production sets SITE_URL in Vercel to the public .vercel.app address.
   url: resolveSiteUrl(),
 
+  /**
+   * Contact form switch.
+   *
+   * OFF until email delivery is configured. Resend's free testing sender only
+   * delivers to the single address that owns the Resend account, and sending
+   * to anyone else needs a verified domain we don't own yet. With this off,
+   * the contact section shows direct email / WhatsApp options and no form, so
+   * nothing on the page looks functional while silently failing.
+   *
+   * To turn it on: set RESEND_API_KEY, CONTACT_TO and CONTACT_FROM in Vercel
+   * (see .env.example), then set this to true.
+   */
+  contactForm: false,
+
+  founders: [
+    {
+      name: 'Ahmed Shaban',
+      initials: 'AS',
+      role: 'Co-founder · Shopify development',
+      email: 'anmedshaban1265@gmail.com',
+      bio: 'Builds the storefronts — custom themes, Liquid sections, cart and checkout logic, and the integrations that keep a store running day to day.'
+    },
+    {
+      name: 'Abdulrahman Magdy',
+      initials: 'AM',
+      role: 'Co-founder · Commerce design & CRO',
+      email: 'Abdulramanmagdy@gmail.com',
+      bio: 'Shapes how a store reads and sells — storefront design, merchandising structure, bilingual AR/EN experiences and conversion work after launch.'
+    }
+  ],
+
+  // Both addresses stay reachable. Neither is replaced.
   emails: ['Abdulramanmagdy@gmail.com', 'anmedshaban1265@gmail.com'],
   phones: [
     { display: '+20 102 013 9953', tel: '+201020139953', whatsapp: '201020139953' },
@@ -53,29 +86,30 @@ export const site = {
   ],
 
   meta: {
-    title: 'Abdulrahman Magdy — Shopify Developer | Custom themes, Liquid & CRO',
+    title: 'VEQRU — Digital Commerce Studio | Shopify development & CRO',
     description:
-      'Shopify developer building custom themes, Liquid sections, bilingual AR/EN storefronts and conversion-focused commerce for brands across Egypt and the Gulf. 50+ stores delivered.',
+      'VEQRU is a digital commerce studio building custom Shopify storefronts, Liquid sections, bilingual AR/EN experiences and conversion-focused commerce for brands across Egypt and the Gulf. 50+ stores delivered.',
     keywords: [
-      'Shopify developer',
+      'Shopify development agency',
       'Shopify theme development',
+      'custom Shopify solutions',
+      'Shopify development',
+      'e-commerce development',
       'Shopify Liquid',
-      'custom Shopify sections',
-      'Shopify CRO',
+      'conversion rate optimisation',
       'RTL Shopify store',
-      'Shopify developer Egypt'
+      'Shopify development Egypt'
     ]
   },
 
   nav: [
     { label: 'Work', href: '/#work' },
-    { label: 'Services', href: '/#services' },
-    { label: 'Demos', href: '/#demos' },
+    { label: 'Solutions', href: '/#services' },
+    { label: 'Shopify Lab', href: '/#demos' },
     { label: 'Process', href: '/#process' },
     { label: 'About', href: '/#about' }
   ],
 
-  // Announcement bar — all four claims are verifiable from the portfolio PDF.
   announcements: [
     '50+ Shopify stores delivered',
     'Egypt &amp; GCC · Shopify Markets',
@@ -83,7 +117,6 @@ export const site = {
     'For new projects, redesigns &amp; consultations'
   ],
 
-  // Marquee brands — every name is a store in the portfolio PDF.
   marquee: [
     'Skechers', 'ANTA', 'ECCO', 'MyVi', 'Infinity Clinic Pharma',
     'Skinify', 'IMZA', 'Givago', 'Cole Haan', 'Fashion Retail Group'
@@ -95,5 +128,24 @@ export const site = {
     { value: 25, suffix: '', label: 'Named stores in this portfolio' },
     { text: 'AR/EN', label: 'Bilingual &amp; full RTL builds' },
     { value: 2, suffix: '', label: 'Regions · Egypt &amp; GCC' }
+  ],
+
+  /** Why work with us — each point is demonstrable from the work shown. */
+  why: [
+    {
+      n: '01',
+      title: 'We build features, not app stacks',
+      body: 'Bundle builders, quizzes, loyalty tiers and cart logic live in the theme. Fewer apps fighting each other, and a store that stays fast.'
+    },
+    {
+      n: '02',
+      title: 'We have shipped at brand-flagship scale',
+      body: 'Official storefronts for Skechers, ANTA and ECCO run on one multi-brand build alongside a nationwide retail network of 38 stores.'
+    },
+    {
+      n: '03',
+      title: 'We build for how this region actually buys',
+      body: 'True right-to-left Arabic, Shopify Markets, multi-currency, and instalment checkout with ValU, Meeza and Forsa.'
+    }
   ]
 };

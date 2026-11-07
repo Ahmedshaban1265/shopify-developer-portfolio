@@ -1,7 +1,11 @@
-# Shopify Developer Portfolio
+# VEQRU — Digital Commerce Studio
 
-Personal portfolio for a Shopify e-commerce developer working across Egypt and the Gulf.
-Editorial design, real store previews, and working demonstrations of storefront features.
+Website for VEQRU, a two-person Shopify and digital-commerce studio working across
+Egypt and the Gulf. Editorial design, real store previews captured from live
+storefronts, and working demonstrations of storefront features.
+
+> **Branches.** `main` is the live VEQRU site. The original personal
+> portfolio is preserved on `portfolio-personal-backup`.
 
 **Stack:** Vite (multi-page) · vanilla JS modules · GSAP + ScrollTrigger · Lenis · Vercel
 (static build + one Node serverless function). No framework runtime ships to the browser.
@@ -99,11 +103,15 @@ cannot reach are reported in the run summary rather than faked. Edit the store l
 |---|---|
 | `RESEND_API_KEY` | API key from the Resend dashboard |
 | `CONTACT_TO` | comma-separated recipients |
-| `CONTACT_FROM` | verified sender, e.g. `Portfolio <hello@yourdomain.com>` |
+| `CONTACT_FROM` | a sender on a domain you have verified in Resend |
 
-Set these in **Vercel → Settings → Environment Variables**. Until they exist the endpoint
-returns `503` and the form tells the visitor to email directly — it never silently drops
-an enquiry. Spam handling: hidden honeypot field, a minimum fill time, length/format
+Set these in **Vercel → Settings → Environment Variables**. The form is **switched off** (`contactForm: false` in `content/site.js`): the
+contact section shows direct email and WhatsApp options instead, so nothing on the
+page looks functional while failing. Turn it on only after the variables are set.
+
+Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
+address that owns the Resend account, so it can't route enquiries to both founders.
+A verified domain is required. Spam handling: hidden honeypot field, a minimum fill time, length/format
 validation and a small per-IP throttle.
 
 ## Accessibility & performance notes
@@ -122,3 +130,16 @@ production; any other branch gets a preview deployment.
 
 Before launch, set `site.url` in `content/site.js` to the real domain — canonical tags,
 Open Graph URLs and `sitemap.xml` all derive from it.
+
+## Brand clearance — pending
+
+Checked 7 Nov 2026:
+
+- `veqru.com`, `.io`, `.co`, `.net`, `.dev`, `.studio` and `.agency` were all
+  **unregistered** at the time of checking. None has been purchased.
+- No exact "VEQRU" trademark surfaced in a general search. The nearest marks found
+  were unrelated (`VEQ`, `VERQ`).
+
+This is a preliminary check, not legal advice. Before any public launch:
+register the domain, and run a proper trademark search in Egypt, the GCC, the
+EUIPO and the USPTO — ideally through a trademark attorney.

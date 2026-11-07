@@ -7,7 +7,7 @@
  * Required environment variables (set in Vercel → Settings → Environment Variables):
  *   RESEND_API_KEY   API key from the Resend dashboard
  *   CONTACT_TO       comma-separated recipient addresses
- *   CONTACT_FROM     a verified sender, e.g. "Portfolio <hello@yourdomain.com>"
+ *   CONTACT_FROM     a sender on a domain you own and have verified in Resend
  *
  * Without RESEND_API_KEY the endpoint returns 503 and the front end tells the
  * visitor to email directly — it never silently swallows an enquiry.
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
   const ip =
     (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket?.remoteAddress || 'unknown';
   if (rateLimited(ip)) {
-    return res.status(429).json({ error: 'Too many enquiries from this connection. Please email me directly.' });
+    return res.status(429).json({ error: 'Too many enquiries from this connection. Please email us directly.' });
   }
 
   const key = process.env.RESEND_API_KEY;
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
   if (!key || !to.length || !from) {
     return res.status(503).json({
-      error: 'The contact form is not connected yet — please email me directly.',
+      error: 'The contact form is not connected yet — please email us directly.',
       detail: 'Missing RESEND_API_KEY, CONTACT_TO or CONTACT_FROM.'
     });
   }
@@ -103,12 +103,12 @@ export default async function handler(req, res) {
     if (!r.ok) {
       const detail = await r.text().catch(() => '');
       console.error('Resend error', r.status, detail.slice(0, 300));
-      return res.status(502).json({ error: 'Could not send right now. Please email me directly.' });
+      return res.status(502).json({ error: 'Could not send right now. Please email us directly.' });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Contact handler failed:', err?.message);
-    return res.status(502).json({ error: 'Could not send right now. Please email me directly.' });
+    return res.status(502).json({ error: 'Could not send right now. Please email us directly.' });
   }
 }
