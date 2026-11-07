@@ -55,13 +55,84 @@
       ]
     }
   },
+  "frg": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/frg-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/frg-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/frg-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/frg-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/frg-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/frg-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    }
+  },
   "givago": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/givago-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/givago-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
           "src": "/images/givago-home-desktop-900.webp",
           "w": 900,
           "h": 562
+        },
+        {
+          "src": "/images/givago-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
         },
         {
           "src": "/images/givago-home-desktop-1600.webp",
@@ -76,20 +147,62 @@
           "h": 772
         },
         {
+          "src": "/images/givago-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        },
+        {
           "src": "/images/givago-home-mobile-700.webp",
           "w": 700,
           "h": 1422
         }
       ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/givago-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/givago-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
     }
   },
   "imza": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/imza-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/imza-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
           "src": "/images/imza-home-desktop-900.webp",
           "w": 900,
           "h": 562
+        },
+        {
+          "src": "/images/imza-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
         },
         {
           "src": "/images/imza-home-desktop-1600.webp",
@@ -104,20 +217,62 @@
           "h": 772
         },
         {
+          "src": "/images/imza-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        },
+        {
           "src": "/images/imza-home-mobile-700.webp",
           "w": 700,
           "h": 1422
         }
       ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/imza-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/imza-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
     }
   },
   "infinity": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/infinity-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/infinity-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
           "src": "/images/infinity-home-desktop-900.webp",
           "w": 900,
           "h": 562
+        },
+        {
+          "src": "/images/infinity-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
         },
         {
           "src": "/images/infinity-home-desktop-1600.webp",
@@ -132,20 +287,62 @@
           "h": 772
         },
         {
+          "src": "/images/infinity-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        },
+        {
           "src": "/images/infinity-home-mobile-700.webp",
           "w": 700,
           "h": 1422
         }
       ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/infinity-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/infinity-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
     }
   },
   "myvi": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/myvi-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/myvi-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
           "src": "/images/myvi-home-desktop-1600.webp",
           "w": 855,
           "h": 534
+        },
+        {
+          "src": "/images/myvi-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
         }
       ],
       "mobile": [
@@ -153,6 +350,27 @@
           "src": "/images/myvi-home-mobile-380.webp",
           "w": 262,
           "h": 534
+        },
+        {
+          "src": "/images/myvi-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/myvi-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/myvi-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
         }
       ]
     }
@@ -186,12 +404,33 @@
     }
   },
   "skinify": {
+    "cart": {
+      "desktop": [
+        {
+          "src": "/images/skinify-cart-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/skinify-cart-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        }
+      ]
+    },
     "home": {
       "desktop": [
         {
           "src": "/images/skinify-home-desktop-900.webp",
           "w": 900,
           "h": 562
+        },
+        {
+          "src": "/images/skinify-home-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
         },
         {
           "src": "/images/skinify-home-desktop-1600.webp",
@@ -206,9 +445,30 @@
           "h": 772
         },
         {
+          "src": "/images/skinify-home-mobile-560.webp",
+          "w": 560,
+          "h": 1139
+        },
+        {
           "src": "/images/skinify-home-mobile-700.webp",
           "w": 700,
           "h": 1422
+        }
+      ]
+    },
+    "product": {
+      "desktop": [
+        {
+          "src": "/images/skinify-product-desktop-1400.webp",
+          "w": 1400,
+          "h": 864
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/skinify-product-mobile-560.webp",
+          "w": 560,
+          "h": 1139
         }
       ]
     }
