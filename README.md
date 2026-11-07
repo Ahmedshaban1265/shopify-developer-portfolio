@@ -4,9 +4,8 @@ Website for VEQRU, a two-person Shopify and digital-commerce studio working acro
 Egypt and the Gulf. Editorial design, real store previews captured from live
 storefronts, and working demonstrations of storefront features.
 
-> **Branch note.** `main` carries the original personal portfolio. This branch
-> (`veqru-rebrand`) is the agency rebrand and is **not** approved for public launch —
-> see "Brand clearance" below.
+> **Branches.** `main` is the live VEQRU site. The original personal
+> portfolio is preserved on `portfolio-personal-backup`.
 
 **Stack:** Vite (multi-page) · vanilla JS modules · GSAP + ScrollTrigger · Lenis · Vercel
 (static build + one Node serverless function). No framework runtime ships to the browser.
@@ -104,11 +103,15 @@ cannot reach are reported in the run summary rather than faked. Edit the store l
 |---|---|
 | `RESEND_API_KEY` | API key from the Resend dashboard |
 | `CONTACT_TO` | comma-separated recipients |
-| `CONTACT_FROM` | verified sender, e.g. `Portfolio <hello@yourdomain.com>` |
+| `CONTACT_FROM` | a sender on a domain you have verified in Resend |
 
-Set these in **Vercel → Settings → Environment Variables**. Until they exist the endpoint
-returns `503` and the form tells the visitor to email directly — it never silently drops
-an enquiry. Spam handling: hidden honeypot field, a minimum fill time, length/format
+Set these in **Vercel → Settings → Environment Variables**. The form is **switched off** (`contactForm: false` in `content/site.js`): the
+contact section shows direct email and WhatsApp options instead, so nothing on the
+page looks functional while failing. Turn it on only after the variables are set.
+
+Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
+address that owns the Resend account, so it can't route enquiries to both founders.
+A verified domain is required. Spam handling: hidden honeypot field, a minimum fill time, length/format
 validation and a small per-IP throttle.
 
 ## Accessibility & performance notes

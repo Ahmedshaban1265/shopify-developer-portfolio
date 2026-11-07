@@ -495,17 +495,25 @@ const aboutSection = () => `
 </section>`;
 
 /* --------------------------------------------------------------- contact */
-const contact = () => `
-<section class="noir contact" id="contact">
-  <div class="wrap">
-    <span class="label rv">Contact</span>
-    <h2 class="contact-h display lines rv">
-      <span class="line"><span>Have a Shopify</span></span>
-      <span class="line"><span>project <em class="serif-i">in mind?</em></span></span>
-    </h2>
-    <p class="contact-lede rv">Tell us what the store needs to do. We reply to every serious enquiry — new builds, redesigns, rescue jobs and consultations.</p>
 
-    <div class="contact-grid">
+/** Pre-filled email so an enquiry arrives with what we need to reply well. */
+const MAIL_SUBJECT = 'Shopify project enquiry';
+const MAIL_BODY = [
+  'Hi VEQRU,',
+  '',
+  'Store URL (if you have one):',
+  'What we need (new build / redesign / custom feature / AR-EN / CRO):',
+  'Rough timeline:',
+  'A bit about the project:',
+  '',
+  'Thanks,'
+].join('\n');
+
+const mailto = (to) =>
+  `mailto:${to}?subject=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`;
+
+/** Live form — only rendered when site.contactForm is true. */
+const contactForm = () => `
       <form class="cform rv" id="contactForm" novalidate>
         <div class="field">
           <label for="cf-name">Your name</label>
@@ -547,25 +555,75 @@ const contact = () => `
           <button class="btn btn--fill" type="submit" id="cfSubmit" data-magnet><i></i>Send enquiry</button>
           <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
         </div>
-      </form>
+      </form>`;
+
+/** Direct contact — shown while the form is switched off. */
+const contactDirect = () => `
+      <div class="cdirect-main rv">
+        <div class="ccards">
+          ${site.founders
+            .map(
+              (f) => `<article class="ccard">
+            <span class="founder-mark" aria-hidden="true">${f.initials}</span>
+            <div class="ccard-who">
+              <h3>${f.name}</h3>
+              <span class="label">${f.role}</span>
+            </div>
+            <span class="ccard-email">${f.email}</span>
+            <div class="ccard-acts">
+              <a class="btn btn--fill" href="${mailto(f.email)}" data-magnet><i></i>Email ${f.name.split(' ')[0]}</a>
+              <button type="button" class="copy-btn" data-copy="${f.email}" aria-label="Copy ${f.name}'s email address">Copy address</button>
+            </div>
+          </article>`
+            )
+            .join('\n          ')}
+        </div>
+        <div class="cinclude">
+          <h3 class="label">To get a faster, better reply, include</h3>
+          <ul>
+            <li>Your store URL, if you already have one</li>
+            <li>What you need — new build, redesign, a custom feature, AR/EN, or CRO</li>
+            <li>A rough timeline</li>
+          </ul>
+          <p>The email buttons open your mail app with these prompts filled in. Prefer webmail? Copy an address instead.</p>
+        </div>
+        <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
+      </div>`;
+
+const contact = () => `
+<section class="noir contact" id="contact">
+  <div class="wrap">
+    <span class="label rv">Contact</span>
+    <h2 class="contact-h display lines rv">
+      <span class="line"><span>Have a Shopify</span></span>
+      <span class="line"><span>project <em class="serif-i">in mind?</em></span></span>
+    </h2>
+    <p class="contact-lede rv">Tell us what the store needs to do. We reply to every serious enquiry — new builds, redesigns, rescue jobs and consultations.</p>
+
+    <div class="contact-grid">
+      ${site.contactForm ? contactForm() : contactDirect()}
 
       <aside class="cdirect rv rv-d1">
-        <div class="cblock">
-          <h3 class="label">Email</h3>
-          ${site.emails.map((e) => `<a href="mailto:${e}">${e}</a>`).join('\n          ')}
-        </div>
-        <div class="cblock">
-          <h3 class="label">Phone</h3>
-          ${site.phones.map((p) => `<a href="tel:${p.tel}">${p.display}</a>`).join('\n          ')}
-        </div>
         ${
           whatsappUrl
             ? `<div class="cblock">
           <h3 class="label">WhatsApp</h3>
           <a class="wa" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" data-magnet>
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2a.6.6 0 0 0 0-.6c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.7 12a5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9 5 5 0 0 0 3.1.6 2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>
-            Message on WhatsApp
+            Message us on WhatsApp
           </a>
+        </div>`
+            : ''
+        }
+        <div class="cblock">
+          <h3 class="label">Phone</h3>
+          ${site.phones.map((p) => `<a href="tel:${p.tel}">${p.display}</a>`).join('\n          ')}
+        </div>
+        ${
+          site.contactForm
+            ? `<div class="cblock">
+          <h3 class="label">Email</h3>
+          ${site.emails.map((e) => `<a href="mailto:${e}">${e}</a>`).join('\n          ')}
         </div>`
             : ''
         }

@@ -1,53 +1,59 @@
-# VEQRU — launch checklist
+# VEQRU — launch status
 
-This branch (`veqru-rebrand`) is the agency site. It deploys as a **protected
-preview** and is not merged into `main`. Work through this list before launch.
+VEQRU is live on a free Vercel address. No custom domain has been purchased,
+and none is required for this stage.
 
-## 1. Brand clearance — blocking
+| | |
+|---|---|
+| Production | `main` → the project's `.vercel.app` production domain |
+| Previews | every other branch — protected by Vercel auth, `noindex` |
+| Personal portfolio backup | `portfolio-personal-backup` |
 
-- [ ] **Register the domain.** `veqru.com`, `.io`, `.co`, `.net`, `.dev`,
-      `.studio` and `.agency` were all unregistered on 7 Nov 2026. Nothing has
-      been purchased.
-- [ ] **Trademark search** in Egypt, the GCC states you sell into, EUIPO and
-      USPTO, ideally through a trademark attorney. A general web search found
-      no exact "VEQRU" mark (nearest: unrelated `VEQ`, `VERQ`). That is a
-      preliminary check, not clearance.
-- [ ] Check social handles (`@veqru` on Instagram, LinkedIn, X, Behance).
+## Done
 
-## 2. Content — blocking
+- [x] VEQRU branch merged into `main` and live in production
+- [x] Production publicly accessible; previews remain protected
+- [x] `SITE_URL` set to the production `.vercel.app` address — canonical tags,
+      Open Graph, JSON-LD, `sitemap.xml` and `robots.txt` all derive from it
+- [x] Contact form switched off; direct email + WhatsApp shown instead
+
+## Still open
+
+### Brand clearance
+
+- [ ] **Trademark search** for "VEQRU" in Egypt, the GCC markets you sell into,
+      EUIPO and USPTO, ideally through a trademark attorney. A general web
+      search on 7 Nov 2026 found no exact mark (nearest: unrelated `VEQ`,
+      `VERQ`). That is a preliminary check, not clearance.
+- [ ] Social handles (`@veqru` on Instagram, LinkedIn, X, Behance).
+- [ ] Domain — optional. `veqru.com` and the other TLDs checked were unregistered
+      on 7 Nov 2026. If you buy one later: add it in Vercel, then update
+      `SITE_URL`. Nothing in the code needs to change.
+
+### Contact form
+
+Off by design. Turning it on needs a domain you own:
+
+1. Verify the domain in Resend.
+2. Set `RESEND_API_KEY`, `CONTACT_TO` (both founders' addresses) and
+   `CONTACT_FROM` (a sender on that domain) in Vercel → Production.
+3. Set `contactForm: true` in `content/site.js` and push.
+
+Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
+address that owns the Resend account, so it can't serve as a stopgap for two
+founders.
+
+### Content
 
 - [ ] Both founders approve their role line and bio in `content/site.js`.
-- [ ] Fill `challenge` / `contribution` / `solution` per project in
-      `content/projects.js`. Say who did what, and mark any AI-assisted work.
-      The fields render automatically once they're filled in.
+- [ ] Fill in `challenge` / `contribution` / `solution` per project in
+      `content/projects.js`. Say who did what, and mark any work done with AI
+      assistance.
 - [ ] Add `outcomes` only where you have real measured numbers.
-- [ ] Skechers & ECCO: provide the brand-specific frg.store URLs so the capture
+- [ ] Skechers & ECCO: the brand-specific frg.store URLs, so the capture
       workflow can add product-page and cart-drawer previews.
-- [ ] Retro Sport Egypt, Italiano, MAZY, Shopify Slice: confirm URL + scope,
-      or leave them out.
-
-## 3. Contact form — blocking
-
-Set in **Vercel → Project → Settings → Environment Variables** (Production):
-
-| Variable | Value |
-|---|---|
-| `RESEND_API_KEY` | from resend.com |
-| `CONTACT_TO` | `Abdulramanmagdy@gmail.com,anmedshaban1265@gmail.com` |
-| `CONTACT_FROM` | `VEQRU <hello@veqru.com>` — requires the domain verified in Resend |
-
-Until these exist, `/api/contact` returns 503 and the form tells visitors to
-email you directly.
-
-## 4. Go-live steps
-
-1. Add the domain to the Vercel project and point DNS at it.
-2. Set `SITE_URL=https://veqru.com` (Production). Canonical tags, Open Graph
-   URLs and `sitemap.xml` all derive from it.
-3. Open a PR from `veqru-rebrand` into `main`, review the preview, and merge.
-4. Check the live site: canonical tags, `robots.txt` allows crawling, there's
-   no `noindex` tag, the OG card renders when shared, and the form delivers.
-5. Submit `sitemap.xml` in Google Search Console.
+- [ ] Retro Sport Egypt, Italiano, MAZY, Shopify Slice: confirm the URL and
+      scope for each, or leave them out.
 
 ## Do not claim
 

@@ -5,8 +5,8 @@
  * (Shopify_Ecommerce_Portfolio.pdf) or were stated directly by the founders.
  * No invented team members, results, certifications or years of experience.
  *
- * ⚠ PENDING BEFORE PUBLIC LAUNCH — see `url` and the brand-clearance note
- *   in README.md. veqru.com is unregistered as of 7 Nov 2026.
+ * Live on a free .vercel.app address — no custom domain owned. Trademark
+ * clearance for the VEQRU name is still open; see LAUNCH.md.
  */
 
 /**
@@ -44,8 +44,22 @@ export const site = {
   year: 'MMXXVI',
 
   // Resolved per environment at build time — see resolveSiteUrl() above.
-  // Set SITE_URL once veqru.com (or the final domain) is registered.
+  // Production sets SITE_URL in Vercel to the public .vercel.app address.
   url: resolveSiteUrl(),
+
+  /**
+   * Contact form switch.
+   *
+   * OFF until email delivery is configured. Resend's free testing sender only
+   * delivers to the single address that owns the Resend account, and sending
+   * to anyone else needs a verified domain we don't own yet. With this off,
+   * the contact section shows direct email / WhatsApp options and no form, so
+   * nothing on the page looks functional while silently failing.
+   *
+   * To turn it on: set RESEND_API_KEY, CONTACT_TO and CONTACT_FROM in Vercel
+   * (see .env.example), then set this to true.
+   */
+  contactForm: false,
 
   founders: [
     {
@@ -84,7 +98,7 @@ export const site = {
       'Shopify Liquid',
       'conversion rate optimisation',
       'RTL Shopify store',
-      'Shopify developer Egypt'
+      'Shopify development Egypt'
     ]
   },
 

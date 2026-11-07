@@ -7,7 +7,7 @@
  * Required environment variables (set in Vercel → Settings → Environment Variables):
  *   RESEND_API_KEY   API key from the Resend dashboard
  *   CONTACT_TO       comma-separated recipient addresses
- *   CONTACT_FROM     a verified sender, e.g. "Portfolio <hello@yourdomain.com>"
+ *   CONTACT_FROM     a sender on a domain you own and have verified in Resend
  *
  * Without RESEND_API_KEY the endpoint returns 503 and the front end tells the
  * visitor to email directly — it never silently swallows an enquiry.

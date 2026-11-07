@@ -14,6 +14,7 @@ import { initCursor } from './modules/cursor.js';
 import { initShowcase, initLightbox } from './modules/showcase.js';
 import { initDemoTabs, initStickyDemo, initCartDemo, initVariantDemo } from './modules/demos.js';
 import { initContactForm } from './modules/form.js';
+import { initCopyButtons } from './modules/copy.js';
 
 /** Decode the HTML entities the content layer uses, for text-node output. */
 const decode = (s) => {
@@ -36,7 +37,8 @@ function boot() {
   initStickyDemo();
   initCartDemo();
   initVariantDemo();
-  initContactForm();
+  initContactForm(); // no-op when the form is switched off
+  initCopyButtons();
   initReveal();
   initCursor();
 }
