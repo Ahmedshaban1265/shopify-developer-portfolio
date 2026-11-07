@@ -80,7 +80,9 @@ project with just a homepage still works perfectly. Keep the aspect ratios —
 
 ### Refreshing screenshots from the live stores
 
-A GitHub Actions workflow does this for you:
+Playwright and sharp are deliberately **not** in `package.json` — they are installed
+just-in-time by the workflow so Vercel never downloads them. A GitHub Actions workflow
+does this for you:
 
 **Actions → Capture store screenshots → Run workflow**
 

@@ -1,7 +1,7 @@
 /**
  * Captures real screenshots from the live Shopify storefronts.
  *
- * Run locally (`npx playwright install --with-deps chromium` first) or, more
+ * Run locally (`npm i --no-save playwright sharp && npx playwright install --with-deps chromium` first) or, more
  * easily, through the "Capture store screenshots" GitHub Actions workflow.
  *
  *   node scripts/capture-screenshots.mjs            # every store below

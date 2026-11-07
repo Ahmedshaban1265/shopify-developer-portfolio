@@ -27,8 +27,12 @@ jobs:
 
       - run: npm ci
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      # Installed only for this job — keeping Playwright and sharp out of
+      # package.json stops Vercel pulling ~300 MB on every production build.
+      - name: Install capture tooling
+        run: |
+          npm i --no-save playwright sharp
+          npx playwright install --with-deps chromium
 
       - name: Capture
         run: node scripts/capture-screenshots.mjs ${{ inputs.stores }}
