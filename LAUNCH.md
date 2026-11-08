@@ -16,6 +16,8 @@ and none is required for this stage.
 - [x] `SITE_URL` set to the production `.vercel.app` address — canonical tags,
       Open Graph, JSON-LD, `sitemap.xml` and `robots.txt` all derive from it
 - [x] Contact form switched off; direct email + WhatsApp shown instead
+- [x] Brand system: design tokens, light/dark themes, English/Arabic with
+      true RTL. 18 pages (9 per language) with hreflang + x-default.
 
 ## Still open
 
@@ -45,10 +47,17 @@ founders.
 
 ### Content
 
+- [ ] **Arabic spelling of both founders' names** in `content/site.js`
+      (`أحمد شعبان`, `عبدالرحمن مجدي`). Each founder should confirm his own —
+      a name is not something to guess at.
+- [ ] Read the Arabic copy in `content/i18n/ar.js` end to end. It was written,
+      not machine-translated, but it has had no native-speaker review and the
+      marketing voice is a judgement call.
 - [ ] Both founders approve their role line and bio in `content/site.js`.
 - [ ] Fill in `challenge` / `contribution` / `solution` per project in
-      `content/projects.js`. Say who did what, and mark any work done with AI
-      assistance.
+      `content/i18n/projects.en.js` **and** `projects.ar.js`. They are `null`
+      today, and each case study says so rather than inventing a story.
+      Say who did what, and mark any work done with AI assistance.
 - [ ] Add `outcomes` only where you have real measured numbers.
 - [ ] Skechers & ECCO: the brand-specific frg.store URLs, so the capture
       workflow can add product-page and cart-drawer previews.
