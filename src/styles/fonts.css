@@ -1,0 +1,22 @@
+/* Self-hosted fonts (via @fontsource, bundled by Vite).
+   Each file is subset by unicode-range, so a browser only downloads the
+   Arabic files when Arabic text is on the page, and the Latin files when
+   Latin is. No third-party font requests. */
+
+/* English: display + wordmark */
+@import '@fontsource/space-grotesk/latin-500.css';
+@import '@fontsource/space-grotesk/latin-600.css';
+/* English: body */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+/* Labels, data, domains */
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+/* Arabic: display */
+@import '@fontsource/alexandria/arabic-500.css';
+@import '@fontsource/alexandria/arabic-600.css';
+/* Arabic: body */
+@import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+@import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
+@import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';

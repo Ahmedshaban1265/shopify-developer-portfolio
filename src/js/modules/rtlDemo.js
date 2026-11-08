@@ -12,7 +12,10 @@ export function initRtlDemo() {
     const dir = btn.dataset.dir;
     if (demo.getAttribute('dir') === dir) return;
 
-    $$('button', toggle).forEach((b) => b.classList.toggle('on', b === btn));
+    $$('button', toggle).forEach((b) => {
+      b.classList.toggle('on', b === btn);
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
     toggle.classList.toggle('ar', dir === 'rtl');
     demo.classList.add('swap');
 

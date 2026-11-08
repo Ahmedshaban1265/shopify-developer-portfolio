@@ -1,41 +1,113 @@
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — layouts are re-composed per breakpoint, not shrunk.
    ============================================================ */
-@media (max-width:1080px){
-  .about-grid,.exp-grid,.svc-grid{grid-template-columns:1fr}
-  .svc-sticky,.exp-demo,.about-grid > div:first-child{position:static}
-  .hero-grid{grid-template-columns:1fr;align-items:start}
-  .proj-feats{grid-template-columns:1fr 1fr}
+@media (max-width: 1180px) {
+  .nav-links { gap: 4px; }
+  .nav-links a { padding-inline: 4px; font-size: 13.5px; }
 }
-@media (max-width:860px){
-  .nav-links,.nav-cta{display:none}
-  .burger{display:flex}
-  .stats{grid-template-columns:1fr 1fr}
-  .stat:nth-child(2){border-right:0}
-  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--rule)}
-  .frame-d{width:100%}
-  .stage-caps{width:100%}
-  .frame-p{width:98px;right:8px;bottom:6px}
-  .stage{padding-bottom:44px}
-  .proj-feats{grid-template-columns:1fr;gap:22px}
-  .feat{border-top:1px solid var(--rule-soft);padding-top:16px}
-  .contact-grid{grid-template-columns:1fr}
-  .wall{grid-template-rows:1fr;gap:12px}
-  .store{width:78vw;max-width:300px}
-  .demo-card{grid-template-columns:78px 1fr}
-  .demo-links{display:none}
-  .hero{min-height:auto}
+
+@media (max-width: 1080px) {
+  .hero-in { grid-template-columns: 1fr; }
+  .hero-stage { justify-self: center; max-width: 520px; aspect-ratio: 1.15; }
+  .hphone { width: 32%; }
+  .hphone--1 { inset-inline-start: 4%; }
+  .hphone--2 { inset-inline-start: 34%; width: 34%; }
+  .hphone--3 { inset-inline-end: 4%; }
+  .sect-head { grid-template-columns: 1fr; }
+  .sect-note { justify-self: start; }
+  .proj-body, .exp-grid, .about-grid, .cs-body { grid-template-columns: 1fr; }
+  .about-aside, .cs-aside { position: static; }
+  .lab-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bench-grid { grid-template-columns: 1fr; }
+  .bench-copy { border-inline-end: 0; border-bottom: 1px solid var(--border); }
+  .bench-note { margin-top: var(--s-3); }
+  .contact-grid { grid-template-columns: 1fr; }
+  .why { grid-template-columns: 1fr; }
+  .why-item { min-height: 0; }
+  .why-item .h3 { margin-top: var(--s-4); }
 }
-@media (max-width:520px){
-  .hero-h1{font-size:clamp(38px,11.4vw,56px)}
-  .proj-title{font-size:clamp(32px,11vw,56px)}
-  .stat b{font-size:clamp(36px,13vw,58px)}
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .burger { display: inline-flex; }
+  .nav-in { grid-template-columns: auto 1fr; }
+  .nav-tools { justify-self: end; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-inline-end: 0; }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .stat { padding-bottom: var(--s-6); }
+  .bento { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr 1fr; }
+  .founders, .ccards { grid-template-columns: 1fr; }
+  .cs-feats { grid-template-columns: 1fr; }
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-  .line > span{transform:none!important}
-  .rv{opacity:1!important;transform:none!important}
-  .frame-d,.frame-p{clip-path:none!important}
-  .cursor{display:none!important}
-  .marquee-in{animation:none}
+
+@media (max-width: 680px) {
+  :root { --nav-h: 62px; --bar-h: 32px; }
+  .brand { font-size: 24px; }
+  .hero { min-height: auto; }
+  .hero-stage { aspect-ratio: 1.08; }
+  .hphone { padding: 4px; border-radius: 22px; }
+  .hphone img { border-radius: 18px; }
+  .proj-head { grid-template-columns: 1fr; align-items: start; }
+  .seg { display: flex; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .seg::-webkit-scrollbar { display: none; }
+  .seg-btn { flex: 1 0 auto; }
+  .stage { padding: 12px 12px 34px; border-radius: var(--r-md); }
+  .frame-d { width: 100%; }
+  .frame-p { width: 31%; inset-inline-end: 8px; bottom: -6%; padding: 3px; border-radius: 14px; }
+  .frame-p .shot { border-radius: 11px; }
+  .frame-p::after { top: 7px; height: 3px; }
+  .chrome { height: 24px; }
+  .dots i { width: 6px; height: 6px; }
+  .chrome .url { font-size: 9.5px; }
+  .stage-caps { margin-top: var(--s-5); }
+  .bento, .flow { grid-template-columns: 1fr; }
+  .cell--wide { grid-column: auto; }
+  .cell { min-height: 0; }
+  .exp-cols { grid-template-columns: 1fr; gap: var(--s-7); }
+  .wall { grid-template-rows: 1fr; }
+  .store { width: 76vw; max-width: 300px; }
+  .lab-tabs { display: flex; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); }
+  .lab-tabs::-webkit-scrollbar { display: none; }
+  .dtab { flex: 0 0 auto; min-width: 168px; }
+  .bench-head .spec { margin-inline-start: 0; flex-basis: 100%; }
+  .demo-links { display: none; }
+  .demo-card { grid-template-columns: 82px 1fr; }
+  .sd-hero { grid-template-columns: 104px 1fr; gap: 14px; }
+  .cart-demo, .var-demo { grid-template-columns: 1fr; }
+  .cd-products { border-inline-end: 0; border-bottom: 1px solid var(--st-line); }
+  .vd-media { min-height: 200px; }
+  .founder { grid-template-columns: 1fr; }
+  .founder .avatar { grid-row: auto; }
+  .facts > div { grid-template-columns: 1fr; gap: 2px; }
+  .cs-nav { grid-template-columns: 1fr; }
+  .cs-next { text-align: start; align-items: flex-start; }
+  .foot { grid-template-columns: 1fr; justify-items: start; gap: var(--s-4); }
+  .foot-meta { justify-content: flex-start; }
+}
+
+@media (max-width: 400px) {
+  .nav-tools { gap: 6px; }
+  .tool { height: 36px; min-width: 36px; padding: 0 10px; }
+  .theme-toggle { width: 36px; }
+  .burger { width: 36px; height: 36px; }
+}
+
+/* ---------- reduced motion: everything readable, nothing moving ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+  /* Arabic reveals fade rather than slide (a clipping mask would cut
+     diacritics), so opacity has to be reset here too — resetting only the
+     transform would leave Arabic headings permanently invisible. */
+  .line > span { transform: none !important; opacity: 1 !important; }
+  .rv { opacity: 1 !important; transform: none !important; }
+  .hphone { opacity: 1 !important; translate: none !important; }
+  .frame-d, .frame-p { clip-path: none !important; }
+  .cursor { display: none !important; }
+  .marquee-in { animation: none; }
+  .live i::after { display: none; }
 }

@@ -18,6 +18,16 @@ export function initParallax() {
     );
   });
 
+  // Hero phones drift at different depths as the page scrolls.
+  gsap.utils.toArray('.hphone').forEach((el) => {
+    const depth = parseFloat(el.dataset.depth || '1');
+    gsap.to(el, {
+      yPercent: -9 * depth,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
+    });
+  });
+
   gsap.utils.toArray('.frame-p').forEach((p) => {
     gsap.fromTo(
       p,

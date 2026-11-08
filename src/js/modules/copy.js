@@ -1,24 +1,25 @@
 import { $, $$ } from './env.js';
+import { t, fmt } from './i18n.js';
 
-/** "Copy address" buttons in the direct-contact cards. */
+/** "Copy address" buttons on the founder contact cards. */
 export function initCopyButtons() {
   const buttons = $$('[data-copy]');
   if (!buttons.length) return;
   const status = $('#copyStatus');
+  const s = t();
 
   const announce = (msg) => {
     if (!status) return;
     status.textContent = msg;
     clearTimeout(announce.t);
-    announce.t = setTimeout(() => { status.textContent = ''; }, 2600);
+    announce.t = setTimeout(() => { status.textContent = ''; }, 2800);
   };
 
   const fallbackCopy = (text) => {
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.setAttribute('readonly', '');
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
+    ta.style.cssText = 'position:fixed;opacity:0';
     document.body.appendChild(ta);
     ta.select();
     let ok = false;
@@ -30,27 +31,18 @@ export function initCopyButtons() {
   buttons.forEach((btn) => {
     const label = btn.textContent;
     btn.addEventListener('click', async () => {
-      const text = btn.dataset.copy;
+      const email = btn.dataset.copy;
       let ok = false;
-      try {
-        await navigator.clipboard.writeText(text);
-        ok = true;
-      } catch {
-        ok = fallbackCopy(text);
-      }
+      try { await navigator.clipboard.writeText(email); ok = true; } catch { ok = fallbackCopy(email); }
       if (ok) {
-        btn.textContent = 'Copied ✓';
+        btn.textContent = `${s.copied} ✓`;
         btn.classList.add('done');
-        announce(`${text} copied to your clipboard.`);
+        announce(fmt(s.copiedMsg, { email }));
       } else {
-        // Clipboard blocked: leave the address visible and selectable.
-        btn.textContent = 'Select & copy';
-        announce(`Couldn't copy automatically — the address is ${text}.`);
+        btn.textContent = s.copyFailed;
+        announce(fmt(s.copyFailedMsg, { email }));
       }
-      setTimeout(() => {
-        btn.textContent = label;
-        btn.classList.remove('done');
-      }, 1800);
+      setTimeout(() => { btn.textContent = label; btn.classList.remove('done'); }, 1800);
     });
   });
 }

@@ -19,12 +19,14 @@ export function initScroll() {
     }
   }
 
-  $$('a[href^="#"], a[href^="/#"]').forEach((a) => {
+  $$('a[href*="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
-      const href = a.getAttribute('href');
-      const hash = href.slice(href.indexOf('#'));
-      // On a sub-page a "/#id" link must navigate home, not scroll.
-      if (href.startsWith('/#') && location.pathname !== '/') return;
+      const url = new URL(a.getAttribute('href'), location.href);
+      // A link to an anchor on ANOTHER page (e.g. /ar/#work from a case
+      // study) must navigate, not scroll.
+      if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+      const hash = url.hash;
+      if (!hash) return;
       const el = hash === '#top' ? document.body : document.querySelector(hash);
       if (!el) return;
       e.preventDefault();

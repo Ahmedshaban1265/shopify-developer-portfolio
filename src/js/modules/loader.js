@@ -8,7 +8,7 @@ export function initLoader() {
   const startHero = () => {
     const hero = $('#hero') || $('.cs-head');
     hero?.classList.add('hero-ready', 'is-in');
-    $$('#hero .rv, .cs-head .rv').forEach((el) => el.classList.add('is-in'));
+    $$('#hero .rv, .cs-head .rv, .cs-head .lines').forEach((el) => el.classList.add('is-in'));
     document.body.classList.add('ready');
   };
 

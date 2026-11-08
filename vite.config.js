@@ -1,18 +1,16 @@
 import { defineConfig } from 'vite';
-import { readdirSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readdirSync, existsSync, statSync } from 'node:fs';
+import { resolve, relative } from 'node:path';
 
-/** Every generated HTML file is a build entry point. */
-function htmlEntries() {
-  const entries = { main: resolve(__dirname, 'index.html') };
-  const workDir = resolve(__dirname, 'work');
-  if (existsSync(workDir)) {
-    for (const slug of readdirSync(workDir)) {
-      const file = resolve(workDir, slug, 'index.html');
-      if (existsSync(file)) entries[`work-${slug}`] = file;
-    }
+/** Every generated index.html (any language, any depth) is a build entry. */
+function htmlEntries(dir = __dirname, out = {}) {
+  for (const name of readdirSync(dir)) {
+    if (['node_modules', 'dist', 'public', 'src', '.git', '.github', 'content', 'templates', 'scripts', 'api', '_recovered'].includes(name)) continue;
+    const full = resolve(dir, name);
+    if (statSync(full).isDirectory()) htmlEntries(full, out);
+    else if (name === 'index.html') out[relative(__dirname, full).replace(/\/?index\.html$/, '') || 'main'] = full;
   }
-  return entries;
+  return out;
 }
 
 export default defineConfig({
@@ -23,7 +21,7 @@ export default defineConfig({
     target: 'es2020',
     cssCodeSplit: false,
     assetsInlineLimit: 2048,
-    rollupOptions: { input: htmlEntries() }
+    rollupOptions: { input: existsSync(resolve(__dirname, 'index.html')) ? htmlEntries() : {} }
   },
   server: { port: 5173, open: false }
 });

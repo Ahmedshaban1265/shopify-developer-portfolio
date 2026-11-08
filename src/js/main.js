@@ -1,6 +1,7 @@
 import '../styles/main.css';
 
-import { site } from '../../content/site.js';
+import { t } from './modules/i18n.js';
+import { initTheme, initLangSwitch } from './modules/theme.js';
 import { initScroll } from './modules/scroll.js';
 import { initLoader } from './modules/loader.js';
 import { initAnnounce } from './modules/announce.js';
@@ -16,19 +17,18 @@ import { initDemoTabs, initStickyDemo, initCartDemo, initVariantDemo } from './m
 import { initContactForm } from './modules/form.js';
 import { initCopyButtons } from './modules/copy.js';
 
-/** Decode the HTML entities the content layer uses, for text-node output. */
-const decode = (s) => {
-  const el = document.createElement('textarea');
-  el.innerHTML = s;
-  return el.value;
-};
+const BRANDS = [
+  'Skechers', 'ANTA', 'ECCO', 'MyVi', 'Infinity Clinic Pharma',
+  'Skinify', 'IMZA', 'Givago', 'Cole Haan', 'Fashion Retail Group'
+];
 
 function boot() {
-  // Structure first — these must not depend on images or fonts.
+  initTheme();
+  initLangSwitch();
   initScroll();
   initNav();
-  initAnnounce(site.announcements.map(decode));
-  initMarquee(site.marquee);
+  initAnnounce(t().announcements);
+  initMarquee(BRANDS);
   initShowcase();
   initLightbox();
   initWall();
@@ -43,13 +43,10 @@ function boot() {
   initCursor();
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', boot, { once: true });
-} else {
-  boot();
-}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+else boot();
 
-// Loader + parallax wait for full load so measurements are correct.
+// Loader and parallax wait for full load so measurements are correct.
 window.addEventListener('load', () => {
   initLoader();
   initParallax();
