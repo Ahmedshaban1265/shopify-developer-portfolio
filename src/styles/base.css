@@ -1,0 +1,192 @@
+/* ============================================================
+   BASE — reset, typography, and the shared component primitives.
+   Everything here reads semantic tokens only.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+body.is-locked { overflow: hidden; }
+/* height: auto is not cosmetic — every <img> ships width/height attributes to
+   reserve layout space, and those map to presentational hints. Without this,
+   any rule that sets `width` leaves the attribute height pinned, and an
+   `aspect-ratio` alongside it is ignored because both axes already resolve. */
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+h1, h2, h3, h4, h5, h6, p, dl, dd, figure { margin: 0; }
+::selection { background: var(--accent); color: var(--on-accent); }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+/* Latin runs inside Arabic pages (emails, domains, phone numbers, brand names)
+   keep their own direction and never inherit Arabic letter-spacing rules. */
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+.skip {
+  position: absolute; inset-inline-start: var(--s-4); top: -100px; z-index: 9999;
+  background: var(--accent); color: var(--on-accent);
+  padding: var(--s-3) var(--s-5); border-radius: var(--r-pill);
+  font-weight: 600; font-size: var(--fs-small);
+  transition: top var(--t-2) var(--ease-out);
+}
+.skip:focus { top: var(--s-4); }
+
+/* ---------- layout primitives ---------- */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+.sect { padding-block: var(--sect-y); position: relative; }
+section { scroll-margin-top: calc(var(--nav-h) + 20px); }
+.sect-head {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--s-6) var(--s-9); align-items: end;
+  margin-bottom: clamp(32px, 4.4vw, 64px);
+}
+.sect-note { color: var(--fg-muted); font-size: var(--fs-small); line-height: var(--lh-tight); max-width: 44ch; justify-self: end; }
+
+/* ---------- type ---------- */
+.display {
+  font-family: var(--ff-display); font-weight: 500;
+  line-height: var(--lh-display); letter-spacing: var(--tr-display);
+  text-wrap: balance;
+}
+.h-hero { font-size: var(--fs-hero); }
+.h1 { font-size: var(--fs-h1); }
+.h2 { font-size: var(--fs-h2); line-height: calc(var(--lh-display) + .04); }
+.h3 { font-family: var(--ff-display); font-weight: 500; font-size: var(--fs-h3); line-height: var(--lh-heading); letter-spacing: var(--tr-heading); }
+
+/* Emphasis is colour plus a rule drawn under the text box — never italics
+   (the display face has no italic, and Arabic has no italic convention).
+   A background highlight was tried first: it cuts through Arabic descenders
+   and sits at a different height in each script, so the rule is drawn from
+   the bottom of the line box instead, where both scripts agree. */
+.display em, .h3 em {
+  font-style: normal; color: var(--accent-ink);
+  position: relative; display: inline-block; padding-bottom: .06em;
+}
+.display em::after, .h3 em::after {
+  content: ""; position: absolute; inset-inline: 0; bottom: 0;
+  height: .06em; min-height: 2px; border-radius: 2px; background: var(--accent); opacity: .85;
+}
+/* The brand full stop: a drawn mint circle that ends key headlines. */
+.dot {
+  display: inline-block; width: .17em; height: .17em; border-radius: 50%;
+  background: var(--brand-dot); margin-inline-start: .06em; vertical-align: baseline;
+  transform: translateY(-.02em);
+}
+
+.lead { font-size: var(--fs-lead); line-height: var(--lh-tight); color: var(--fg-muted); text-wrap: pretty; }
+.lead strong { color: var(--fg); font-weight: 500; }
+
+.label {
+  font-family: var(--label-font); font-size: var(--fs-label); font-weight: var(--label-weight);
+  letter-spacing: var(--tr-label); text-transform: var(--label-transform);
+  color: var(--fg-subtle); line-height: 1.4;
+}
+/* Eyebrow: label + brand dot. Marks the start of every section. */
+.eyebrow { display: inline-flex; align-items: center; gap: var(--s-2); margin-bottom: var(--s-5); }
+.eyebrow::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--brand-dot); flex: none;
+}
+.mono { font-family: var(--ff-mono); letter-spacing: 0; }
+
+/* ---------- wordmark ---------- */
+.wordmark {
+  font-family: var(--ff-brand); font-weight: 600; letter-spacing: -.055em;
+  text-transform: lowercase; line-height: 1; direction: ltr; unicode-bidi: isolate;
+  display: inline-flex; align-items: baseline;
+}
+.wordmark .wm-dot {
+  display: inline-block; width: .2em; height: .2em; border-radius: 50%;
+  background: var(--brand-dot); margin-inline-start: .07em;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  --btn-bg: transparent; --btn-fg: var(--fg); --btn-bd: var(--control-border);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 22px; border-radius: var(--r-pill);
+  background: var(--btn-bg); color: var(--btn-fg); border: 1px solid var(--btn-bd);
+  font-family: var(--ff-sans); font-size: 15px; font-weight: 500; line-height: 1; white-space: nowrap;
+  transition: background var(--t-2) var(--ease), color var(--t-2) var(--ease),
+              border-color var(--t-2) var(--ease), transform var(--t-3) var(--ease-out);
+}
+.btn:hover { --btn-bg: var(--fg); --btn-fg: var(--bg); --btn-bd: var(--fg); }
+.btn--fill { --btn-bg: var(--accent); --btn-fg: var(--on-accent); --btn-bd: var(--accent); font-weight: 600; }
+.btn--fill:hover { --btn-bg: var(--accent-hover); --btn-fg: var(--on-accent); --btn-bd: var(--accent-hover); }
+.btn--sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+/* Brand dot inside a button. */
+.btn i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+.btn .arr { width: 14px; height: 14px; flex: none; transition: transform var(--t-3) var(--ease-out); transform: scaleX(var(--dir)); }
+.btn:hover .arr { transform: translateX(calc(3px * var(--dir))) scaleX(var(--dir)); }
+
+/* Text link with arrow. */
+.tlink {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--fs-small); font-weight: 500; color: var(--fg);
+  padding-block: 4px; border-bottom: 1px solid var(--border-strong);
+  transition: color var(--t-2), border-color var(--t-2);
+}
+.tlink:hover { color: var(--accent-ink); border-color: currentColor; }
+.tlink svg { width: 10px; height: 10px; flex: none; transform: scaleX(var(--dir)); transition: transform var(--t-3) var(--ease-out); }
+.tlink:hover svg { transform: translate(calc(2px * var(--dir)), -2px) scaleX(var(--dir)); }
+.tlink .mono { font-size: 13px; }
+
+/* ---------- pills, chips, segmented tabs ---------- */
+.pill {
+  display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--r-pill);
+  font-size: var(--fs-xs); color: var(--fg-muted); background: var(--bg-raised); white-space: nowrap;
+}
+
+.seg {
+  display: inline-flex; gap: 2px; padding: 4px;
+  background: var(--bg-sunken); border: 1px solid var(--border); border-radius: var(--r-pill);
+}
+.seg-btn, .chip {
+  min-height: 36px; padding: 0 16px; border-radius: var(--r-pill);
+  font-size: 13.5px; font-weight: 500; color: var(--fg-muted); white-space: nowrap;
+  transition: background var(--t-2) var(--ease), color var(--t-2) var(--ease), border-color var(--t-2) var(--ease);
+}
+.seg-btn:hover { color: var(--fg); }
+.seg-btn.on, .seg-btn[aria-selected="true"] { background: var(--fg); color: var(--bg); }
+
+.chip { border: 1px solid var(--border); background: var(--bg-raised); }
+.chip:hover { border-color: var(--control-border); color: var(--fg); }
+.chip.on { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+
+/* ---------- surfaces ---------- */
+.card {
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--r-md);
+}
+
+/* ---------- reveal motion ---------- */
+.lines { display: block; }
+.line { display: block; overflow: hidden; padding-block: .06em; margin-block: -.06em; }
+.line > span { display: block; transform: translateY(105%); transition: transform 1s var(--ease-out); }
+.is-in .line > span, .hero-ready .line > span { transform: none; }
+/* Arabic: a mask would clip diacritics and tall ascenders, so the same
+   reveal is done as a fade-up with no clipping. */
+:root[lang="ar"] .line { overflow: visible; padding-block: 0; margin-block: 0; }
+:root[lang="ar"] .line > span { transform: translateY(14px); opacity: 0; transition: transform .9s var(--ease-out), opacity .9s var(--ease-out); }
+:root[lang="ar"] .is-in .line > span, :root[lang="ar"] .hero-ready .line > span { transform: none; opacity: 1; }
+.line:nth-child(2) > span { transition-delay: .08s; }
+.line:nth-child(3) > span { transition-delay: .16s; }
+
+.rv { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.rv.is-in { opacity: 1; transform: none; }
+.rv-d1 { transition-delay: .07s; } .rv-d2 { transition-delay: .14s; } .rv-d3 { transition-delay: .21s; }
+
+/* Theme switching: the View Transitions API crossfades when available. */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .32s; }

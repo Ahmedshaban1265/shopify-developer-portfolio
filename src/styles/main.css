@@ -1,8 +1,10 @@
-/* Design system entry point.
-   Order matters: tokens → layout chrome → page sections → new components → responsive. */
+/* VEQRU design system — entry point.
+   Order: fonts → tokens → base primitives → chrome → sections → lab → case → responsive. */
+@import './fonts.css';
 @import './tokens.css';
-@import './brand.css';
-@import './layout.css';
+@import './base.css';
+@import './chrome.css';
 @import './sections.css';
-@import './components.css';
+@import './lab.css';
+@import './case.css';
 @import './responsive.css';

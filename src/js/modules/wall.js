@@ -8,7 +8,7 @@ export function initWall() {
 
   const update = () => {
     const max = ws.scrollWidth - ws.clientWidth;
-    const p = max > 0 ? ws.scrollLeft / max : 0;
+    const p = max > 0 ? Math.abs(ws.scrollLeft) / max : 0;
     if (bar) bar.style.width = `${12 + p * 88}%`;
   };
   ws.addEventListener('scroll', update, { passive: true });

@@ -1,25 +1,25 @@
 /**
- * Brand identity, contact details and global metadata.
+ * Language-independent site data: identity, contact details, flags.
  *
- * SOURCE OF TRUTH: facts here come from the portfolio PDF
- * (Shopify_Ecommerce_Portfolio.pdf) or were stated directly by the founders.
- * No invented team members, results, certifications or years of experience.
+ * Everything a visitor reads lives in content/i18n/{en,ar}.js — this file
+ * holds only what is the same in every language.
  *
- * Live on a free .vercel.app address — no custom domain owned. Trademark
- * clearance for the VEQRU name is still open; see LAUNCH.md.
+ * SOURCE OF TRUTH: facts here come from the portfolio PDF or were stated
+ * directly by the founders. No invented team members, results,
+ * certifications or years of experience.
  */
 
 /**
  * Canonical origin for the environment being built.
  *
  * Priority:
- *   1. SITE_URL            — set this once a custom domain exists
+ *   1. SITE_URL             — set in Vercel (Production) to the public address
  *   2. production on Vercel → the project's stable production domain
  *   3. preview on Vercel    → that deployment's own URL
  *   4. local dev
  *
- * Canonical tags, Open Graph URLs and sitemap.xml all derive from this, so a
- * preview never advertises itself as the production site.
+ * Canonical tags, hreflang, Open Graph and sitemap.xml all derive from this,
+ * so a preview never advertises itself as the production site.
  */
 function resolveSiteUrl() {
   const env = process.env;
@@ -31,52 +31,23 @@ function resolveSiteUrl() {
   return 'http://localhost:4173';
 }
 
-/** True for anything that is not the production deployment. */
+/** Only the production deployment may be indexed. */
 export const isProduction = process.env.VERCEL_ENV === 'production';
 
 export const site = {
   brand: 'VEQRU',
-  /** How the brand is written in running text and in the wordmark. */
+  /** Lowercase form used by the wordmark. The full stop is drawn, not typed. */
   brandMark: 'veqru',
-  positioning: 'Digital Commerce Studio',
-  tagline: 'We Build Commerce That Performs.',
-  regions: 'Egypt & GCC',
   year: 'MMXXVI',
-
-  // Resolved per environment at build time — see resolveSiteUrl() above.
-  // Production sets SITE_URL in Vercel to the public .vercel.app address.
   url: resolveSiteUrl(),
 
   /**
-   * Contact form switch.
-   *
-   * OFF until email delivery is configured. Resend's free testing sender only
-   * delivers to the single address that owns the Resend account, and sending
-   * to anyone else needs a verified domain we don't own yet. With this off,
-   * the contact section shows direct email / WhatsApp options and no form, so
-   * nothing on the page looks functional while silently failing.
-   *
-   * To turn it on: set RESEND_API_KEY, CONTACT_TO and CONTACT_FROM in Vercel
-   * (see .env.example), then set this to true.
+   * Contact form switch — OFF until email delivery is configured.
+   * Resend's free testing sender only delivers to the single address that
+   * owns the Resend account; sending anywhere else needs a verified domain.
+   * See LAUNCH.md for how to turn it on.
    */
   contactForm: false,
-
-  founders: [
-    {
-      name: 'Ahmed Shaban',
-      initials: 'AS',
-      role: 'Co-founder · Shopify development',
-      email: 'anmedshaban1265@gmail.com',
-      bio: 'Builds the storefronts — custom themes, Liquid sections, cart and checkout logic, and the integrations that keep a store running day to day.'
-    },
-    {
-      name: 'Abdulrahman Magdy',
-      initials: 'AM',
-      role: 'Co-founder · Commerce design & CRO',
-      email: 'Abdulramanmagdy@gmail.com',
-      bio: 'Shapes how a store reads and sells — storefront design, merchandising structure, bilingual AR/EN experiences and conversion work after launch.'
-    }
-  ],
 
   // Both addresses stay reachable. Neither is replaced.
   emails: ['Abdulramanmagdy@gmail.com', 'anmedshaban1265@gmail.com'],
@@ -85,67 +56,30 @@ export const site = {
     { display: '010 9795 0983', tel: '+201097950983', whatsapp: null }
   ],
 
-  meta: {
-    title: 'VEQRU — Digital Commerce Studio | Shopify development & CRO',
-    description:
-      'VEQRU is a digital commerce studio building custom Shopify storefronts, Liquid sections, bilingual AR/EN experiences and conversion-focused commerce for brands across Egypt and the Gulf. 50+ stores delivered.',
-    keywords: [
-      'Shopify development agency',
-      'Shopify theme development',
-      'custom Shopify solutions',
-      'Shopify development',
-      'e-commerce development',
-      'Shopify Liquid',
-      'conversion rate optimisation',
-      'RTL Shopify store',
-      'Shopify development Egypt'
-    ]
-  },
-
-  nav: [
-    { label: 'Work', href: '/#work' },
-    { label: 'Solutions', href: '/#services' },
-    { label: 'Shopify Lab', href: '/#demos' },
-    { label: 'Process', href: '/#process' },
-    { label: 'About', href: '/#about' }
+  /**
+   * Founders. Names are given in both scripts; role and bio are per-language
+   * in content/i18n. ⚠ Arabic spellings should be confirmed by each founder.
+   */
+  founders: [
+    { id: 'ahmed', name: { en: 'Ahmed Shaban', ar: 'أحمد شعبان' }, initials: 'AS', email: 'anmedshaban1265@gmail.com' },
+    { id: 'abdulrahman', name: { en: 'Abdulrahman Magdy', ar: 'عبدالرحمن مجدي' }, initials: 'AM', email: 'Abdulramanmagdy@gmail.com' }
   ],
 
-  announcements: [
-    '50+ Shopify stores delivered',
-    'Egypt &amp; GCC · Shopify Markets',
-    'AR / EN · Full RTL builds',
-    'For new projects, redesigns &amp; consultations'
-  ],
-
+  // Brand names are proper nouns: identical in both languages.
   marquee: [
     'Skechers', 'ANTA', 'ECCO', 'MyVi', 'Infinity Clinic Pharma',
     'Skinify', 'IMZA', 'Givago', 'Cole Haan', 'Fashion Retail Group'
   ],
 
+  // Values only — labels are per-language. 25 = 8 featured + 17 further
+  // distinct stores named in the PDF.
   stats: [
-    { value: 50, suffix: '+', label: 'Shopify projects delivered' },
-    // 8 featured case studies + 17 further distinct stores = 25 named in the PDF.
-    { value: 25, suffix: '', label: 'Named stores in this portfolio' },
-    { text: 'AR/EN', label: 'Bilingual &amp; full RTL builds' },
-    { value: 2, suffix: '', label: 'Regions · Egypt &amp; GCC' }
+    { value: 50, suffix: '+' },
+    { value: 25 },
+    { text: 'AR/EN' },
+    { value: 2 }
   ],
 
-  /** Why work with us — each point is demonstrable from the work shown. */
-  why: [
-    {
-      n: '01',
-      title: 'We build features, not app stacks',
-      body: 'Bundle builders, quizzes, loyalty tiers and cart logic live in the theme. Fewer apps fighting each other, and a store that stays fast.'
-    },
-    {
-      n: '02',
-      title: 'We have shipped at brand-flagship scale',
-      body: 'Official storefronts for Skechers, ANTA and ECCO run on one multi-brand build alongside a nationwide retail network of 38 stores.'
-    },
-    {
-      n: '03',
-      title: 'We build for how this region actually buys',
-      body: 'True right-to-left Arabic, Shopify Markets, multi-currency, and instalment checkout with ValU, Meeza and Forsa.'
-    }
-  ]
+  /** Real mobile captures shown in the hero, in stacking order. */
+  heroPhones: ['skinify', 'givago', 'myvi']
 };

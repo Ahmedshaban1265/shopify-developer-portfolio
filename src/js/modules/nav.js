@@ -1,5 +1,6 @@
 import { $, $$ } from './env.js';
 import { lockScroll } from './scroll.js';
+import { t } from './i18n.js';
 
 export function initNav() {
   const nav = $('#nav');
@@ -17,7 +18,7 @@ export function initNav() {
   burger?.addEventListener('click', () => {
     const open = document.body.classList.toggle('menu-open');
     burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    burger.setAttribute('aria-label', open ? t().menuClose : t().menuOpen);
     lockScroll(open);
   });
 

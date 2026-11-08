@@ -1,0 +1,73 @@
+/* ============================================================
+   CASE STUDY — editorial reading layout
+   ============================================================ */
+.cs-head { padding-top: calc(var(--bar-h) + var(--nav-h) + clamp(32px, 6vw, 80px)); padding-bottom: clamp(28px, 3.4vw, 48px); }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: clamp(20px, 2.6vw, 32px); font-size: var(--fs-xs); color: var(--fg-subtle); }
+.crumbs a { color: var(--fg-muted); transition: color var(--t-2); }
+.crumbs a:hover { color: var(--fg); }
+.crumbs .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--border-strong); }
+.cs-title { font-family: "Space Grotesk", var(--ff-display); font-size: clamp(44px, 8.4vw, 132px); letter-spacing: -.045em; line-height: .92; }
+.cs-cat { margin-top: var(--s-5); display: block; }
+.cs-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: clamp(24px, 3vw, 36px); }
+.cs-stage { padding-bottom: clamp(24px, 3vw, 40px); }
+
+.cs-body {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: clamp(32px, 6vw, 112px); align-items: start;
+  padding-block: clamp(40px, 5vw, 80px); border-top: 1px solid var(--border);
+}
+.cs-main { max-width: 70ch; }
+.cs-lede {
+  font-family: var(--ff-display); font-weight: 500; font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.3; letter-spacing: var(--tr-heading); margin-bottom: clamp(32px, 4vw, 56px); text-wrap: pretty;
+}
+.cs-block { margin-bottom: clamp(32px, 4vw, 52px); }
+.cs-block > .label { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+.cs-block > .label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.cs-prose p { font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--fg-muted); margin-bottom: var(--s-5); }
+.cs-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cs-feats .feat { padding: var(--s-6); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--bg-raised); }
+.cs-pending {
+  display: flex; gap: var(--s-3); align-items: flex-start; padding: var(--s-5);
+  border: 1px dashed var(--border-strong); border-radius: var(--r-md); color: var(--fg-muted); font-size: var(--fs-small);
+}
+.cs-pending::before { content: ""; width: 7px; height: 7px; margin-top: .6em; border-radius: 50%; background: var(--meta); flex: none; }
+.cs-outcomes { display: flex; flex-wrap: wrap; gap: var(--s-8); padding-block: var(--s-6); border-block: 1px solid var(--border); }
+.cs-outcomes b { display: block; font-family: "Space Grotesk", sans-serif; font-size: clamp(32px, 4vw, 56px); font-weight: 500; line-height: 1; }
+
+.cs-aside { position: sticky; top: calc(var(--nav-h) + 32px); display: flex; flex-direction: column; gap: var(--s-6); padding: var(--s-6); }
+.cs-aside .facts { margin-top: 0; border-top: 0; }
+.cs-aside .facts > div { grid-template-columns: 1fr; gap: 4px; padding-block: 12px; }
+.cs-aside .facts > div:first-child { padding-top: 0; }
+.cs-aside .facts dd .tlink { font-size: var(--fs-small); }
+
+.cs-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-block: clamp(32px, 4vw, 56px); }
+.cs-nav a {
+  display: flex; flex-direction: column; gap: var(--s-3); padding: clamp(20px, 2.4vw, 32px);
+  transition: border-color var(--t-3), transform var(--t-3) var(--ease-out);
+}
+.cs-nav a:hover { border-color: var(--control-border); transform: translateY(-3px); }
+.cs-nav b { font-family: "Space Grotesk", var(--ff-display); font-weight: 500; font-size: clamp(22px, 2.8vw, 40px); letter-spacing: -.03em; line-height: 1.05; }
+.cs-next { text-align: end; align-items: flex-end; }
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lb { position: fixed; inset: 0; z-index: 9400; display: flex; align-items: center; justify-content: center; padding: clamp(10px, 3vw, 40px); }
+.lb[hidden] { display: none; }
+.lb-backdrop { position: absolute; inset: 0; background: var(--scrim); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.lb-panel {
+  position: relative; z-index: 2; width: min(1200px, 100%); max-height: 92vh; display: flex; flex-direction: column;
+  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-2);
+  animation: lb-in .32s var(--ease-out);
+}
+@keyframes lb-in { from { opacity: 0; transform: translateY(12px) scale(.985); } }
+.lb-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--border); }
+:root[dir="rtl"] .lb-head { padding: 12px 20px 12px 12px; }
+.lb-x { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--border); color: var(--fg); transition: background var(--t-2), color var(--t-2); }
+.lb-x:hover { background: var(--fg); color: var(--bg); }
+.lb-x svg { width: 15px; height: 15px; }
+.lb-scroll { overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: var(--shot-bg); }
+.lb-scroll img { width: 100%; height: auto; display: block; }
+.lb-scroll.is-phone { display: grid; place-items: start center; padding: var(--s-6); }
+.lb-scroll.is-phone img { width: min(420px, 100%); border-radius: var(--r-lg); box-shadow: var(--shadow-2); }

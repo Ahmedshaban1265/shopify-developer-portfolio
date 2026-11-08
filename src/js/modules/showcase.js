@@ -1,4 +1,5 @@
 import { $, $$ } from './env.js';
+import { arrowStep } from './i18n.js';
 
 /**
  * Store showcase: segmented control that swaps the desktop AND mobile preview
@@ -48,11 +49,15 @@ function setup(root) {
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => show(tab.dataset.view));
     tab.addEventListener('keydown', (e) => {
-      const map = { ArrowRight: 1, ArrowLeft: -1, Home: 'first', End: 'last' };
-      if (!(e.key in map)) return;
+      let next = null;
+      if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      else {
+        const step = arrowStep(e.key); // mirrored in RTL
+        if (step) next = (i + step + tabs.length) % tabs.length;
+      }
+      if (next === null) return;
       e.preventDefault();
-      const next =
-        map[e.key] === 'first' ? 0 : map[e.key] === 'last' ? tabs.length - 1 : (i + map[e.key] + tabs.length) % tabs.length;
       show(tabs[next].dataset.view, { focus: true });
     });
   });
@@ -95,11 +100,12 @@ export function initLightbox() {
     const src = $('img', btn);
     if (!src) return;
     lastFocus = btn;
-    title.textContent = btn.getAttribute('aria-label')?.replace(/^Enlarge /, '') || 'Preview';
+    title.textContent = btn.dataset.title || '';
     const clone = document.createElement('img');
     clone.src = src.currentSrc || src.src;
     clone.alt = src.alt;
     scroll.innerHTML = '';
+    scroll.classList.toggle('is-phone', btn.dataset.device === 'mobile');
     scroll.appendChild(clone);
     lb.hidden = false;
     document.body.classList.add('is-locked');
