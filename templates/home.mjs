@@ -25,10 +25,11 @@ const sectHead = (eyebrow, title, note) => `<div class="sect-head">
 /** Two opposing rows, each duplicated once for a seamless CSS-only loop. */
 const brandMarquee = () => {
   const rows = [site.marquee.filter((_, i) => i % 2 === 0), site.marquee.filter((_, i) => i % 2 === 1)];
-  return `<div class="marquee" id="marquee" dir="ltr" aria-hidden="true">
+  return `<div class="marquee" id="marquee" dir="ltr">
     ${rows.map((brands) => {
-      const group = `<div class="marquee-group">${brands.map((b) => `<span class="marquee-item marquee-item--${b.slug}"><img src="/logos/${b.slug}.svg" width="${b.width}" height="${b.height}" alt="" decoding="async" draggable="false"></span>`).join('')}</div>`;
-      return `<div class="marquee-row" style="--marquee-duration:${(brands.length * 7.6).toFixed(1)}s"><div class="marquee-track">${group}${group.replace('class="marquee-group"', 'class="marquee-group" data-clone')}</div></div>`;
+      // Loop copies remain clickable by pointer, without repeating keyboard stops.
+      const group = (clone = false) => `<div class="marquee-group"${clone ? ' data-clone aria-hidden="true"' : ''}>${brands.map((b) => `<a class="marquee-item marquee-item--${b.slug}${b.hoverSurface === 'dark' ? ' marquee-item--on-dark' : ''}" href="${attr(b.url)}" target="_blank" rel="noopener noreferrer" aria-label="${attr(b.name)}"${clone ? ' tabindex="-1"' : ''}><img src="/logos/${b.slug}.svg" width="${b.width}" height="${b.height}" alt="" decoding="async" draggable="false"></a>`).join('')}</div>`;
+      return `<div class="marquee-row" style="--marquee-duration:${(brands.length * 7.6).toFixed(1)}s"><div class="marquee-track">${group()}${group(true)}</div></div>`;
     }).join('\n    ')}
   </div>`;
 };

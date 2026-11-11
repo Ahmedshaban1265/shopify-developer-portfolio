@@ -2,7 +2,7 @@
 
 Original logos downloaded from the brands’ official storefronts on 2026-11-11. No lettering or geometry was redrawn.
 
-Skechers and ECCO retain their source vector paths. The remaining SVGs embed the original PNG pixels. SVG alpha filters isolate flat backgrounds where needed; viewBox crops remove empty margins. The marquee applies a monochrome treatment in CSS. These wrappers are transparent, but the embedded PNG artwork remains raster.
+Skechers and ECCO retain their source vector paths. The remaining SVGs embed the original PNG pixels. SVG alpha filters isolate flat backgrounds where needed; viewBox crops remove empty margins. The marquee applies a monochrome treatment in CSS at rest, then reveals the original artwork on hover or keyboard focus. SVG background masks composite the original source pixels, retaining their colours. These wrappers are transparent, but the embedded PNG artwork remains raster.
 
 | Asset | Original source | Preparation |
 |---|---|---|

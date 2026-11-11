@@ -57,9 +57,10 @@
   flex: 0 0 auto; min-width: 100vw; display: flex; align-items: center; justify-content: space-around;
   gap: clamp(40px, 6vw, 96px); padding-inline-end: clamp(40px, 6vw, 96px);
 }
-.marquee-item { width: 180px; height: 76px; flex: 0 0 auto; display: grid; place-items: center; }
+.marquee-item { width: 180px; height: 76px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; transition: background var(--t-2) var(--ease); }
 .marquee-item img {
   width: 160px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: .58;
+  transition: filter var(--t-2) var(--ease), opacity var(--t-2) var(--ease);
 }
 :root[data-theme="light"] .marquee-item img { filter: brightness(0); opacity: .62; }
 .marquee-item--skechers img { width: 180px; }
@@ -74,7 +75,12 @@
 .marquee-item--be-cosmetics img { width: 76px; height: 72px; }
 .marquee-item--luxuria img { width: 118px; height: 72px; }
 .marquee-item--penduline img, .marquee-item--snugglez img { width: 152px; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-item--on-dark { --logo-hover-bg: var(--charcoal-950); }
+.marquee-item:is(:hover, :focus-visible) { background: var(--logo-hover-bg, var(--paper-50)); }
+:root[data-theme] .marquee-item:is(:hover, :focus-visible) img { filter: none; opacity: 1; }
+.marquee-item:focus-visible { outline-offset: -3px; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+.marquee:focus-within { -webkit-mask-image: none; mask-image: none; }
 @keyframes brand-drift { to { transform: translateX(-50%); } }
 
 /* ---------- stats ---------- */
