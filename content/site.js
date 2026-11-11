@@ -42,14 +42,15 @@ export const site = {
   url: resolveSiteUrl(),
 
   /**
-   * Contact form switch — OFF until email delivery is configured.
+   * Email delivery switch — OFF until the studio mailbox is provided.
    * Resend's free testing sender only delivers to the single address that
    * owns the Resend account; sending anywhere else needs a verified domain.
    * See LAUNCH.md for how to turn it on.
    */
-  contactForm: false,
+  contactEmailEnabled: false,
+  demoEmail: '',
 
-  // Both addresses stay reachable. Neither is replaced.
+  // Original contact records retained for reference; the studio mailbox is pending.
   emails: ['Abdulramanmagdy@gmail.com', 'anmedshaban1265@gmail.com'],
   phones: [
     { display: '+20 102 013 9953', tel: '+201020139953', whatsapp: '201020139953' },

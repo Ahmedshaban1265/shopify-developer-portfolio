@@ -27,7 +27,7 @@ function jsonLd(page, L) {
     slogan: plain(L.ui.tagline),
     url: site.url + prefix(page.lang) + '/',
     inLanguage: L.lang,
-    email: `mailto:${site.emails[0]}`,
+    ...(site.demoEmail ? { email: site.demoEmail } : {}),
     telephone: tel.tel,
     areaServed: ['Egypt', 'Saudi Arabia', 'United Arab Emirates', 'United States'],
     knowsAbout: L.meta.keywords,
@@ -56,6 +56,9 @@ const clientBundle = (L) =>
     themeToDark: L.ui.themeToDark,
     menuOpen: L.ui.menuOpen,
     menuClose: L.ui.menuClose,
+    scrollUp: L.ui.scrollUp,
+    scrollDown: L.ui.scrollDown,
+    form: L.form,
     ...L.client,
     copyFailed: plain(L.client.copyFailed)
   }).replace(/</g, '\\u003c');
@@ -117,7 +120,7 @@ ${alternates}
      loader never dismisses and every .rv stays at opacity 0, so the page is
      a blank screen. Serve the whole thing statically instead — the same
      overrides the reduced-motion block uses. */
-  #loader, .cursor { display: none !important; }
+  #loader, .cursor, #scrollToggle { display: none !important; }
   .rv, .hero-mascot img { opacity: 1 !important; transform: none !important; translate: none !important; }
   .line { overflow: visible !important; }
   .line > span { transform: none !important; opacity: 1 !important; }
@@ -150,7 +153,7 @@ ${jsonLd(page, L)}
       <a class="tool lang-switch" id="langSwitch" href="${prefix(other)}${page.path}" hreflang="${other}" lang="${other}"
         aria-label="${attr(O.ui.langSwitchAria)}">${O.langName}</a>
       <button class="tool theme-toggle" id="themeToggle" type="button" aria-label="${attr(L.ui.themeToLight)}">${ICON_MOON}${ICON_SUN}</button>
-      <a class="btn btn--fill btn--sm nav-cta" href="${anchor('contact')}" data-magnet>${L.ui.cta}</a>
+      <a class="btn btn--fill btn--sm nav-cta" href="${anchor('contact')}" data-enquiry="demo" data-magnet>${L.ui.cta}</a>
       <button class="burger" id="burger" type="button" aria-label="${attr(L.ui.menuOpen)}" aria-expanded="false" aria-controls="menu"><span></span></button>
     </div>
   </div>
@@ -162,7 +165,7 @@ ${jsonLd(page, L)}
     <a class="m-link" href="${anchor('contact')}">${L.ui.contact}</a>
   </nav>
   <div class="menu-foot">
-    ${site.emails.map((e) => `<a href="mailto:${e}" dir="ltr">${e}</a>`).join('\n    ')}
+    ${site.demoEmail ? `<a href="mailto:${site.demoEmail}" dir="ltr">${site.demoEmail}</a>` : ''}
     <a href="tel:${tel.tel}" dir="ltr">${tel.display}</a>
   </div>
 </div>
@@ -181,6 +184,9 @@ ${page.body}
     <a class="to-top" href="${home}#top" data-magnet>${L.ui.backToTop} ${ICON_UP}</a>
   </div>
 </footer>
+
+<a class="floating-demo" id="floatingDemo" href="${anchor('contact')}" data-enquiry="demo"><span>${L.ui.bookDemo}</span></a>
+<button class="scroll-toggle" id="scrollToggle" type="button" data-direction="down" aria-label="${attr(L.ui.scrollDown)}">${ICON_UP}</button>
 
 <script type="application/json" id="i18n">${clientBundle(L)}</script>
 <script type="module" src="/src/js/main.js"></script>

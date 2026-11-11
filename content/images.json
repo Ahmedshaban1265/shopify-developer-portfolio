@@ -59,6 +59,34 @@
       ]
     }
   },
+  "ecco-current": {
+    "home": {
+      "desktop": [
+        {
+          "src": "/images/ecco-current-home-desktop-900.webp",
+          "w": 900,
+          "h": 452
+        },
+        {
+          "src": "/images/ecco-current-home-desktop-1600.webp",
+          "w": 1600,
+          "h": 804
+        }
+      ],
+      "mobile": [
+        {
+          "src": "/images/ecco-current-home-mobile-380.webp",
+          "w": 380,
+          "h": 772
+        },
+        {
+          "src": "/images/ecco-current-home-mobile-700.webp",
+          "w": 700,
+          "h": 1422
+        }
+      ]
+    }
+  },
   "ecco": {
     "home": {
       "desktop": [

@@ -68,7 +68,8 @@ export function showcase(p, L, { eager = false } = {}) {
   const shot = (v, device, first) => {
     const label = fmt(L.work.enlargeAria, { name, view: v.label, device: dev[device] });
     const title = `${name} · ${v.label} · ${dev[device]}`;
-    return `<button type="button" class="shot shot-btn" data-zoom data-device="${device}" data-title="${attr(title)}"
+    const source = manifest[p.img]?.[v.id]?.[device]?.at(-1);
+    return `<button type="button" class="shot shot-btn" data-zoom data-device="${device}" data-title="${attr(title)}"${source ? ` style="--shot-ratio:${source.w}/${source.h}"` : ''}
           data-cursor="${attr(L.work.enlarge)}" aria-label="${attr(label)}">
           ${img(p.img, v.id, device, {
             alt: fmt(L.work.shotAlt, { name, view: v.label, device: dev[device] }),
@@ -84,7 +85,7 @@ export function showcase(p, L, { eager = false } = {}) {
     .map((v, i) => {
       const first = i === 0;
       return `<div class="view${first ? ' on' : ''}" role="tabpanel" id="panel-${p.slug}-${v.id}"
-        aria-labelledby="tab-${p.slug}-${v.id}" data-view="${v.id}"${first ? '' : ' hidden'}>
+        ${views.length > 1 ? `aria-labelledby="tab-${p.slug}-${v.id}"` : `aria-label="${attr(v.label)}"`} data-view="${v.id}"${first ? '' : ' hidden'}>
       <div class="frame-d">
         <div class="chrome"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">${p.domain}</span></div>
         ${shot(v, 'desktop', first)}
@@ -94,7 +95,7 @@ export function showcase(p, L, { eager = false } = {}) {
     })
     .join('\n    ');
 
-  return `<div class="showcase" data-showcase="${p.slug}">
+  return `<div class="showcase" data-showcase="${p.slug}" data-store-name="${attr(p.name)}" data-store-url="${attr(p.url)}">
     ${tabs}
     <div class="stage">
       ${panels}

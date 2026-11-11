@@ -1,5 +1,6 @@
 import { $, $$ } from './env.js';
 import { arrowStep } from './i18n.js';
+import { lockScroll } from './scroll.js';
 
 /**
  * Store showcase: segmented control that swaps the desktop AND mobile preview
@@ -80,54 +81,62 @@ function setup(root) {
   warm.observe(root);
 }
 
-/** Fullscreen viewer for any preview image. */
+/** Native dialog preview. Store headers currently prohibit live embedding. */
 export function initLightbox() {
-  const lb = $('#lightbox');
-  if (!lb) return;
-  const panel = $('#lbPanel');
-  const scroll = $('#lbScroll');
-  const title = $('#lbTitle');
+  const dialog = $('#storePreview');
+  if (!dialog) return;
+  const image = $('#previewImage');
+  const canvas = $('#previewCanvas');
+  const title = $('#previewTitle');
+  const domain = $('#previewDomain');
+  const live = $('#previewLive');
+  const controls = $$('[data-preview-device]', dialog);
   let lastFocus = null;
+  let sources = {};
 
-  const close = () => {
-    lb.hidden = true;
-    document.body.classList.remove('is-locked');
-    scroll.innerHTML = '';
-    lastFocus?.focus();
+  const setDevice = (device) => {
+    const source = sources[device] || sources.desktop || sources.mobile;
+    if (!source) return;
+    image.src = source.src;
+    image.alt = source.alt;
+    canvas.dataset.device = device;
+    controls.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.previewDevice === device)));
   };
-
-  const open = (btn) => {
-    const src = $('img', btn);
-    if (!src) return;
-    lastFocus = btn;
-    title.textContent = btn.dataset.title || '';
-    const clone = document.createElement('img');
-    clone.src = src.currentSrc || src.src;
-    clone.alt = src.alt;
-    scroll.innerHTML = '';
-    scroll.classList.toggle('is-phone', btn.dataset.device === 'mobile');
-    scroll.appendChild(clone);
-    lb.hidden = false;
-    document.body.classList.add('is-locked');
-    $('#lbClose').focus();
+  const open = (button) => {
+    const root = button.closest('[data-showcase]') || $('[data-showcase]', button.closest('.proj'));
+    if (!root) return;
+    const view = button.closest('.view') || $('.view.on', root);
+    const url = new URL(root.dataset.storeUrl);
+    if (url.protocol !== 'https:') return;
+    sources = {};
+    ['desktop', 'mobile'].forEach((device) => {
+      const shot = $(`[data-device="${device}"] img`, view);
+      if (shot) sources[device] = { src: shot.srcset ? shot.srcset.split(',').at(-1).trim().split(/\s+/)[0] : shot.src, alt: shot.alt };
+    });
+    title.textContent = root.dataset.storeName;
+    domain.textContent = url.host;
+    live.href = url.href;
+    lastFocus = button;
+    setDevice(button.dataset.device || 'desktop');
+    dialog.showModal();
+    lockScroll(true);
+    document.body.classList.add('preview-open');
+    $('#previewClose').focus();
   };
-
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-zoom]');
-    if (btn) { e.preventDefault(); open(btn); return; }
-    if (e.target.closest('[data-lb-close]') || e.target.closest('#lbClose')) close();
+    const button = e.target.closest('[data-zoom], [data-preview-open]');
+    if (button) { e.preventDefault(); open(button); }
   });
-
-  document.addEventListener('keydown', (e) => {
-    if (lb.hidden) return;
-    if (e.key === 'Escape') { close(); return; }
-    if (e.key !== 'Tab') return;
-    // Simple focus trap: only the close button is focusable inside.
-    const focusables = $$('button, a[href]', panel);
-    if (!focusables.length) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  controls.forEach((button) => button.addEventListener('click', () => setDevice(button.dataset.previewDevice)));
+  $('#previewClose').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (e) => {
+    const r = dialog.getBoundingClientRect();
+    if (e.target === dialog && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    lockScroll(false);
+    document.body.classList.remove('preview-open');
+    image.removeAttribute('src');
+    lastFocus?.focus({ preventScroll: true });
   });
 }

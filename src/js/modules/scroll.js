@@ -55,3 +55,9 @@ export const lockScroll = (on) => {
   document.body.classList.toggle('is-locked', on);
   if (lenis) on ? lenis.stop() : lenis.start();
 };
+
+export function scrollToEdge(edge) {
+  closeMenu();
+  if (lenis) lenis.scrollTo(edge === 'top' ? 0 : 'bottom');
+  else window.scrollTo({ top: edge === 'top' ? 0 : document.documentElement.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
+}

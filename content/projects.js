@@ -19,7 +19,7 @@
 export const featured = [
   { slug: 'skechers-egypt', img: 'skechers', name: 'Skechers', sector: 'sportswear', domain: 'frg.com.eg', url: 'https://frg.com.eg/pages/skechers-home' },
   { slug: 'anta-egypt', img: 'anta', name: 'ANTA', sector: 'sportswear', domain: 'frg.com.eg', url: 'https://frg.com.eg/pages/anta-home' },
-  { slug: 'ecco-egypt', img: 'ecco', name: 'ECCO', sector: 'footwear', domain: 'eg.ecco.com', url: 'https://eg.ecco.com' },
+  { slug: 'ecco-egypt', img: 'ecco-current', name: 'ECCO', sector: 'footwear', domain: 'eg.ecco.com', url: 'https://eg.ecco.com' },
   { slug: 'myvi', img: 'myvi', name: 'MyVi', sector: 'wellness', domain: 'myvistores.com', url: 'https://myvistores.com' },
   { slug: 'infinity-clinic-pharma', img: 'infinity', name: 'Infinity Clinic Pharma', sector: 'beauty', domain: 'infinityclinicpharma.com', url: 'https://infinityclinicpharma.com' },
   { slug: 'skinify', img: 'skinify', name: 'Skinify', sector: 'beauty', domain: 'uskinify.com', url: 'https://uskinify.com' },

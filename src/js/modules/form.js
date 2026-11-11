@@ -2,105 +2,80 @@ import { $, $$ } from './env.js';
 import { t } from './i18n.js';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
-
 const rules = (F) => ({
-  name: (v) => (v.trim().length >= 2 ? '' : F.errName),
-  email: (v) => (EMAIL.test(v.trim()) ? '' : F.errEmail),
-  store: (v) => (!v.trim() || /^https?:\/\/.+\..+/.test(v.trim()) ? '' : F.errStore),
-  message: (v) => (v.trim().length >= 20 ? '' : F.errMessage)
+  name: (v) => v.trim().length >= 2 ? '' : F.errName,
+  email: (v) => EMAIL.test(v.trim()) ? '' : F.errEmail,
+  store: (v) => !v.trim() || /^https?:\/\/.+\..+/.test(v.trim()) ? '' : F.errStore,
+  message: (v) => v.trim().length >= 20 ? '' : F.errMessage
 });
 
-/** Contact form: inline validation, honeypot + timing spam checks, real POST. */
+/** Email-ready form, with an explicit WhatsApp hand-off until mail is configured. */
 export function initContactForm() {
   const form = $('#contactForm');
   if (!form) return;
-  const F = t();
+  const F = t().form;
   const RULES = rules(F);
   const status = $('#cfStatus');
   const submit = $('#cfSubmit');
+  const whatsapp = $('#cfWhatsApp');
   const started = Date.now();
   $('#cf-t').value = String(started);
 
-  const fieldError = (name, msg) => {
-    const slot = $(`.err[data-for="${name}"]`, form);
-    const input = form.elements[name];
-    if (slot) slot.textContent = msg;
-    if (input) {
-      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-      input.closest('.field')?.classList.toggle('has-err', Boolean(msg));
-    }
-    return !msg;
-  };
-
-  Object.keys(RULES).forEach((name) => {
-    const input = form.elements[name];
-    if (!input) return;
-    input.addEventListener('blur', () => fieldError(name, RULES[name](input.value)));
-    input.addEventListener('input', () => {
-      if (input.closest('.field')?.classList.contains('has-err')) {
-        fieldError(name, RULES[name](input.value));
-      }
-    });
-  });
-
-  const setStatus = (msg, kind) => {
-    status.textContent = msg;
+  const setStatus = (message, kind = '') => {
+    status.textContent = message;
     status.className = `form-status${kind ? ` is-${kind}` : ''}`;
   };
+  const fieldError = (name, message) => {
+    const input = form.elements[name];
+    $(`.err[data-for="${name}"]`, form).textContent = message;
+    input.setAttribute('aria-invalid', String(Boolean(message)));
+    input.closest('.field').classList.toggle('has-err', Boolean(message));
+    return !message;
+  };
+  $$('[data-enquiry]').forEach((control) => control.addEventListener('click', () => {
+    const kind = control.dataset.enquiry;
+    form.elements.requestType.value = kind;
+    $$('[data-enquiry]', form).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.enquiry === kind)));
+    whatsapp.hidden = true;
+    setStatus('');
+  }));
+  Object.keys(RULES).forEach((name) => {
+    const input = form.elements[name];
+    input.addEventListener('blur', () => fieldError(name, RULES[name](input.value)));
+    input.addEventListener('input', () => {
+      if (input.closest('.has-err')) fieldError(name, RULES[name](input.value));
+    });
+  });
+  const clearDraft = () => { whatsapp.hidden = true; whatsapp.removeAttribute('href'); setStatus(''); };
+  form.addEventListener('input', clearDraft);
+  form.addEventListener('change', clearDraft);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    let ok = true;
-    for (const name of Object.keys(RULES)) {
-      const input = form.elements[name];
-      if (!input) continue;
-      if (!fieldError(name, RULES[name](input.value))) ok = false;
-    }
-    if (!ok) {
-      setStatus(F.fixFields, 'err');
-      $$('.has-err input, .has-err textarea', form)[0]?.focus();
+    let valid = true;
+    for (const [name, rule] of Object.entries(RULES)) if (!fieldError(name, rule(form.elements[name].value))) valid = false;
+    if (!valid) { setStatus(F.fixFields, 'err'); $('.has-err input, .has-err textarea', form)?.focus(); return; }
+    if (form.elements.company.value || Date.now() - started < 3000) { setStatus(F.tooQuick, 'err'); return; }
+    const payload = Object.fromEntries(new FormData(form).entries());
+    if (form.dataset.delivery === 'whatsapp') {
+      const parts = [payload.requestType === 'demo' ? F.demoType : F.projectTypeLabel, '', `${F.name}: ${payload.name.trim()}`, `${F.email}: ${payload.email.trim()}`];
+      if (payload.store.trim()) parts.push(`${F.store}: ${payload.store.trim()}`);
+      parts.push(`${F.need}: ${payload.projectType}`, '', payload.message.trim());
+      whatsapp.href = `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(parts.join('\n'))}`;
+      whatsapp.hidden = false;
+      setStatus(F.whatsappReady);
+      whatsapp.focus();
       return;
     }
-
-    // Spam checks: hidden honeypot, and anything submitted in under 3s.
-    if (form.elements.company.value || Date.now() - started < 3000) {
-      setStatus(F.tooQuick, 'err');
-      return;
-    }
-
     submit.disabled = true;
     setStatus(F.sending);
-
-    const payload = Object.fromEntries(new FormData(form).entries());
-
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok) {
-        form.hidden = true;
-        const done = document.createElement('div');
-        done.className = 'form-done';
-        done.setAttribute('role', 'status');
-        done.innerHTML = `<h3 class="display h3">${F.doneTitle}</h3><p>${F.doneBody}</p>`;
-        form.parentElement.insertBefore(done, form);
-        return;
-      }
-
-      if (res.status === 503) {
-        setStatus(data.error || F.notConnected, 'err');
-      } else {
-        setStatus(data.error || F.failed, 'err');
-      }
-    } catch {
-      setStatus(F.network, 'err');
-    } finally {
-      submit.disabled = false;
-    }
+      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (response.ok) {
+        form.reset();
+        setStatus(`${F.doneTitle} ${F.doneBody}`);
+      } else setStatus(response.status === 503 ? F.notConnected : F.failed, 'err');
+    } catch { setStatus(F.network, 'err'); }
+    finally { submit.disabled = false; }
   });
 }

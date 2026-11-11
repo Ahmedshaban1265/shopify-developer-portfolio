@@ -15,6 +15,8 @@ import { initShowcase, initLightbox } from './modules/showcase.js';
 import { initDemoTabs, initStickyDemo, initCartDemo, initVariantDemo } from './modules/demos.js';
 import { initContactForm } from './modules/form.js';
 import { initCopyButtons } from './modules/copy.js';
+import { initStudioMotion } from './modules/studioMotion.js';
+import { initFloatingActions } from './modules/floating.js';
 
 function boot() {
   initTheme();
@@ -30,8 +32,9 @@ function boot() {
   initStickyDemo();
   initCartDemo();
   initVariantDemo();
-  initContactForm(); // no-op when the form is switched off
+  initContactForm();
   initCopyButtons();
+  initFloatingActions();
   initReveal();
   initCursor();
 }
@@ -43,4 +46,5 @@ else boot();
 window.addEventListener('load', () => {
   initLoader();
   initParallax();
+  initStudioMotion();
 });

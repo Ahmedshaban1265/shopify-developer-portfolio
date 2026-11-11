@@ -79,8 +79,9 @@ node scripts/build-manifest.mjs
 ```
 
 The showcase renders a segmented control only for views that actually exist, so a
-project with just a homepage still works perfectly. Keep the aspect ratios —
-**1440×889 desktop** and **390×793 mobile** — so no layout shift is introduced.
+project with just a homepage still works. The manifest supplies each screenshot’s
+aspect ratio, including the owner-provided ECCO desktop and mobile images. Width
+and height attributes reserve space before the images load.
 
 ### Refreshing screenshots from the live stores
 
@@ -105,14 +106,20 @@ cannot reach are reported in the run summary rather than faked. Edit the store l
 | `CONTACT_TO` | comma-separated recipients |
 | `CONTACT_FROM` | a sender on a domain you have verified in Resend |
 
-Set these in **Vercel → Settings → Environment Variables**. The form is **switched off** (`contactForm: false` in `content/site.js`): the
-contact section shows direct email and WhatsApp options instead, so nothing on the
-page looks functional while failing. Turn it on only after the variables are set.
+The form is visible and currently prepares a **WhatsApp enquiry**. It validates the
+visitor’s details, then shows an explicit “Open WhatsApp” link with the composed
+message. Nothing is sent automatically, and no email-success message is shown.
 
-Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
-address that owns the Resend account, so it can't route enquiries to both founders.
-A verified domain is required. Spam handling: hidden honeypot field, a minimum fill time, length/format
-validation and a small per-IP throttle.
+Email delivery stays disabled until the studio mailbox is supplied:
+
+1. Configure the three variables above in Vercel Production.
+2. Set `demoEmail` to the studio mailbox and `contactEmailEnabled: true` in
+   `content/site.js`, then redeploy.
+3. Verify a real delivery and reply-to address before sharing the email flow.
+
+Spam handling: hidden honeypot, minimum fill time, length/format validation and a
+small per-instance IP throttle. See [the homepage refresh notes](docs/homepage-refresh.md)
+for the preview limitation, screenshot sources and floating controls.
 
 ## Accessibility & performance notes
 

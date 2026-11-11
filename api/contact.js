@@ -9,8 +9,8 @@
  *   CONTACT_TO       comma-separated recipient addresses
  *   CONTACT_FROM     a sender on a domain you own and have verified in Resend
  *
- * Without RESEND_API_KEY the endpoint returns 503 and the front end tells the
- * visitor to email directly — it never silently swallows an enquiry.
+ * Without the required configuration the endpoint returns 503. The front end
+ * uses an explicit WhatsApp hand-off while contactEmailEnabled is false.
  */
 
 const MAX = { name: 80, email: 120, store: 200, message: 2000, projectType: 60 };
@@ -41,14 +41,18 @@ export default async function handler(req, res) {
   if (typeof body === 'string') {
     try { body = JSON.parse(body); } catch { return res.status(400).json({ error: 'Invalid request.' }); }
   }
-  if (!body || typeof body !== 'object') return res.status(400).json({ error: 'Invalid request.' });
+  if (!body || typeof body !== 'object' || Array.isArray(body)) return res.status(400).json({ error: 'Invalid request.' });
 
   const { name = '', email = '', store = '', message = '', projectType = '', company = '', t = '' } = body;
+  if ([name, email, store, message, projectType, company].some((v) => typeof v !== 'string')) {
+    return res.status(422).json({ error: 'Please check the form and try again.' });
+  }
+  const requestType = body.requestType === 'demo' ? 'Demo request' : 'Project enquiry';
 
   // Spam gates: honeypot and a minimum fill time.
   if (company) return res.status(200).json({ ok: true });
   const started = Number(t);
-  if (Number.isFinite(started) && started > 0 && Date.now() - started < 3000) {
+  if (!Number.isFinite(started) || started <= 0 || Date.now() - started < 3000) {
     return res.status(400).json({ error: 'That was too quick — please try again.' });
   }
 
@@ -57,6 +61,7 @@ export default async function handler(req, res) {
   if (!EMAIL_RE.test(email.trim()) || email.length > MAX.email) errors.push('email');
   if (message.trim().length < 20 || message.length > MAX.message) errors.push('message');
   if (store && (store.length > MAX.store || !/^https?:\/\//i.test(store))) errors.push('store');
+  if (projectType.length > MAX.projectType) errors.push('projectType');
   if (errors.length) return res.status(422).json({ error: 'Please check the form and try again.', fields: errors });
 
   const ip =
@@ -77,7 +82,7 @@ export default async function handler(req, res) {
   }
 
   const html = `
-    <h2>New portfolio enquiry</h2>
+    <h2>VEQRU — ${requestType}</h2>
     <p><strong>Name:</strong> ${esc(name)}</p>
     <p><strong>Email:</strong> ${esc(email)}</p>
     ${store ? `<p><strong>Store:</strong> ${esc(store)}</p>` : ''}
@@ -95,7 +100,7 @@ export default async function handler(req, res) {
         from,
         to,
         reply_to: email.trim(),
-        subject: `Portfolio enquiry — ${name.trim()}`,
+        subject: `VEQRU ${requestType} — ${name.trim().replace(/[\r\n]+/g, ' ')}`,
         html
       })
     });

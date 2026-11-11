@@ -15,7 +15,8 @@ and none is required for this stage.
 - [x] Production publicly accessible; previews remain protected
 - [x] `SITE_URL` set to the production `.vercel.app` address — canonical tags,
       Open Graph, JSON-LD, `sitemap.xml` and `robots.txt` all derive from it
-- [x] Contact form switched off; direct email + WhatsApp shown instead
+- [x] Demo/project form validates and prepares a WhatsApp request; email delivery
+      stays off until the studio mailbox is supplied
 - [x] Brand system: design tokens, light/dark themes, English/Arabic with
       true RTL. 18 pages (9 per language) with hreflang + x-default.
 
@@ -34,16 +35,15 @@ and none is required for this stage.
 
 ### Contact form
 
-Off by design. Turning it on needs a domain you own:
+The form currently uses an explicit WhatsApp hand-off. To enable email later:
 
-1. Verify the domain in Resend.
-2. Set `RESEND_API_KEY`, `CONTACT_TO` (both founders' addresses) and
-   `CONTACT_FROM` (a sender on that domain) in Vercel → Production.
-3. Set `contactForm: true` in `content/site.js` and push.
+1. Obtain the studio mailbox from the owner and configure a verified sender.
+2. Set `RESEND_API_KEY`, `CONTACT_TO` (the studio mailbox) and `CONTACT_FROM`
+   in Vercel Production.
+3. Set `demoEmail` and `contactEmailEnabled: true` in `content/site.js`, then push.
+4. Verify delivery and reply-to with a real test enquiry.
 
-Resend's free testing sender (`onboarding@resend.dev`) only delivers to the one
-address that owns the Resend account, so it can't serve as a stopgap for two
-founders.
+The current interface never reports an enquiry as emailed or a demo as booked.
 
 ### Content
 
@@ -53,7 +53,7 @@ founders.
 - [ ] Read the Arabic copy in `content/i18n/ar.js` end to end. It was written,
       not machine-translated, but it has had no native-speaker review and the
       marketing voice is a judgement call.
-- [ ] Both founders approve their role line and bio in `content/site.js`.
+- [x] Individual founder profiles replaced by a compact studio section.
 - [ ] Fill in `challenge` / `contribution` / `solution` per project in
       `content/i18n/projects.en.js` **and** `projects.ar.js`. They are `null`
       today, and each case study says so rather than inventing a story.

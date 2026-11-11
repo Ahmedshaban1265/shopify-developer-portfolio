@@ -49,25 +49,3 @@
 .cs-nav a:hover { border-color: var(--control-border); transform: translateY(-3px); }
 .cs-nav b { font-family: "Space Grotesk", var(--ff-display); font-weight: 500; font-size: clamp(22px, 2.8vw, 40px); letter-spacing: -.03em; line-height: 1.05; }
 .cs-next { text-align: end; align-items: flex-end; }
-
-/* ============================================================
-   LIGHTBOX
-   ============================================================ */
-.lb { position: fixed; inset: 0; z-index: 9400; display: flex; align-items: center; justify-content: center; padding: clamp(10px, 3vw, 40px); }
-.lb[hidden] { display: none; }
-.lb-backdrop { position: absolute; inset: 0; background: var(--scrim); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.lb-panel {
-  position: relative; z-index: 2; width: min(1200px, 100%); max-height: 92vh; display: flex; flex-direction: column;
-  background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-2);
-  animation: lb-in .32s var(--ease-out);
-}
-@keyframes lb-in { from { opacity: 0; transform: translateY(12px) scale(.985); } }
-.lb-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--border); }
-:root[dir="rtl"] .lb-head { padding: 12px 20px 12px 12px; }
-.lb-x { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--border); color: var(--fg); transition: background var(--t-2), color var(--t-2); }
-.lb-x:hover { background: var(--fg); color: var(--bg); }
-.lb-x svg { width: 15px; height: 15px; }
-.lb-scroll { overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: var(--shot-bg); }
-.lb-scroll img { width: 100%; height: auto; display: block; }
-.lb-scroll.is-phone { display: grid; place-items: start center; padding: var(--s-6); }
-.lb-scroll.is-phone img { width: min(420px, 100%); border-radius: var(--r-lg); box-shadow: var(--shadow-2); }

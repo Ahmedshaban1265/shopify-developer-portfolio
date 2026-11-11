@@ -1,7 +1,7 @@
 import { site } from '../content/site.js';
 import { featured, wall } from '../content/projects.js';
 import { prefix, fmt } from '../content/i18n/index.js';
-import { showcase, viewsFor, localize, attr, plain, ltr, ARROW, ARROW_R } from './utils.mjs';
+import { showcase, localize, attr, plain, ltr, ARROW, ARROW_R } from './utils.mjs';
 import { whatsappUrl } from './layout.mjs';
 
 /** A display heading whose lines reveal one by one, ending on the brand dot. */
@@ -43,7 +43,7 @@ const hero = (L) => `
       <p class="lead hero-lede rv rv-d1">${L.hero.lede}</p>
       <div class="hero-acts rv rv-d2">
         <a class="btn btn--fill" href="#work" data-magnet>${L.hero.ctaPrimary} ${ARROW_R}</a>
-        <a class="btn" href="#contact" data-magnet>${L.hero.ctaSecondary}</a>
+        <a class="btn" href="#contact" data-enquiry="demo" data-magnet>${L.hero.ctaSecondary}</a>
       </div>
       <ul class="hero-facts rv rv-d3">
         ${L.hero.facts.map((f) => `<li>${f}</li>`).join('\n        ')}
@@ -77,45 +77,23 @@ const stats = (L) => `
 /* ------------------------------------------------------------------ work */
 function project(base, i, L) {
   const p = localize(base, L);
-  const n = String(i + 1).padStart(2, '0');
-  const views = viewsFor(p.img, L);
   const pre = prefix(L.lang);
-  return `
-  <article class="proj" data-n="${n}" id="${p.slug}">
-    <div class="proj-head rv">
-      <div>
-        <span class="label">${fmt(L.work.projectLabel, { n })}</span>
-        <h3 class="display proj-title">${p.name}</h3>
-        <span class="label">${p.category}</span>
-      </div>
+  return `<article class="proj" data-n="${String(i + 1).padStart(2, '0')}" id="${p.slug}">
+    <div class="project-kicker"><span class="label">${String(i + 1).padStart(2, '0')}</span><span class="label">${p.category}</span></div>
+    ${showcase(p, L)}
+    <div class="project-caption">
+      <h3 class="display proj-title">${p.name}</h3>
       <div class="proj-links">
-        <a class="tlink" href="${pre}/work/${p.slug}/">${L.work.caseStudy} ${ARROW}</a>
-        <a class="tlink" href="${p.url}" target="_blank" rel="noopener noreferrer"><span class="mono" dir="ltr">${p.domain}</span> ${ARROW}</a>
+        <a class="tlink" href="${p.url}" target="_blank" rel="noopener noreferrer" data-preview-open>${L.work.previewLink} ${ARROW}</a>
+        <a class="project-case" href="${pre}/work/${p.slug}/">${L.work.caseStudy}</a>
       </div>
     </div>
-
-    ${showcase(p, L, { eager: i === 0 })}
-
-    <div class="proj-body">
-      <div>
-        <p class="proj-note rv">${p.summary}</p>
-        <div class="proj-scope rv">
-          <span class="label">${L.work.scope}</span>
-          <div class="scope-list">${p.scope.map((s) => `<span class="pill">${s}</span>`).join('')}</div>
-        </div>
-      </div>
-      <div class="proj-feats">
-        ${p.highlights.map((h, j) => `<div class="feat rv rv-d${j + 1}"><h4>${h[0]}</h4><p>${h[1]}</p></div>`).join('\n        ')}
-      </div>
-    </div>
-    ${views.length > 1 ? `<p class="proj-meta label">${p.previewNote || L.work.previewNote} · ${views.map((v) => v.label).join(' · ')}</p>` : ''}
   </article>`;
 }
 
-const work = (L) => `
-<section class="sect wrap" id="work">
+const work = (L) => `<section class="sect wrap" id="work">
   ${sectHead(L.work.eyebrow, L.work.title, L.work.note)}
-  ${featured.map((p, i) => project(p, i, L)).join('\n')}
+  <div class="work-grid">${featured.map((p, i) => project(p, i, L)).join('\n')}</div>
 </section>`;
 
 /* ------------------------------------------------------------ store wall */
@@ -148,40 +126,24 @@ const storeWall = (L) => {
 </section>`;
 };
 
-/* ------------------------------------------------------------------- why */
-const why = (L) => `
-<section class="sect wrap" id="why">
-  ${sectHead(L.why.eyebrow, L.why.title, L.why.note)}
-  <div class="why">
-    ${L.why.items
-      .map(
-        (w, i) => `<div class="card why-item rv rv-d${i}">
-      <span class="why-n">0${i + 1}</span>
-      <h3 class="h3">${w.title}</h3>
-      <p>${w.body}</p>
-    </div>`
-      )
-      .join('\n    ')}
-  </div>
-</section>`;
+/** Word spans preserve joined Arabic letterforms while the colour fills on scroll. */
+const drawnHeading = (text, cls = 'h2') => `<h2 class="display ${cls} drawn-heading" data-draw aria-label="${attr(text)}">${plain(text).split(/\s+/).map((word) => `<span class="draw-word" aria-hidden="true">${word}</span>`).join(' ')}</h2>`;
 
-/* -------------------------------------------------------------- services */
-const servicesSection = (L) => `
-<section class="sect wrap" id="services">
-  ${sectHead(L.services.eyebrow, L.services.title, L.services.note)}
-  <div class="bento">
-    ${L.services.items
-      .map(
-        (s, i) => `<article class="card cell${s.span ? ` cell--${s.span}` : ''} rv">
-      <div class="cell-top"><span class="cell-n">${String(i + 1).padStart(2, '0')}</span></div>
-      <h3 class="h3">${s.title}</h3>
-      <p class="cell-benefit">${s.benefit}</p>
-      <p class="cell-body">${s.body}</p>
-      <div class="cell-tags">${s.tags.map((t) => `<span class="pill">${t}</span>`).join('')}</div>
-    </article>`
-      )
-      .join('\n    ')}
-  </div>
+const SERVICE_PATHS = [
+  '<rect x="3" y="4" width="22" height="19" rx="3"/><path d="M3 10h22M8 7h1M12 7h1M8 15h6v4H8zM18 15h3M18 19h3"/>',
+  '<path d="m10 8-6 6 6 6m8-12 6 6-6 6M16 5l-4 18"/>',
+  '<path d="M5 22V7m0 15h19M9 17l5-6 4 3 6-9"/><path d="M19 5h5v5"/>',
+  '<circle cx="14" cy="14" r="10"/><path d="M4 14h20M14 4c-6 6-6 14 0 20M14 4c6 6 6 14 0 20"/>',
+  '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="17" y="17" width="8" height="8" rx="2"/><path d="M11 7h8a3 3 0 0 1 3 3v7M17 21H9a3 3 0 0 1-3-3v-7"/>',
+  '<path d="M14 24s-10-5-10-12a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 7-10 12-10 12Z"/><path d="m9 14 3 3 7-7"/>'
+];
+
+const servicesSection = (L) => `<section class="sect services-section wrap" id="services">
+  <div class="services-intro"><span class="label eyebrow">${L.services.eyebrow}</span>${drawnHeading(L.services.title)}<p class="lead">${L.services.note}</p></div>
+  <div class="service-grid">${L.services.items.map((s, i) => `<article class="service-card rv" data-tilt>
+    <div class="service-card-inner"><div class="service-top"><span class="service-symbol" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${SERVICE_PATHS[i]}</svg></span><span class="label">0${i + 1}</span></div>
+    <h3 class="h3">${s.title}</h3><p>${s.body}</p><a href="#contact" data-enquiry="demo" class="service-link" aria-label="${attr(s.title + ' — ' + L.ui.cta)}">${L.ui.cta} ${ARROW_R}</a></div>
+  </article>`).join('')}</div>
 </section>`;
 
 /* ------------------------------------------------------------------ lab */
@@ -340,25 +302,6 @@ function lab(L) {
 </section>`;
 }
 
-/* ------------------------------------------------------------- expertise */
-const expertiseSection = (L) => `
-<section class="sect band" id="expertise" style="padding-top:0">
-  <div class="wrap">
-    <div class="exp-grid">
-      <div>
-        <span class="label eyebrow rv">${L.expertise.eyebrow}</span>
-        ${heading(L.expertise.titleLines)}
-        <p class="exp-body rv rv-d1">${L.expertise.body}</p>
-      </div>
-      <div class="exp-cols rv rv-d1">
-        ${L.expertise.groups
-          .map((g) => `<div class="exp-col"><h3 class="label">${g.group}</h3><ul>${g.items.map((i) => `<li>${i}</li>`).join('')}</ul></div>`)
-          .join('\n        ')}
-      </div>
-    </div>
-  </div>
-</section>`;
-
 /* --------------------------------------------------------------- process */
 const processSection = (L) => `
 <section class="sect wrap" id="process">
@@ -376,95 +319,30 @@ const processSection = (L) => `
   </ol>
 </section>`;
 
-/* ----------------------------------------------------------------- about */
-const aboutSection = (L) => `
-<section class="sect wrap" id="about">
-  <div class="about-grid">
-    <div class="about-aside">
-      <span class="label eyebrow rv">${L.about.eyebrow}</span>
-      ${heading(L.about.titleLines)}
-      <dl class="facts rv rv-d2">
-        ${L.about.facts.map(([k, v]) => `<div><dt class="label">${k}</dt><dd>${v}</dd></div>`).join('\n        ')}
-      </dl>
-    </div>
-    <div class="about-body">
-      <p class="rv">${L.about.lede}</p>
-      ${L.about.paragraphs.map((t, i) => `<p class="rv rv-d${i + 1}">${t}</p>`).join('\n      ')}
-    </div>
-  </div>
-  <div class="founders">
-    ${site.founders
-      .map((f) => {
-        const F = L.about.founders[f.id];
-        return `<article class="card founder rv">
-      <span class="avatar" aria-hidden="true">${f.initials}</span>
-      <span class="label role">${F.role}</span>
-      <h3 class="h3">${f.name[L.lang]}</h3>
-      <p>${F.bio}</p>
-      <a class="tlink" href="mailto:${f.email}"><span class="mono" dir="ltr">${f.email}</span> ${ARROW}</a>
-    </article>`;
-      })
-      .join('\n    ')}
-  </div>
+/* ----------------------------------------------------------------- studio */
+const aboutSection = (L) => `<section class="sect studio-section wrap" id="about">
+  <div class="studio-copy"><span class="label eyebrow">${L.about.eyebrow}</span>${drawnHeading(plain(L.about.titleLines.join(' ')))}<p class="lead">${L.about.lede}</p></div>
+  <dl class="studio-facts">${L.about.facts.map(([k,v])=>`<div><dt class="label">${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
 </section>`;
 
 /* --------------------------------------------------------------- contact */
-const mailto = (L, to) =>
-  `mailto:${to}?subject=${encodeURIComponent(L.contact.mailSubject)}&body=${encodeURIComponent(L.contact.mailBody.join('\n'))}`;
-
 const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2a.6.6 0 0 0 0-.6c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.7 12a5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9 5 5 0 0 0 3.1.6 2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>';
 
-const contactDirect = (L) => `
-      <div class="rv">
-        <div class="ccards">
-          ${site.founders
-            .map((f) => {
-              const name = f.name[L.lang];
-              const first = name.split(' ')[0];
-              return `<article class="card ccard">
-            <div class="ccard-who">
-              <span class="avatar" aria-hidden="true">${f.initials}</span>
-              <div><h3 class="h3">${name}</h3><span class="label">${L.about.founders[f.id].role}</span></div>
-            </div>
-            <span class="ccard-email">${f.email}</span>
-            <div class="ccard-acts">
-              <a class="btn btn--fill btn--sm" href="${mailto(L, f.email)}" data-magnet><i></i>${fmt(L.contact.emailCta, { first })}</a>
-              <button type="button" class="btn btn--sm copy-btn" data-copy="${f.email}" aria-label="${attr(fmt(L.contact.copyAria, { name }))}">${L.contact.copy}</button>
-            </div>
-          </article>`;
-            })
-            .join('\n          ')}
-        </div>
-        <div class="card cinclude">
-          <h3 class="label">${L.contact.includeTitle}</h3>
-          <ul>${L.contact.includeItems.map((t) => `<li>${t}</li>`).join('')}</ul>
-          <p>${L.contact.includeNote}</p>
-          <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
-        </div>
-      </div>`;
-
-/** Live form — rendered only when site.contactForm is true (see LAUNCH.md). */
 const contactForm = (L) => {
   const F = L.form;
-  return `
-      <form class="card cform rv" id="contactForm" novalidate>
-        <div class="field"><label for="cf-name">${F.name}</label>
-          <input id="cf-name" name="name" type="text" required autocomplete="name" maxlength="80"><span class="err" data-for="name"></span></div>
-        <div class="field"><label for="cf-email">${F.email}</label>
-          <input id="cf-email" name="email" type="email" required autocomplete="email" maxlength="120" dir="ltr"><span class="err" data-for="email"></span></div>
-        <div class="field"><label for="cf-store">${F.store} <span class="opt">${F.optional}</span></label>
-          <input id="cf-store" name="store" type="url" placeholder="https://" autocomplete="url" maxlength="200" dir="ltr"><span class="err" data-for="store"></span></div>
-        <div class="field"><label for="cf-type">${F.need}</label>
-          <select id="cf-type" name="projectType">${F.needs.map((n) => `<option>${n}</option>`).join('')}</select></div>
-        <div class="field field--full"><label for="cf-msg">${F.details}</label>
-          <textarea id="cf-msg" name="message" rows="4" required maxlength="2000"></textarea><span class="err" data-for="message"></span></div>
-        <div class="hp" aria-hidden="true"><label for="cf-company">Company</label><input id="cf-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
-        <input type="hidden" name="t" id="cf-t">
-        <div class="field field--full form-actions">
-          <button class="btn btn--fill" type="submit" id="cfSubmit"><i></i>${F.submit}</button>
-          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
-        </div>
-      </form>`;
+  return `<form class="card cform rv" id="contactForm" data-delivery="${site.contactEmailEnabled ? 'email' : 'whatsapp'}" data-whatsapp="${site.phones[0].whatsapp}" novalidate>
+    <div class="enquiry-tabs field--full" role="group" aria-label="${attr(F.requestKindAria)}">
+      <button type="button" data-enquiry="demo" aria-pressed="true">${F.demoType}</button><button type="button" data-enquiry="project" aria-pressed="false">${F.projectTypeLabel}</button>
+    </div><input type="hidden" name="requestType" value="demo">
+    <div class="field"><label for="cf-name">${F.name}</label><input id="cf-name" name="name" required autocomplete="name" maxlength="80" aria-describedby="err-name"><span class="err" id="err-name" data-for="name"></span></div>
+    <div class="field"><label for="cf-email">${F.email}</label><input id="cf-email" name="email" type="email" required autocomplete="email" maxlength="120" dir="ltr" aria-describedby="err-email"><span class="err" id="err-email" data-for="email"></span></div>
+    <div class="field"><label for="cf-store">${F.store} <span class="opt">${F.optional}</span></label><input id="cf-store" name="store" type="url" placeholder="https://" maxlength="200" dir="ltr" aria-describedby="err-store"><span class="err" id="err-store" data-for="store"></span></div>
+    <div class="field"><label for="cf-type">${F.need}</label><select id="cf-type" name="projectType">${F.needs.map(n=>`<option>${n}</option>`).join('')}</select></div>
+    <div class="field field--full"><label for="cf-msg">${F.details}</label><textarea id="cf-msg" name="message" rows="3" required maxlength="2000" aria-describedby="err-message"></textarea><span class="err" id="err-message" data-for="message"></span></div>
+    <div class="hp" aria-hidden="true"><label for="cf-company">Company</label><input id="cf-company" name="company" tabindex="-1" autocomplete="off"></div><input type="hidden" name="t" id="cf-t">
+    <div class="field field--full form-actions"><button class="btn btn--fill" type="submit" id="cfSubmit">${site.contactEmailEnabled ? F.submit : F.continueWhatsApp} ${ARROW_R}</button><p class="form-status" id="cfStatus" role="status" aria-live="polite"></p><a class="btn btn--fill" id="cfWhatsApp" href="#" target="_blank" rel="noopener noreferrer" hidden>${F.whatsappOpen}</a></div>
+    ${site.contactEmailEnabled ? '' : `<p class="field--full form-hint">${F.whatsappHint}</p>`}
+  </form>`;
 };
 
 const contact = (L) => {
@@ -476,7 +354,7 @@ const contact = (L) => {
     ${heading(L.contact.titleLines, 'h1 contact-h')}
     <p class="lead contact-lede rv">${L.contact.lede}</p>
     <div class="contact-grid">
-      ${site.contactForm ? contactForm(L) : contactDirect(L)}
+      ${contactForm(L)}
       <aside class="card cdirect rv rv-d1">
         ${
           wa
@@ -486,6 +364,7 @@ const contact = (L) => {
         </div>`
             : ''
         }
+        <div class="contact-agenda"><h3 class="h3">${L.contact.includeTitle}</h3><ul>${L.contact.includeItems.map(item=>`<li>${item}</li>`).join('')}</ul><p>${L.contact.includeNote}</p></div>
         <div class="cblock">
           <span class="label">${L.contact.phone}</span>
           ${site.phones.map((p) => `<a class="num" href="tel:${p.tel}">${p.display}</a>`).join('\n          ')}
@@ -497,22 +376,16 @@ const contact = (L) => {
 </section>`;
 };
 
-/* ------------------------------------------------------------- lightbox */
-export const lightbox = (L) => `
-<div class="lb" id="lightbox" hidden>
-  <div class="lb-backdrop" data-lb-close></div>
-  <div class="lb-panel" role="dialog" aria-modal="true" aria-label="${attr(L.lightbox.dialogAria)}" id="lbPanel">
-    <div class="lb-head">
-      <span class="label" id="lbTitle"></span>
-      <button class="lb-x" type="button" id="lbClose" aria-label="${attr(L.lightbox.close)}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
-      </button>
-    </div>
-    <div class="lb-scroll" id="lbScroll"></div>
+/* ---------------------------------------------------------- store preview */
+export const lightbox = (L) => `<dialog class="store-preview" id="storePreview" aria-label="${attr(L.lightbox.dialogAria)}">
+  <div class="preview-shell"><header class="preview-head"><div><h2 id="previewTitle" class="h3"></h2><span id="previewDomain" class="mono"></span></div>
+    <div class="preview-tools"><div class="preview-devices" role="group" aria-label="${attr(L.case.previews)}"><button type="button" data-preview-device="desktop" aria-pressed="true">${L.lightbox.desktop}</button><button type="button" data-preview-device="mobile" aria-pressed="false">${L.lightbox.mobile}</button></div>
+    <a class="btn btn--fill btn--sm" id="previewLive" href="#" target="_blank" rel="noopener noreferrer">${L.lightbox.openLive} ${ARROW}</a><button class="preview-close" type="button" id="previewClose" aria-label="${attr(L.lightbox.close)}">×</button></div></header>
+    <p class="preview-note">${L.lightbox.fallback}</p><div class="preview-scroll" data-lenis-prevent><div class="preview-canvas" id="previewCanvas" data-device="desktop"><img id="previewImage" alt=""></div></div>
   </div>
-</div>`;
+</dialog>`;
 
 export const homeBody = (L) =>
-  [hero(L), stats(L), work(L), storeWall(L), why(L), servicesSection(L), lab(L), expertiseSection(L), processSection(L), aboutSection(L), contact(L), lightbox(L)].join('\n');
+  [hero(L), stats(L), servicesSection(L), work(L), lab(L), storeWall(L), processSection(L), aboutSection(L), contact(L), lightbox(L)].join('\n');
 
 export { ltr };

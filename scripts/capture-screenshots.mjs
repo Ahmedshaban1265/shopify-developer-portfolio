@@ -32,7 +32,7 @@ const STORES = [
   // Confirmed brand-specific destinations; slugs match the image manifest.
   { slug: 'skechers', url: 'https://frg.com.eg/pages/skechers-home' },
   { slug: 'anta', url: 'https://frg.com.eg/pages/anta-home' },
-  { slug: 'ecco', url: 'https://eg.ecco.com' }
+  { slug: 'ecco-current', url: 'https://eg.ecco.com' }
 ];
 
 const DEVICES = {
