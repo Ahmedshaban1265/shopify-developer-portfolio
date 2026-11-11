@@ -22,6 +22,17 @@ const sectHead = (eyebrow, title, note) => `<div class="sect-head">
     ${note ? `<p class="sect-note rv rv-d1">${note}</p>` : ''}
   </div>`;
 
+/** Two opposing rows, each duplicated once for a seamless CSS-only loop. */
+const brandMarquee = () => {
+  const rows = [site.marquee.slice(0, 5), site.marquee.slice(5)];
+  return `<div class="marquee" id="marquee" dir="ltr" aria-hidden="true">
+    ${rows.map((brands) => {
+      const group = `<div class="marquee-group">${brands.map((b) => `<span class="marquee-item marquee-item--${b.slug}"><img src="/logos/${b.slug}.svg" width="${b.width}" height="${b.height}" alt="" decoding="async" draggable="false"></span>`).join('')}</div>`;
+      return `<div class="marquee-row"><div class="marquee-track">${group}${group.replace('class="marquee-group"', 'class="marquee-group" data-clone')}</div></div>`;
+    }).join('\n    ')}
+  </div>`;
+};
+
 /* ------------------------------------------------------------------ hero */
 const hero = (L) => `
 <section class="hero" id="hero">
@@ -48,7 +59,7 @@ const hero = (L) => `
         .join('\n      ')}
     </div>
   </div>
-  <div class="marquee" dir="ltr" aria-hidden="true"><div class="marquee-in" id="marquee"></div></div>
+  ${brandMarquee()}
 </section>`;
 
 /* ----------------------------------------------------------------- stats */

@@ -47,6 +47,12 @@
   .brand { font-size: 24px; }
   .hero { min-height: auto; }
   .hero-stage { aspect-ratio: 1.08; }
+  .marquee-item { width: 140px; height: 60px; }
+  .marquee-item img { max-width: 132px; max-height: 56px; }
+  .marquee-item--myvi img { max-width: 52px; }
+  .marquee-item--infinity img { max-width: 90px; }
+  .marquee-track { animation-duration: 32s; }
+  .marquee-row:nth-child(2) .marquee-track { animation-duration: 36s; }
   .hphone { padding: 4px; border-radius: 22px; }
   .hphone img { border-radius: 18px; }
   .proj-head { grid-template-columns: 1fr; align-items: start; }
@@ -108,6 +114,9 @@
   .hphone { opacity: 1 !important; translate: none !important; }
   .frame-d, .frame-p { clip-path: none !important; }
   .cursor { display: none !important; }
-  .marquee-in { animation: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-track { animation: none !important; width: 100%; }
+  .marquee-group { min-width: 0; width: 100%; padding-inline: var(--s-4); gap: var(--s-5); flex-wrap: wrap; justify-content: center; }
+  .marquee-group[data-clone] { display: none; }
   .live i::after { display: none; }
 }

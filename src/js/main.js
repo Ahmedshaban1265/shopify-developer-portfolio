@@ -7,7 +7,6 @@ import { initLoader } from './modules/loader.js';
 import { initAnnounce } from './modules/announce.js';
 import { initNav } from './modules/nav.js';
 import { initReveal } from './modules/reveal.js';
-import { initMarquee } from './modules/marquee.js';
 import { initParallax } from './modules/parallax.js';
 import { initWall } from './modules/wall.js';
 import { initRtlDemo } from './modules/rtlDemo.js';
@@ -17,18 +16,12 @@ import { initDemoTabs, initStickyDemo, initCartDemo, initVariantDemo } from './m
 import { initContactForm } from './modules/form.js';
 import { initCopyButtons } from './modules/copy.js';
 
-const BRANDS = [
-  'Skechers', 'ANTA', 'ECCO', 'MyVi', 'Infinity Clinic Pharma',
-  'Skinify', 'IMZA', 'Givago', 'Cole Haan', 'Fashion Retail Group'
-];
-
 function boot() {
   initTheme();
   initLangSwitch();
   initScroll();
   initNav();
   initAnnounce(t().announcements);
-  initMarquee(BRANDS);
   initShowcase();
   initLightbox();
   initWall();

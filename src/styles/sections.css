@@ -57,19 +57,33 @@
 
 /* ---------- marquee ---------- */
 .marquee {
-  border-block: 1px solid var(--border); overflow: hidden; padding-block: var(--s-5);
-  display: flex; user-select: none;
+  border-block: 1px solid var(--border); overflow: hidden;
+  padding-block: clamp(24px, 3vw, 40px);
+  display: grid; gap: clamp(18px, 2.4vw, 32px); user-select: none;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.marquee-in { display: flex; white-space: nowrap; animation: slide 48s linear infinite; flex: none; }
-.marquee span {
-  font-family: "Space Grotesk", var(--ff-display); font-weight: 500; letter-spacing: -.02em;
-  font-size: clamp(18px, 1.8vw, 26px); color: var(--fg-muted);
-  padding-inline: 28px; display: inline-flex; align-items: center; gap: 28px;
+.marquee-row { min-width: 0; overflow: hidden; }
+.marquee-track { display: flex; width: max-content; animation: brand-drift 38s linear infinite; }
+.marquee-row:nth-child(2) .marquee-track { animation-direction: reverse; animation-duration: 44s; }
+.marquee-group {
+  flex: 0 0 auto; min-width: 100vw; display: flex; align-items: center; justify-content: space-around;
+  gap: clamp(40px, 6vw, 96px); padding-inline-end: clamp(40px, 6vw, 96px);
 }
-.marquee span::after { content: ""; width: 5px; height: 5px; background: var(--brand-dot); border-radius: 50%; }
-@keyframes slide { to { transform: translateX(-50%); } }
+.marquee-item { width: 180px; height: 76px; flex: 0 0 auto; display: grid; place-items: center; }
+.marquee-item img {
+  width: 160px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: .58;
+}
+:root[data-theme="light"] .marquee-item img { filter: brightness(0); opacity: .62; }
+.marquee-item--skechers img { width: 180px; }
+.marquee-item--anta img { width: 108px; }
+.marquee-item--ecco img { width: 142px; }
+.marquee-item--myvi img { width: 66px; height: 70px; }
+.marquee-item--infinity img { width: 116px; height: 76px; }
+.marquee-item--givago img { width: 120px; }
+.marquee-item--cole-haan img { width: 176px; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes brand-drift { to { transform: translateX(-50%); } }
 
 /* ---------- stats ---------- */
 .stats-wrap { padding-block: clamp(48px, 6vw, 88px) 0; }

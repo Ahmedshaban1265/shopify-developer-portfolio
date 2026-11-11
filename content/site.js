@@ -65,10 +65,19 @@ export const site = {
     { id: 'abdulrahman', name: { en: 'Abdulrahman Magdy', ar: 'عبدالرحمن مجدي' }, initials: 'AM', email: 'Abdulramanmagdy@gmail.com' }
   ],
 
-  // Brand names are proper nouns: identical in both languages.
+  // Original artwork, shared by both languages. See public/logos/README.md.
+  // Width/height describe the transparent asset; CSS balances its visual size.
   marquee: [
-    'Skechers', 'ANTA', 'ECCO', 'MyVi', 'Infinity Clinic Pharma',
-    'Skinify', 'IMZA', 'Givago', 'Cole Haan', 'Fashion Retail Group'
+    { slug: 'skechers', name: 'Skechers', width: 150, height: 15 },
+    { slug: 'anta', name: 'ANTA', width: 544, height: 298 },
+    { slug: 'ecco', name: 'ECCO', width: 110, height: 30 },
+    { slug: 'myvi', name: 'MyVi', width: 527, height: 542 },
+    { slug: 'infinity', name: 'Infinity Clinic Pharma', width: 518, height: 361 },
+    { slug: 'skinify', name: 'Skinify', width: 611, height: 116 },
+    { slug: 'imza', name: 'IMZA', width: 640, height: 189 },
+    { slug: 'givago', name: 'Givago', width: 207, height: 114 },
+    { slug: 'cole-haan', name: 'Cole Haan', width: 520, height: 124 },
+    { slug: 'frg', name: 'Fashion Retail Group', width: 640, height: 237 }
   ],
 
   // Values only — labels are per-language. 25 = 8 featured + 17 further
