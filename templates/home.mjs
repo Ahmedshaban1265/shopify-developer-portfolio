@@ -9,7 +9,7 @@ const heading = (lines, cls = 'h2', tag = 'h2', extra = '') => `<${tag} class="d
       ${lines
         .map(
           (l, i) =>
-            `<span class="line"><span>${l}${i === lines.length - 1 && !/[?؟]$/.test(plain(l)) ? '<span class="dot" aria-hidden="true"></span>' : ''}</span></span>`
+            `<span class="line"><span>${i === lines.length - 1 ? l.replace(/[.。]$/, '') : l}${i === lines.length - 1 && !/[?؟]$/.test(plain(l)) ? '<span class="dot" aria-hidden="true"></span>' : ''}</span></span>`
         )
         .join('\n      ')}
     </${tag}>`;
@@ -142,7 +142,7 @@ const servicesSection = (L) => `<section class="sect services-section wrap" id="
   <div class="services-intro"><span class="label eyebrow">${L.services.eyebrow}</span>${drawnHeading(L.services.title)}<p class="lead">${L.services.note}</p></div>
   <div class="service-grid">${L.services.items.map((s, i) => `<article class="service-card rv" data-tilt>
     <div class="service-card-inner"><div class="service-top"><span class="service-symbol" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${SERVICE_PATHS[i]}</svg></span><span class="label">0${i + 1}</span></div>
-    <h3 class="h3">${s.title}</h3><p>${s.body}</p><a href="#contact" data-enquiry="demo" class="service-link" aria-label="${attr(s.title + ' — ' + L.ui.cta)}">${L.ui.cta} ${ARROW_R}</a></div>
+    <h3 class="h3">${s.title}</h3><p>${s.body}</p><a href="#contact" data-enquiry="demo" data-service="${attr(s.title)}" class="service-link" aria-label="${attr(s.title + ' — ' + L.ui.cta)}">${L.ui.cta} ${ARROW_R}</a></div>
   </article>`).join('')}</div>
 </section>`;
 

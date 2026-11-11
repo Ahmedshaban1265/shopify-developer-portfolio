@@ -127,8 +127,8 @@ for the preview limitation, screenshot sources and floating controls.
 - Showcase tabs are a real ARIA tablist with arrow-key navigation; the lightbox traps
   focus and closes on Escape.
 - Every image ships explicit `width`/`height` and `srcset`, so there is no layout shift.
-- The first store preview loads eagerly; the rest are lazy, with adjacent tab images
-  warmed as a project approaches the viewport.
+- Store previews load lazily, with adjacent tab images warmed as a project
+  approaches the viewport.
 
 ## Deployment
 

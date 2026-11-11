@@ -45,7 +45,8 @@
 .work-grid .proj { min-width: 0; padding: 0; border: 0; }
 .project-kicker { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
 .project-kicker .label:last-child { text-align: end; }
-.work-grid .showcase { margin-bottom: 24px; }
+.work-grid .showcase { position: relative; padding-top: 56px; margin-bottom: 24px; }
+.work-grid .showcase .seg { position: absolute; top: 0; margin: 0; }
 .work-grid .stage { padding: 20px 20px 38px; }
 .work-grid .frame-d { width: 88%; }
 .work-grid .frame-p { width: 25%; padding: 3px; bottom: -3%; border-radius: 17px; }
@@ -87,7 +88,7 @@
 #cfSubmit:disabled { opacity: .6; cursor: wait; }
 .contact-agenda .h3 { font-size: 22px; margin-bottom: 16px; }
 .contact-agenda li { display: flex; align-items: baseline; gap: 10px; margin-block: 10px; color: var(--fg-muted); font-size: var(--fs-small); }
-.contact-agenda li::before { content: "↗"; color: var(--accent-ink); }
+.contact-agenda li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; flex: none; align-self: center; background: var(--accent-ink); }
 .contact-agenda p { margin-top: 18px; color: var(--fg-subtle); font-size: var(--fs-xs); }
 
 /* Native dialog provides focus trapping, Escape and a dedicated scroll surface. */

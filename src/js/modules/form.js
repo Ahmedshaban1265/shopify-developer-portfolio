@@ -35,6 +35,7 @@ export function initContactForm() {
   $$('[data-enquiry]').forEach((control) => control.addEventListener('click', () => {
     const kind = control.dataset.enquiry;
     form.elements.requestType.value = kind;
+    if (control.dataset.service) form.elements.projectType.value = control.dataset.service;
     $$('[data-enquiry]', form).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.enquiry === kind)));
     whatsapp.hidden = true;
     setStatus('');
@@ -73,6 +74,7 @@ export function initContactForm() {
       const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       if (response.ok) {
         form.reset();
+        $$('[data-enquiry]', form).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.enquiry === 'demo')));
         setStatus(`${F.doneTitle} ${F.doneBody}`);
       } else setStatus(response.status === 503 ? F.notConnected : F.failed, 'err');
     } catch { setStatus(F.network, 'err'); }
