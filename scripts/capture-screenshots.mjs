@@ -29,9 +29,10 @@ const STORES = [
   { slug: 'skinify', url: 'https://uskinify.com' },
   { slug: 'imza', url: 'https://imzaeg.com' },
   { slug: 'givago', url: 'https://givago.com' },
-  // Skechers, ANTA and ECCO all live on the Fashion Retail Group platform.
-  // Point these at the brand-specific paths once confirmed.
-  { slug: 'frg', url: 'https://frg.store' }
+  // Confirmed brand-specific destinations; slugs match the image manifest.
+  { slug: 'skechers', url: 'https://frg.com.eg/pages/skechers-home' },
+  { slug: 'anta', url: 'https://frg.com.eg/pages/anta-home' },
+  { slug: 'ecco', url: 'https://eg.ecco.com' }
 ];
 
 const DEVICES = {
@@ -103,7 +104,7 @@ async function findProductUrl(page, base) {
     );
   const url = await pick();
   if (url) return url;
-  await page.goto(`${base}/collections/all`, { waitUntil: 'domcontentloaded', timeout: 45000 });
+  await page.goto(new URL('/collections/all', base).href, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await page.waitForTimeout(2500);
   return pick();
 }
@@ -132,7 +133,7 @@ async function openCart(page, base) {
       });
     });
     if (drawerOpen) return 'drawer';
-    await page.goto(`${base}/cart`, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await page.goto(new URL('/cart', base).href, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await settle(page);
     return 'cart page';
   }

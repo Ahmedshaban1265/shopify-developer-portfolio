@@ -18,11 +18,10 @@ export function initParallax() {
     );
   });
 
-  // Hero phones drift at different depths as the page scrolls.
-  gsap.utils.toArray('.hphone').forEach((el) => {
-    const depth = parseFloat(el.dataset.depth || '1');
+  // A small drift keeps the mascot anchored to the hero without large motion.
+  gsap.utils.toArray('.hero-mascot').forEach((el) => {
     gsap.to(el, {
-      yPercent: -9 * depth,
+      yPercent: -4,
       ease: 'none',
       scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 0.8 }
     });

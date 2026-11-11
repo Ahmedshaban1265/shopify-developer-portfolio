@@ -80,15 +80,18 @@ export const site = {
     { slug: 'frg', name: 'Fashion Retail Group', width: 640, height: 237 }
   ],
 
-  // Values only — labels are per-language. 25 = 8 featured + 17 further
-  // distinct stores named in the PDF.
+  // Values only — labels are per-language. Egypt, GCC and USA are 3 markets.
   stats: [
     { value: 50, suffix: '+' },
-    { value: 25 },
     { text: 'AR/EN' },
-    { value: 2 }
+    { value: 3 }
   ],
 
-  /** Real mobile captures shown in the hero, in stacking order. */
-  heroPhones: ['skinify', 'givago', 'myvi']
+  /** Original VEQRU mascot, supplied at two sizes with transparent alpha. */
+  heroIllustration: {
+    src: '/images/veqru-developer-1100.webp',
+    srcset: '/images/veqru-developer-640.webp 640w, /images/veqru-developer-1100.webp 1100w',
+    width: 1100,
+    height: 1100
+  }
 };

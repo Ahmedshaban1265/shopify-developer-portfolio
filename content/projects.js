@@ -17,9 +17,9 @@
  */
 
 export const featured = [
-  { slug: 'skechers-egypt', img: 'skechers', name: 'Skechers Egypt', sector: 'sportswear', domain: 'frg.store', url: 'https://frg.store' },
-  { slug: 'anta-egypt', img: 'anta', name: 'ANTA Egypt', sector: 'sportswear', domain: 'frg.store', url: 'https://frg.store' },
-  { slug: 'ecco-egypt', img: 'ecco', name: 'ECCO Egypt', sector: 'footwear', domain: 'frg.store', url: 'https://frg.store' },
+  { slug: 'skechers-egypt', img: 'skechers', name: 'Skechers', sector: 'sportswear', domain: 'frg.com.eg', url: 'https://frg.com.eg/pages/skechers-home' },
+  { slug: 'anta-egypt', img: 'anta', name: 'ANTA', sector: 'sportswear', domain: 'frg.com.eg', url: 'https://frg.com.eg/pages/anta-home' },
+  { slug: 'ecco-egypt', img: 'ecco', name: 'ECCO', sector: 'footwear', domain: 'eg.ecco.com', url: 'https://eg.ecco.com' },
   { slug: 'myvi', img: 'myvi', name: 'MyVi', sector: 'wellness', domain: 'myvistores.com', url: 'https://myvistores.com' },
   { slug: 'infinity-clinic-pharma', img: 'infinity', name: 'Infinity Clinic Pharma', sector: 'beauty', domain: 'infinityclinicpharma.com', url: 'https://infinityclinicpharma.com' },
   { slug: 'skinify', img: 'skinify', name: 'Skinify', sector: 'beauty', domain: 'uskinify.com', url: 'https://uskinify.com' },
@@ -32,7 +32,7 @@ export const wall = [
   { name: 'Infinity Clinic Pharma', domain: 'infinityclinicpharma.com', sector: 'beauty' },
   { name: 'MyVi', domain: 'myvistores.com', sector: 'wellness' },
   { name: 'Skinify', domain: 'uskinify.com', sector: 'beauty' },
-  { name: 'FRG · Fashion Retail Group', domain: 'frg.store', sector: 'sportswear' },
+  { name: 'FRG · Fashion Retail Group', domain: 'frg.com.eg', sector: 'sportswear' },
   { name: 'Cole Haan Egypt', domain: 'colehaan.com.eg', sector: 'footwear' },
   { name: 'El Tahan Homewear', domain: 'eltahanhomewear.com', sector: 'fashion' },
   { name: 'Voy Collections', domain: 'voycollections.com', sector: 'fashion' },

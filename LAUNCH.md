@@ -59,8 +59,8 @@ founders.
       today, and each case study says so rather than inventing a story.
       Say who did what, and mark any work done with AI assistance.
 - [ ] Add `outcomes` only where you have real measured numbers.
-- [ ] Skechers & ECCO: the brand-specific frg.store URLs, so the capture
-      workflow can add product-page and cart-drawer previews.
+- [x] Skechers, ANTA and ECCO destinations confirmed by the owner and added
+      to the project links and screenshot-capture configuration.
 - [ ] Retro Sport Egypt, Italiano, MAZY, Shopify Slice: confirm the URL and
       scope for each, or leave them out.
 

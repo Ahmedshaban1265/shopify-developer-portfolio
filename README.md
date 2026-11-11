@@ -1,7 +1,7 @@
 # VEQRU — Digital Commerce Studio
 
 Website for VEQRU, a two-person Shopify and digital-commerce studio working across
-Egypt and the Gulf. Editorial design, real store previews captured from live
+Egypt, the Gulf and the USA. Editorial design, real store previews captured from live
 storefronts, and working demonstrations of storefront features.
 
 > **Branches.** `main` is the live VEQRU site. The original personal

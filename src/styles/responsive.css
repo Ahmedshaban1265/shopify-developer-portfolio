@@ -8,11 +8,7 @@
 
 @media (max-width: 1080px) {
   .hero-in { grid-template-columns: 1fr; }
-  .hero-stage { justify-self: center; max-width: 520px; aspect-ratio: 1.15; }
-  .hphone { width: 32%; }
-  .hphone--1 { inset-inline-start: 4%; }
-  .hphone--2 { inset-inline-start: 34%; width: 34%; }
-  .hphone--3 { inset-inline-end: 4%; }
+  .hero-stage { justify-self: center; max-width: 520px; }
   .sect-head { grid-template-columns: 1fr; }
   .sect-note { justify-self: start; }
   .proj-body, .exp-grid, .about-grid, .cs-body { grid-template-columns: 1fr; }
@@ -32,10 +28,7 @@
   .burger { display: inline-flex; }
   .nav-in { grid-template-columns: auto 1fr; }
   .nav-tools { justify-self: end; }
-  .stats { grid-template-columns: 1fr 1fr; }
-  .stat:nth-child(2) { border-inline-end: 0; }
-  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
-  .stat { padding-bottom: var(--s-6); }
+  .stat { padding-inline: 12px; padding-bottom: var(--s-6); }
   .bento { grid-template-columns: 1fr 1fr; }
   .flow { grid-template-columns: 1fr 1fr; }
   .founders, .ccards { grid-template-columns: 1fr; }
@@ -46,15 +39,16 @@
   :root { --nav-h: 62px; --bar-h: 32px; }
   .brand { font-size: 24px; }
   .hero { min-height: auto; }
-  .hero-stage { aspect-ratio: 1.08; }
+  .hero-stage { max-width: 440px; }
+  .stat { padding-inline: 8px; }
+  .stat b { font-size: clamp(38px, 10vw, 60px); }
+  .stat b.txt { font-size: clamp(24px, 6.5vw, 36px); }
   .marquee-item { width: 140px; height: 60px; }
   .marquee-item img { max-width: 132px; max-height: 56px; }
   .marquee-item--myvi img { max-width: 52px; }
   .marquee-item--infinity img { max-width: 90px; }
   .marquee-track { animation-duration: 32s; }
   .marquee-row:nth-child(2) .marquee-track { animation-duration: 36s; }
-  .hphone { padding: 4px; border-radius: 22px; }
-  .hphone img { border-radius: 18px; }
   .proj-head { grid-template-columns: 1fr; align-items: start; }
   .seg { display: flex; width: 100%; overflow-x: auto; scrollbar-width: none; }
   .seg::-webkit-scrollbar { display: none; }
@@ -111,7 +105,7 @@
      transform would leave Arabic headings permanently invisible. */
   .line > span { transform: none !important; opacity: 1 !important; }
   .rv { opacity: 1 !important; transform: none !important; }
-  .hphone { opacity: 1 !important; translate: none !important; }
+  .hero-mascot img { opacity: 1 !important; translate: none !important; }
   .frame-d, .frame-p { clip-path: none !important; }
   .cursor { display: none !important; }
   .marquee { -webkit-mask-image: none; mask-image: none; }

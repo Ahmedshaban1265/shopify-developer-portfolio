@@ -29,7 +29,7 @@ function jsonLd(page, L) {
     inLanguage: L.lang,
     email: `mailto:${site.emails[0]}`,
     telephone: tel.tel,
-    areaServed: ['Egypt', 'Saudi Arabia', 'United Arab Emirates'],
+    areaServed: ['Egypt', 'Saudi Arabia', 'United Arab Emirates', 'United States'],
     knowsAbout: L.meta.keywords,
     address: { '@type': 'PostalAddress', addressCountry: 'EG' },
     founder: site.founders.map((f) => ({ '@type': 'Person', name: f.name[L.lang], jobTitle: plain(L.about.founders[f.id].role) }))
@@ -118,7 +118,7 @@ ${alternates}
      a blank screen. Serve the whole thing statically instead — the same
      overrides the reduced-motion block uses. */
   #loader, .cursor { display: none !important; }
-  .rv, .hphone { opacity: 1 !important; transform: none !important; translate: none !important; }
+  .rv, .hero-mascot img { opacity: 1 !important; transform: none !important; translate: none !important; }
   .line { overflow: visible !important; }
   .line > span { transform: none !important; opacity: 1 !important; }
   .frame-d, .frame-p { clip-path: none !important; }

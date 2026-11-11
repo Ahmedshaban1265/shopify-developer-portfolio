@@ -1,7 +1,7 @@
 import { site } from '../content/site.js';
 import { featured, wall } from '../content/projects.js';
 import { prefix, fmt } from '../content/i18n/index.js';
-import { showcase, viewsFor, localize, img, attr, plain, ltr, ARROW, ARROW_R } from './utils.mjs';
+import { showcase, viewsFor, localize, attr, plain, ltr, ARROW, ARROW_R } from './utils.mjs';
 import { whatsappUrl } from './layout.mjs';
 
 /** A display heading whose lines reveal one by one, ending on the brand dot. */
@@ -49,15 +49,12 @@ const hero = (L) => `
         ${L.hero.facts.map((f) => `<li>${f}</li>`).join('\n        ')}
       </ul>
     </div>
-    <div class="hero-stage" role="img" aria-label="${attr(L.hero.phonesAria)}">
-      ${site.heroPhones
-        .map(
-          (slug, i) => `<figure class="hphone hphone--${i + 1}" data-depth="${[0.6, 1, 0.8][i]}">
-        ${img(slug, 'home', 'mobile', { alt: '', sizes: '(max-width: 680px) 32vw, 230px', eager: true, priority: i === 1 })}
-      </figure>`
-        )
-        .join('\n      ')}
-    </div>
+    <figure class="hero-stage hero-mascot">
+      <img src="${site.heroIllustration.src}" srcset="${site.heroIllustration.srcset}"
+        sizes="(max-width: 680px) 90vw, (max-width: 1080px) 520px, 42vw"
+        width="${site.heroIllustration.width}" height="${site.heroIllustration.height}"
+        alt="${attr(L.hero.mascotAlt)}" fetchpriority="high" decoding="async">
+    </figure>
   </div>
   ${brandMarquee()}
 </section>`;

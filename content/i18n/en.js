@@ -22,7 +22,7 @@ export default {
   meta: {
     title: 'VEQRU — Digital Commerce Studio | Shopify development & CRO',
     description:
-      'VEQRU is a digital commerce studio building custom Shopify storefronts, Liquid sections, bilingual Arabic–English experiences and conversion-focused commerce for brands across Egypt and the Gulf. 50+ stores delivered.',
+      'VEQRU is a digital commerce studio building custom Shopify storefronts, Liquid sections, bilingual Arabic–English experiences and conversion-focused commerce for brands across Egypt, the Gulf and the USA. 50+ stores delivered.',
     keywords: [
       'Shopify development agency',
       'Shopify theme development',
@@ -39,7 +39,7 @@ export default {
     skip: 'Skip to content',
     positioning: 'Digital Commerce Studio',
     tagline: 'We build commerce that performs.',
-    regions: 'Egypt &amp; GCC',
+    regions: 'Egypt, GCC &amp; USA',
     nav: [
       { id: 'work', label: 'Work' },
       { id: 'services', label: 'Solutions' },
@@ -62,7 +62,7 @@ export default {
 
   announcements: [
     '50+ Shopify stores delivered',
-    'Egypt &amp; GCC · Shopify Markets',
+    'Egypt, GCC &amp; USA · Shopify Markets',
     'Arabic / English · full RTL builds',
     'Now taking new builds, redesigns &amp; consultations'
   ],
@@ -73,15 +73,14 @@ export default {
     lede: 'Custom Shopify experiences, powerful integrations and conversion-focused solutions built to help ambitious brands grow. <strong>50+ stores delivered across Egypt and the Gulf</strong> — official brand flagships like Skechers, ANTA and ECCO alongside fast-growing local labels.',
     ctaPrimary: 'See our work',
     ctaSecondary: 'Start a project',
-    facts: ['50+ Shopify stores', 'Arabic / English', 'Egypt &amp; GCC'],
-    phonesAria: 'Mobile storefronts built by the studio: Skinify, Givago and MyVi'
+    facts: ['50+ Shopify stores', 'Arabic / English', 'Egypt, GCC &amp; USA'],
+    mascotAlt: 'VEQRU’s bearded developer mascot in a charcoal hoodie, coding on a laptop'
   },
 
   stats: [
     'Shopify projects delivered',
-    'Stores named in this portfolio',
     'Bilingual &amp; full RTL builds',
-    'Regions · Egypt &amp; GCC'
+    'Regions · Egypt, GCC &amp; USA'
   ],
 
   work: {
@@ -124,7 +123,7 @@ export default {
       'infinityclinicpharma.com': 'Dermo-cosmetics · AR/EN',
       'myvistores.com': 'Gummy vitamins &amp; wellness',
       'uskinify.com': 'Clinical skincare',
-      'frg.store': 'Multi-brand sportswear platform',
+      'frg.com.eg': 'Multi-brand sportswear platform',
       'colehaan.com.eg': 'Official footwear brand store',
       'eltahanhomewear.com': 'Heritage cotton homewear · RTL',
       'voycollections.com': 'Menswear &amp; resortwear',
@@ -353,7 +352,7 @@ export default {
     facts: [
       ['Studio', 'Two founders, Egypt-based'],
       ['Built on', 'Shopify, end to end'],
-      ['Markets', 'Egypt &amp; the Gulf'],
+      ['Markets', 'Egypt, GCC &amp; USA'],
       ['Languages', 'Arabic &amp; English, full RTL'],
       ['Largest platform', 'Multi-brand build running Skechers, ANTA &amp; ECCO']
     ],
@@ -388,7 +387,7 @@ export default {
     whatsappText: 'Hi VEQRU — I’d like to talk about a Shopify project.',
     phone: 'Phone',
     email: 'Email',
-    note: 'Based in Egypt, working with brands across the Gulf and further afield. We work in Arabic and English.',
+    note: 'Based in Egypt, working with brands across the Gulf and the USA. We work in Arabic and English.',
     mailSubject: 'Shopify project enquiry',
     mailBody: [
       'Hi VEQRU,',
