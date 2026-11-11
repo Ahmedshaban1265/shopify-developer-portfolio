@@ -190,6 +190,10 @@
 }
 .wall-scroll::-webkit-scrollbar { display: none; }
 .wall-scroll.dragging { cursor: grabbing; scroll-snap-type: none; }
+.wall-scroll.is-auto { scroll-snap-type: none; }
+.wall-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: var(--s-6); }
+.wall-tools .filters { margin-bottom: 0; }
+.wall-autoplay-toggle[hidden] { display: none; }
 .wall { display: grid; grid-auto-flow: column; grid-template-rows: 1fr 1fr; gap: 12px; width: max-content; padding-inline: var(--pad); }
 .store {
   scroll-snap-align: start; width: clamp(236px, 22vw, 280px); min-height: 156px;

@@ -104,10 +104,13 @@ const storeWall = (L) => {
   return `
 <section class="sect wrap" id="stores">
   ${sectHead(L.wall.eyebrow, L.wall.title, L.wall.note)}
+  <div class="wall-tools">
   <div class="filters rv" role="group" aria-label="${attr(L.wall.filterAria)}">
     ${sectors
       .map(([id, label], i) => `<button class="chip${i === 0 ? ' on' : ''}" type="button" data-filter="${id}" aria-pressed="${i === 0}">${label}</button>`)
       .join('\n    ')}
+  </div>
+  <button class="chip wall-autoplay-toggle" type="button" id="wallPlay" data-pause="${attr(L.wall.pauseMotion)}" data-play="${attr(L.wall.resumeMotion)}" hidden>${L.wall.pauseMotion}</button>
   </div>
   <div class="wall-scroll" id="wallScroll">
     <div class="wall">

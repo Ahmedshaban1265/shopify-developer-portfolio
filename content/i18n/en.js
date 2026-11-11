@@ -117,6 +117,8 @@ export default {
     "previewLink": "Explore store"
   },
   "wall": {
+    "pauseMotion": "Pause motion",
+    "resumeMotion": "Resume motion",
     "eyebrow": "The wider portfolio",
     "title": "Twenty more, all on Shopify",
     "note": "Fashion, beauty, food, home and lifestyle — each with its own identity, audience and commerce logic.",
