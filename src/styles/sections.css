@@ -81,6 +81,7 @@
 .marquee-item:focus-visible { outline-offset: -3px; }
 .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
 .marquee:focus-within { -webkit-mask-image: none; mask-image: none; }
+.marquee--keyboard .marquee-track { animation: none; }
 @keyframes brand-drift { to { transform: translateX(-50%); } }
 
 /* ---------- stats ---------- */

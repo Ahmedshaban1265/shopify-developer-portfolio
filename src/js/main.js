@@ -16,6 +16,7 @@ import { initDemoTabs, initStickyDemo, initCartDemo, initVariantDemo } from './m
 import { initContactForm } from './modules/form.js';
 import { initCopyButtons } from './modules/copy.js';
 import { initStudioMotion } from './modules/studioMotion.js';
+import { initBrandMarquee } from './modules/marquee.js';
 import { initFloatingActions } from './modules/floating.js';
 
 function boot() {
@@ -35,6 +36,7 @@ function boot() {
   initContactForm();
   initCopyButtons();
   initFloatingActions();
+  initBrandMarquee();
   initReveal();
   initCursor();
 }
