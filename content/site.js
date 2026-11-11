@@ -78,7 +78,22 @@ export const site = {
     { slug: 'imza', name: 'IMZA', width: 640, height: 189 },
     { slug: 'givago', name: 'Givago', width: 207, height: 114 },
     { slug: 'cole-haan', name: 'Cole Haan', width: 520, height: 124 },
-    { slug: 'frg', name: 'Fashion Retail Group', width: 640, height: 237 }
+    { slug: 'frg', name: 'Fashion Retail Group', width: 640, height: 237 },
+    { slug: 'el-tahan', name: 'El Tahan Homewear', width: 187, height: 288 },
+    { slug: 'voy', name: 'Voy Collections', width: 345, height: 63 },
+    { slug: 'roban', name: 'Roban', width: 200, height: 173 },
+    { slug: 'penduline', name: 'Penduline KSA', width: 346, height: 150 },
+    { slug: 'traumen', name: 'Traumen', width: 313, height: 120 },
+    { slug: 'snugglez', name: 'Snugglez', width: 346, height: 109 },
+    { slug: 'ranch', name: 'Ranch', width: 329, height: 158 },
+    { slug: 'anagen', name: 'Anagen', width: 357, height: 121 },
+    { slug: 'fourteen', name: 'Fourteen Scarves', width: 191, height: 307 },
+    { slug: 'square', name: 'SQUARE', width: 352, height: 78 },
+    { slug: 'champs-land', name: 'Champs Land', width: 360, height: 98 },
+    { slug: 'alasdekaa', name: 'Alasdekaa', width: 356, height: 173 },
+    { slug: 'murouj', name: 'Murouj Art', width: 355, height: 108 },
+    { slug: 'luxuria', name: 'Luxuria', width: 350, height: 207 },
+    { slug: 'be-cosmetics', name: 'Be Cosmetics', width: 186, height: 169 }
   ],
 
   // Values only — labels are per-language. Egypt, GCC and USA are 3 markets.

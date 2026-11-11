@@ -47,8 +47,8 @@
   .marquee-item img { max-width: 132px; max-height: 56px; }
   .marquee-item--myvi img { max-width: 52px; }
   .marquee-item--infinity img { max-width: 90px; }
-  .marquee-track { animation-duration: 32s; }
-  .marquee-row:nth-child(2) .marquee-track { animation-duration: 36s; }
+  .marquee-track { animation-duration: var(--marquee-duration, 32s); }
+  .marquee-row:nth-child(2) .marquee-track { animation-duration: calc(var(--marquee-duration, 33s) * 1.1); }
   .proj-head { grid-template-columns: 1fr; align-items: start; }
   .seg { display: flex; width: 100%; overflow-x: auto; scrollbar-width: none; }
   .seg::-webkit-scrollbar { display: none; }

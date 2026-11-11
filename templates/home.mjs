@@ -24,11 +24,11 @@ const sectHead = (eyebrow, title, note) => `<div class="sect-head">
 
 /** Two opposing rows, each duplicated once for a seamless CSS-only loop. */
 const brandMarquee = () => {
-  const rows = [site.marquee.slice(0, 5), site.marquee.slice(5)];
+  const rows = [site.marquee.filter((_, i) => i % 2 === 0), site.marquee.filter((_, i) => i % 2 === 1)];
   return `<div class="marquee" id="marquee" dir="ltr" aria-hidden="true">
     ${rows.map((brands) => {
       const group = `<div class="marquee-group">${brands.map((b) => `<span class="marquee-item marquee-item--${b.slug}"><img src="/logos/${b.slug}.svg" width="${b.width}" height="${b.height}" alt="" decoding="async" draggable="false"></span>`).join('')}</div>`;
-      return `<div class="marquee-row"><div class="marquee-track">${group}${group.replace('class="marquee-group"', 'class="marquee-group" data-clone')}</div></div>`;
+      return `<div class="marquee-row" style="--marquee-duration:${(brands.length * 7.6).toFixed(1)}s"><div class="marquee-track">${group}${group.replace('class="marquee-group"', 'class="marquee-group" data-clone')}</div></div>`;
     }).join('\n    ')}
   </div>`;
 };

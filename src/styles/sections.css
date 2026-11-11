@@ -51,8 +51,8 @@
           mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 .marquee-row { min-width: 0; overflow: hidden; }
-.marquee-track { display: flex; width: max-content; animation: brand-drift 38s linear infinite; }
-.marquee-row:nth-child(2) .marquee-track { animation-direction: reverse; animation-duration: 44s; }
+.marquee-track { display: flex; width: max-content; animation: brand-drift var(--marquee-duration, 38s) linear infinite; }
+.marquee-row:nth-child(2) .marquee-track { animation-direction: reverse; animation-duration: calc(var(--marquee-duration, 40s) * 1.1); }
 .marquee-group {
   flex: 0 0 auto; min-width: 100vw; display: flex; align-items: center; justify-content: space-around;
   gap: clamp(40px, 6vw, 96px); padding-inline-end: clamp(40px, 6vw, 96px);
@@ -69,6 +69,11 @@
 .marquee-item--infinity img { width: 116px; height: 76px; }
 .marquee-item--givago img { width: 120px; }
 .marquee-item--cole-haan img { width: 176px; }
+.marquee-item--el-tahan img, .marquee-item--fourteen img { width: 52px; height: 76px; }
+.marquee-item--roban img { width: 84px; height: 76px; }
+.marquee-item--be-cosmetics img { width: 76px; height: 72px; }
+.marquee-item--luxuria img { width: 118px; height: 72px; }
+.marquee-item--penduline img, .marquee-item--snugglez img { width: 152px; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes brand-drift { to { transform: translateX(-50%); } }
 
