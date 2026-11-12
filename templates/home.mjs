@@ -75,6 +75,38 @@ const stats = (L) => `
   </div>
 </section>`;
 
+/* ----------------------------------------------------------- trusted by */
+/* Platform relationships — deliberately separate from the client marquee in
+   the hero, and the copy says which is which. A tile carries an official mark
+   only where we hold the right to show one; where we don't, it names the
+   platform in text beside a VEQRU-drawn glyph rather than an imitation of
+   someone's logo. public/logos/platform/README.md records the reasoning. */
+const PLATFORM_GLYPH =
+  '<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10.5" r="4.2"/><path d="M2.6 23.2c0-4.1 3.3-6.7 7.4-6.7s7.4 2.6 7.4 6.7"/><path d="M19.6 6.8a7.3 7.3 0 0 1 0 10.4"/><path d="M23.2 3.2a12.3 12.3 0 0 1 0 17.6"/></svg>';
+
+const trustedSection = (L) => `<section class="sect wrap trusted-section" id="trusted">
+  ${sectHead(L.trusted.eyebrow, L.trusted.title, L.trusted.note)}
+  <ul class="platform-grid">
+    ${L.trusted.items
+      .map((p, i) => {
+        const ref = site.platforms[i];
+        return `<li class="platform-card rv rv-d${i}">
+      <span class="platform-mark"${ref.logo ? '' : ' data-glyph'}>${
+        ref.logo
+          ? `<img src="${attr(ref.logo)}" width="${ref.width}" height="${ref.height}" alt="" loading="lazy" decoding="async">`
+          : PLATFORM_GLYPH
+      }</span>
+      <span class="platform-status label">${p.status}</span>
+      <h3 class="h3"><bdi dir="ltr">${p.name}</bdi></h3>
+      <p class="platform-body">${p.body}</p>
+      <ul class="platform-tags">${p.tags.map((t) => `<li class="pill">${t}</li>`).join('')}</ul>
+      <a class="tlink platform-link" href="${attr(ref.url)}" target="_blank" rel="noopener noreferrer" aria-label="${attr(fmt(L.trusted.linkAria, { name: plain(p.name) }))}"><span class="mono">${p.linkLabel}</span> ${ARROW}</a>
+    </li>`;
+      })
+      .join('\n    ')}
+  </ul>
+</section>`;
+
 /* ------------------------------------------------------------------ work */
 function project(base, i, L) {
   const p = localize(base, L);
@@ -133,18 +165,30 @@ const storeWall = (L) => {
 /** Word spans preserve joined Arabic letterforms while the colour fills on scroll. */
 const drawnHeading = (text, cls = 'h2') => `<h2 class="display ${cls} drawn-heading" data-draw aria-label="${attr(text)}">${plain(text).split(/\s+/).map((word) => `<span class="draw-word" aria-hidden="true">${word}</span>`).join(' ')}</h2>`;
 
+/* One glyph per service card, in the same order as L.services.items.
+   28×28, stroked, no fills — they inherit currentColor from the card. */
 const SERVICE_PATHS = [
+  // Shopify store design — storefront layout
   '<rect x="3" y="4" width="22" height="19" rx="3"/><path d="M3 10h22M8 7h1M12 7h1M8 15h6v4H8zM18 15h3M18 19h3"/>',
+  // UI/UX design — wireframe with a cursor
+  '<rect x="3" y="4" width="22" height="18" rx="3"/><path d="M8 10h8M8 14h5"/><path d="m15 14 8 3.2-3.3 1.2L18.4 22 15 14Z"/>',
+  // Custom development — code brackets
   '<path d="m10 8-6 6 6 6m8-12 6 6-6 6M16 5l-4 18"/>',
+  // Conversion & speed — rising chart
   '<path d="M5 22V7m0 15h19M9 17l5-6 4 3 6-9"/><path d="M19 5h5v5"/>',
+  // Performance marketing — target with an incoming arrow
+  '<circle cx="12" cy="16" r="9"/><circle cx="12" cy="16" r="4"/><path d="M12 16 24 4"/><path d="M18 4h6v6"/>',
+  // Arabic & global markets — globe
   '<circle cx="14" cy="14" r="10"/><path d="M4 14h20M14 4c-6 6-6 14 0 20M14 4c6 6 6 14 0 20"/>',
+  // Integrations & automation — linked blocks
   '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="17" y="17" width="8" height="8" rx="2"/><path d="M11 7h8a3 3 0 0 1 3 3v7M17 21H9a3 3 0 0 1-3-3v-7"/>',
+  // Care & continuous growth — heart with a check
   '<path d="M14 24s-10-5-10-12a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 7-10 12-10 12Z"/><path d="m9 14 3 3 7-7"/>'
 ];
 
 const servicesSection = (L) => `<section class="sect services-section wrap" id="services">
   <div class="services-intro"><span class="label eyebrow">${L.services.eyebrow}</span>${drawnHeading(L.services.title)}<p class="lead">${L.services.note}</p></div>
-  <div class="service-grid">${L.services.items.map((s, i) => `<article class="service-card rv" data-tilt>
+  <div class="service-grid">${L.services.items.map((s, i) => `<article class="service-card rv"${s.span ? ` data-span="${attr(s.span)}"` : ''} data-tilt>
     <div class="service-card-inner"><div class="service-top"><span class="service-symbol" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${SERVICE_PATHS[i]}</svg></span><span class="label">0${i + 1}</span></div>
     <h3 class="h3">${s.title}</h3><p>${s.body}</p><a href="#contact" data-enquiry="demo" data-service="${attr(s.title)}" class="service-link" aria-label="${attr(s.title + ' — ' + L.ui.cta)}">${L.ui.cta} ${ARROW_R}</a></div>
   </article>`).join('')}</div>
@@ -390,6 +434,6 @@ export const lightbox = (L) => `<dialog class="store-preview" id="storePreview" 
 </dialog>`;
 
 export const homeBody = (L) =>
-  [hero(L), stats(L), servicesSection(L), work(L), lab(L), storeWall(L), processSection(L), aboutSection(L), contact(L), lightbox(L)].join('\n');
+  [hero(L), stats(L), trustedSection(L), servicesSection(L), work(L), lab(L), storeWall(L), processSection(L), aboutSection(L), contact(L), lightbox(L)].join('\n');
 
 export { ltr };
