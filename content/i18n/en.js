@@ -177,6 +177,36 @@ export default {
       }
     ]
   },
+  "trusted": {
+    "eyebrow": "Platform relationships",
+    "title": "Trusted by",
+    "note": "The brands above are clients. These are the platforms the work runs on, and where we stand with each.",
+    "items": [
+      {
+        "name": "Shopify",
+        "status": "Shopify Partner",
+        "linkLabel": "Partner programme",
+        "body": "Enrolled in the Shopify Partner Program. Every storefront we ship is built, themed and maintained on Shopify.",
+        "tags": [
+          "Themes & Liquid",
+          "Shopify Markets",
+          "App integrations"
+        ]
+      },
+      {
+        "name": "Meta Ads",
+        "status": "Advertising platform",
+        "linkLabel": "Meta for Business",
+        "body": "We plan and run paid social campaigns on Meta platforms for client brands, and report on what they return.",
+        "tags": [
+          "Campaign strategy",
+          "Retargeting",
+          "ROAS tracking"
+        ]
+      }
+    ],
+    "linkAria": "{name} — open in a new tab"
+  },
   "services": {
     "eyebrow": "Our services",
     "title": "Everything your next store needs.",
@@ -191,6 +221,17 @@ export default {
           "Store design",
           "Custom themes",
           "Launch"
+        ]
+      },
+      {
+        "span": "",
+        "title": "UI/UX design",
+        "benefit": "Interfaces and buying journeys designed around how people actually shop.",
+        "body": "Interfaces and buying journeys designed around how people actually shop.",
+        "tags": [
+          "Journey design",
+          "Mobile-first",
+          "Design systems"
         ]
       },
       {
@@ -217,6 +258,17 @@ export default {
       },
       {
         "span": "",
+        "title": "Performance marketing",
+        "benefit": "Paid social campaigns that find buyers, then get tuned on what the numbers show.",
+        "body": "Paid social campaigns that find buyers, then get tuned on what the numbers show.",
+        "tags": [
+          "Meta Ads",
+          "Retargeting",
+          "ROAS tracking"
+        ]
+      },
+      {
+        "span": "",
         "title": "Arabic & global markets",
         "benefit": "Native Arabic experiences and international storefronts that feel local.",
         "body": "Native Arabic experiences and international storefronts that feel local.",
@@ -238,7 +290,7 @@ export default {
         ]
       },
       {
-        "span": "",
+        "span": "wide",
         "title": "Care & continuous growth",
         "benefit": "Reliable support and thoughtful improvements as your store evolves.",
         "body": "Reliable support and thoughtful improvements as your store evolves.",
@@ -518,7 +570,7 @@ export default {
       "Hi VEQRU,",
       "",
       "Store URL (if you have one):",
-      "What we need (new build / redesign / custom feature / Arabic-English / CRO):",
+      "What we need (new build / redesign / UI-UX / custom feature / Arabic-English / CRO / paid social):",
       "Rough timeline:",
       "A bit about the project:",
       "",
@@ -533,8 +585,10 @@ export default {
     "need": "What do you need?",
     "needs": [
       "Shopify store design",
+      "UI/UX design",
       "Custom development",
       "Conversion & speed",
+      "Performance marketing",
       "Arabic & global markets",
       "Integrations & automation",
       "Care & continuous growth"

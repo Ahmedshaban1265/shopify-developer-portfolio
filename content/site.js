@@ -96,6 +96,22 @@ export const site = {
     { slug: 'be-cosmetics', url: 'https://beyourself-club.com', name: 'Be Cosmetics', width: 186, height: 169 }
   ],
 
+  /**
+   * Platform relationships behind the "Trusted by" section — distinct from
+   * `marquee`, which is client brands. Names and status wording live in the
+   * locale files; only the mark and link are language-independent.
+   *
+   * `logo` is null where we hold no right to show the mark. Meta states that
+   * all use of its logo requires Brand Review approval, and advertising on
+   * Meta grants no such right, so that tile renders a VEQRU-drawn glyph and
+   * names the platform in text instead. See public/logos/platform/README.md.
+   * Once an approved file exists, set `logo` and the template picks it up.
+   */
+  platforms: [
+    { id: 'shopify', logo: '/logos/platform/shopify-bag.svg', width: 89, height: 101, url: 'https://www.shopify.com/partners' },
+    { id: 'meta', logo: null, url: 'https://www.facebook.com/business/ads' }
+  ],
+
   // Values only — labels are per-language. Egypt, GCC and USA are 3 markets.
   stats: [
     { value: 50, suffix: '+' },
